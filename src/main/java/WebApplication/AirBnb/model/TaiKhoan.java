@@ -16,6 +16,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+
 @Entity
 @Data
 @AllArgsConstructor
@@ -36,5 +37,6 @@ public class TaiKhoan implements Serializable {
 	
 	@OneToMany(mappedBy = "TaiKhoan")
 	private List<Tin> lstTin;
+
 	
 }

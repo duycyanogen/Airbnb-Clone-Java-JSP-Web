@@ -16,6 +16,7 @@
 
 <body>
 <h1>Đây là trang index2</h1>
+<h1>${Accounts }</h1>
 </body>
 
 
