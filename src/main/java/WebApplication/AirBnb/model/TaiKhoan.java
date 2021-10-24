@@ -37,6 +37,4 @@ public class TaiKhoan implements Serializable {
 	@OneToMany(mappedBy = "TaiKhoan")
 	private List<Tin> lstTin;
 	
-	@OneToMany(mappedBy = "TaiKhoan")
-	private List<Rating> lstRating;
 }

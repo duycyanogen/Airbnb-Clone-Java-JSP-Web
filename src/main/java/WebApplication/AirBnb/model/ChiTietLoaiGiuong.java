@@ -21,14 +21,17 @@ import lombok.NoArgsConstructor;
 public class ChiTietLoaiGiuong implements Serializable {
 	@EmbeddedId
 	private ChiTietLoaiGiuongID ChiTietLoaiGiuongID;
-	private String ChuThich;
+	
 	
 	@ManyToOne
-	@MapsId("idtt")
+	@MapsId("IDTT")
+	//@JoinColumn(name = "idtt")
     private ThongTinLoaiPhong ThongTinLoaiPhong;
 	
 	@ManyToOne
-	@MapsId("idloai_giuong")
+	@MapsId("IDLoaiGiuong")
+	//@JoinColumn(name = "idloai_giuong")
     private LoaiGiuong LoaiGiuong;	
+	private String ChuThich;
 	
 }

@@ -34,9 +34,9 @@ public class Tin implements Serializable {
 	@JoinColumn(name = "idtai_khoan")
 	private TaiKhoan TaiKhoan;
 	
-	@OneToMany(mappedBy = "tin")
+	@OneToMany(mappedBy = "Tin")
 	private List<Rating> lstRating;
 	
-	@OneToMany(mappedBy = "thong_tin_loai_phong")
+	@OneToMany(mappedBy = "Tin")
 	private List<ThongTinLoaiPhong> lstThongTinLoaiPhong;
 }

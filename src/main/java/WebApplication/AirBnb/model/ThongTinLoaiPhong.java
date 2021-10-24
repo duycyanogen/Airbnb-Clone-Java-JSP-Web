@@ -28,21 +28,24 @@ public class ThongTinLoaiPhong implements Serializable {
 	private int SoPhong;
 	private Double DienTich;
 	
-	@OneToMany(mappedBy = "lstThongTinLoaiPhong")
+	@OneToMany(mappedBy = "ThongTinLoaiPhong")
     private List<ChiTietLoaiGiuong> lstChiTietLoaiGiuong;
 	
 	@OneToMany(mappedBy = "TienNghi")
-    private List<TienNghi> lstTienNghi;
+    private List<ChiTietTienNghi> lstChiTietTienNghi;
 	
 	@ManyToOne
 	@JoinColumn(name = "idkhach_san")
 	private CoSoKhachSan CoSoKhachSan;
+	
 	@ManyToOne
 	@JoinColumn(name = "idloai_phong")
 	private LoaiPhong LoaiPhong;
+	
 	@ManyToOne
 	@JoinColumn(name = "idkhuyen_mai")
 	private KhuyenMai KhuyenMai;
+	
 	@ManyToOne
 	@JoinColumn(name = "idtin")
 	private Tin Tin;

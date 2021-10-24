@@ -6,6 +6,7 @@ import javax.persistence.Embeddable;
 import javax.persistence.Embedded;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
@@ -20,17 +21,15 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Rating implements Serializable {
 	@EmbeddedId
-	private RatingID RatingID;
+	private Long RatingID;
 	private int SoSao;
 	private String Comment;
 	
-//	@ManyToOne
-//	@JoinColumn(name = "idtai_khoan")
-//    private TaiKhoan TaiKhoan;
-//	
-//	@ManyToOne
-//	@JoinColumn(name = "idtin")
-//    private Tin Tin;
+		
+	@ManyToOne
+	@MapsId("IDTin")
+	//@JoinColumn(name = "idtin")
+    private Tin Tin;
 	
 	
 }

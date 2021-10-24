@@ -25,10 +25,12 @@ public class ChiTietTienNghi implements Serializable {
 	private String ChuThich;
 	
 	@ManyToOne
-	@MapsId("idtt")    
+	@MapsId("IDTT")
+	//@JoinColumn(name = "idtt")
     private ThongTinLoaiPhong ThongTinLoaiPhong;
 	
 	@ManyToOne
-	@MapsId("idtien_nghi")        
+	@MapsId("IDTienNghi") 
+	//@JoinColumn(name = "idtien_nghi")
 	private TienNghi TienNghi;	
 }

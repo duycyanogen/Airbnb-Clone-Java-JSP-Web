@@ -14,8 +14,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class ChiTietLoaiGiuongID implements Serializable {
 	@Column
-	private String IDLoaiGiuong;
+	private Long IDLoaiGiuong;
 	@Column
-	private String IDTT;
+	private Long IDTT;
 	
 }

@@ -22,6 +22,6 @@ public class TienNghi implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long IDTienNghi;
 	private String TenTienNghi;
-	@OneToMany(mappedBy = "ThongTinLoaiPhong")
-    private List<ThongTinLoaiPhong> lstThongTinLoaiPhong;
+	@OneToMany(mappedBy = "TienNghi")
+    private List<ChiTietTienNghi> lstChiTietTienNghi;
 }
