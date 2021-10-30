@@ -1,10 +1,10 @@
 package WebApplication.AirBnb.dao;
 
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-import WebApplication.AirBnb.model.NguoiDung;
 import WebApplication.AirBnb.model.Tin;
-
-public interface TinDAO extends CrudRepository<Tin, Long>{
+@Repository
+public interface TinDAO extends JpaRepository<Tin, Long>{
 
 }

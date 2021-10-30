@@ -1,9 +1,10 @@
 package WebApplication.AirBnb.dao;
 
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 import WebApplication.AirBnb.model.NguoiDung;
-
-public interface NguoiDungDAO extends CrudRepository<NguoiDung, Long>{
+@Repository
+public interface NguoiDungDAO extends JpaRepository<NguoiDung, Long>{
 
 }

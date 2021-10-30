@@ -1,11 +1,11 @@
 package WebApplication.AirBnb.dao;
 
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-import WebApplication.AirBnb.model.DiaDiem;
 import WebApplication.AirBnb.model.KhuyenMai;
 
-
-public interface KhuyenMaiDAO extends CrudRepository<KhuyenMai, Long>{
+@Repository
+public interface KhuyenMaiDAO extends JpaRepository<KhuyenMai, Long>{
 
 }

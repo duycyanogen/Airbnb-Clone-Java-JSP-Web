@@ -15,7 +15,7 @@ import WebApplication.AirBnb.model.TaiKhoan;
 
 @Controller
 @RequestMapping("home")
-public class HomeController {
+public class NewsController {
 	@Autowired
 	TaiKhoanDAO taiKhoanDAO;
 	

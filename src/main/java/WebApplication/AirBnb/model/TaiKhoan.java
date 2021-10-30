@@ -25,6 +25,7 @@ public class TaiKhoan implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long IDTaiKhoan;
+	//@Email
 	private String Mail;
 	private String Password;
 
