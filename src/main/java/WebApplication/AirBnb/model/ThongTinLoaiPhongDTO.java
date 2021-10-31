@@ -1,16 +1,16 @@
 package WebApplication.AirBnb.model;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
-public class TienNghi{
+@AllArgsConstructor
+public class ThongTinLoaiPhongDTO {
+	
+	private int SoPhong;
+	private Double DienTich;
 	
 	
-	private String TenTienNghi;
 	
 }

@@ -1,16 +1,19 @@
 package WebApplication.AirBnb.model;
 
+import java.sql.Date;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class TienNghi{
+public class KhuyenMaiDTO {
 	
+	private Double MucGiam;
+	private int LoaiKhuyenMai;
+	private Date ThoiHan;
+	private String MoTa;
 	
-	private String TenTienNghi;
 	
 }
