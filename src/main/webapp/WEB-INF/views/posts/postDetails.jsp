@@ -7,9 +7,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="<c:url value='css/reset.css'/>"/>
-    <link rel="stylesheet" type="text/css" href="<c:url value='css/base.css'/>"/>
-    <link rel="stylesheet" type="text/css" href="<c:url value='css/news.css'/>"/>
+    <link rel="stylesheet" type="text/css" href="<c:url value='css/postdetail/reset.css'/>"/>
+    <link rel="stylesheet" type="text/css" href="<c:url value='css/postdetail/base.css'/>"/>
+    <link rel="stylesheet" type="text/css" href="<c:url value='css/postdetail/news.css'/>"/>
     <link rel="stylesheet" type="text/css" href="<c:url value='Fonts/fontawesome-free-5.15.3-web/css/all.min.css'/>"/>
     <title>Airbnd - Detail</title>
 </head>

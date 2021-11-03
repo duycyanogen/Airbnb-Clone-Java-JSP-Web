@@ -27,8 +27,8 @@ public class PostsController {
 	@Autowired
 	TinServiceImpl service;
 	
-	@GetMapping("post/{IDTin}")
-	private String postdetails() {
+	@GetMapping("post")
+	private String postdetails(ModelMap model, @PathVariable("IDTin") Long IDTin) {
 		
 		return "posts/postDetails";
 	}	
