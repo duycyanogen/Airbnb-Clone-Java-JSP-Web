@@ -32,7 +32,7 @@ public class TaiKhoan implements Serializable {
 	private Long IDTaiKhoan;
 	@Column(length = 60,unique = true, nullable = false)
 	private String Mail;
-	@Column(length = 60, nullable = false)
+	@Column(length = 200, nullable = false)
 	private String Password;
 
 	@ManyToOne

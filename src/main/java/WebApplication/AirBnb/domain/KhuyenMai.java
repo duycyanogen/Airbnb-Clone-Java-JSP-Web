@@ -28,7 +28,7 @@ public class KhuyenMai implements Serializable {
 	private Long IDKhuyenMai;
 	private Double MucGiam;
 	private int LoaiKhuyenMai;
-	private Date ThoiHan;
+	private String ThoiHan;
 	private String MoTa;
 	@OneToMany(mappedBy = "KhuyenMai")
     private List<ThongTinLoaiPhong> lstThongTinLoaiPhong;

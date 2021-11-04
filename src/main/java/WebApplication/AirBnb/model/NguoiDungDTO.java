@@ -11,7 +11,7 @@ public class NguoiDungDTO {
 	private String Ten;
 	private String DiaChi;
 	private String GioiTinh;
-	private Date NgaySinh;
+	private String NgaySinh;
 	private String CCCD;
 	private String AnhDaiDien;
 	private String SDT;

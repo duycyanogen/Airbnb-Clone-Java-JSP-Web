@@ -27,7 +27,7 @@ public class Tin implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long IDTin;
-	private Date NgayDang;
+	private String NgayDang;
 	private String TieuDe;
 	private String NoiDung;
 	private int TrangThai;

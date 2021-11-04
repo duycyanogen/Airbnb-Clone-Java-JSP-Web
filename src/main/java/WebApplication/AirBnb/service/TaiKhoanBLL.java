@@ -8,6 +8,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 
 import WebApplication.AirBnb.domain.TaiKhoan;
+import WebApplication.AirBnb.model.TaiKhoanDTO;
+import WebApplication.AirBnb.model.User_AccountDTO;
 
 
 public interface TaiKhoanBLL {
@@ -69,6 +71,10 @@ public interface TaiKhoanBLL {
 	<S extends TaiKhoan> Optional<S> findOne(Example<S> example);
 
 	<S extends TaiKhoan> S save(S entity);
+
+	boolean register(User_AccountDTO useracc);
+
+	User_AccountDTO login(TaiKhoanDTO account);
 
 
 }

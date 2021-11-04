@@ -1,7 +1,7 @@
 package WebApplication.AirBnb.domain;
 
 import java.io.Serializable;
-import java.sql.Date;
+
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -27,8 +27,8 @@ public class NguoiDung implements Serializable {
 	private Long IDNguoiDung;		
 	private String Ten;
 	private String DiaChi;
-	private String GioiTinh;
-	private Date NgaySinh;
+	private String GioiTinh;	
+	private String NgaySinh;
 	private String CCCD;
 	private String AnhDaiDien;
 	private String SDT;

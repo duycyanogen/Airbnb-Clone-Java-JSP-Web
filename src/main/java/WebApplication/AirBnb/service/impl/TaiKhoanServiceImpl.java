@@ -11,20 +11,74 @@ import org.springframework.data.domain.Sort;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import WebApplication.AirBnb.domain.NguoiDung;
+import WebApplication.AirBnb.domain.Quyen;
 import WebApplication.AirBnb.domain.TaiKhoan;
+import WebApplication.AirBnb.model.TaiKhoanDTO;
+import WebApplication.AirBnb.model.User_AccountDTO;
+import WebApplication.AirBnb.repository.NguoiDungDAO;
 import WebApplication.AirBnb.repository.TaiKhoanDAO;
 import WebApplication.AirBnb.service.TaiKhoanBLL;
 
 @Service
-public class TaiKhoanServiceImpl implements TaiKhoanBLL{
+public class TaiKhoanServiceImpl implements TaiKhoanBLL {
 	@Autowired
 	private TaiKhoanDAO repository;
 	@Autowired
+	private NguoiDungDAO repository1;
+	@Autowired
 	BCryptPasswordEncoder bCryptPasswordEncoder;
+
 	@Override
 	public <S extends TaiKhoan> S save(S entity) {
 		entity.setPassword(bCryptPasswordEncoder.encode(entity.getPassword()));
 		return repository.save(entity);
+	}
+
+	@Override
+	public boolean register(User_AccountDTO useracc) {
+		try {
+			TaiKhoan entity = new TaiKhoan();
+			entity.setMail(useracc.getMail());
+			entity.setPassword(useracc.getPassword());
+			Quyen quyen = new Quyen();
+			quyen.setIDQuyen(2l);
+			entity.setQuyen(quyen);
+			repository.save(entity);
+			NguoiDung entity1 = new NguoiDung();
+			entity1.setTen(useracc.getTen());
+			entity1.setSDT(useracc.getSDT());
+			entity1.setDiaChi(useracc.getDiaChi());
+			entity1.setGioiTinh(useracc.getGioiTinh());
+			entity1.setNgaySinh(useracc.getNgaySinh());
+			entity1.setCCCD(useracc.getCCCD());
+			entity1.setAnhDaiDien(useracc.getAnhDaiDien());
+			// BeanUtils.copyProperties(nd, entity1);
+			entity1.setTaiKhoan(entity);
+			repository1.save(entity1);
+			return true;
+		} catch (Exception e) {
+			// TODO: handle exception
+			return false;
+		}
+	}
+
+	@Override
+	public User_AccountDTO login(TaiKhoanDTO account) {
+		try {
+			User_AccountDTO result = new User_AccountDTO();
+			result = repository.getUserAccountByMail(account.getMail());
+			if (result != null) {
+				if (bCryptPasswordEncoder.matches(account.getPassword(), result.getPassword()))
+					return result;
+				else
+					return null;
+			} else
+				return null;
+		} catch (Exception e) {
+			// TODO: handle exception
+			return null;
+		}
 	}
 
 	@Override
@@ -166,5 +220,5 @@ public class TaiKhoanServiceImpl implements TaiKhoanBLL{
 	public <S extends TaiKhoan> List<S> findAll(Example<S> example, Sort sort) {
 		return repository.findAll(example, sort);
 	}
-	
+
 }

@@ -14,7 +14,7 @@ public class TaiKhoanDTO {
 	
 	private String Mail;
 	private String Password;
-	private int idQuyen;
+	//private int idQuyen;
 //	@ManyToOne
 //	@JoinColumn(name = "idquyen")
 //	private Quyen Quyen;
