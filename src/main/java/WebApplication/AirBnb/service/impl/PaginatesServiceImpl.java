@@ -2,12 +2,12 @@ package WebApplication.AirBnb.service.impl;
 
 import org.springframework.stereotype.Service;
 
-import WebApplication.AirBnb.model.PaginatesDTO;
+import WebApplication.AirBnb.model.PaginatesDto;
 
 @Service
 public class PaginatesServiceImpl {
-	public PaginatesDTO GetInfoPaginates(int totalData, int limit, int currentPage) {
-		PaginatesDTO paginates = new PaginatesDTO();
+	public PaginatesDto GetInfoPaginates(int totalData, int limit, int currentPage) {
+		PaginatesDto paginates = new PaginatesDto();
 		paginates.setLimit(limit);
 		paginates.setTotalPage(SetInfoTotalPage(totalData, limit));
 		paginates.setCurrentPage(CheckCurrentPage(currentPage, paginates.getTotalPage()));

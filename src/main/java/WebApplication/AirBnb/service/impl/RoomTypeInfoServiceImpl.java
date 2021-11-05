@@ -10,52 +10,52 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import WebApplication.AirBnb.domain.Ratings;
-import WebApplication.AirBnb.repository.RatingRepository;
-import WebApplication.AirBnb.service.IRatingService;
+import WebApplication.AirBnb.domain.RoomTypeInfos;
+import WebApplication.AirBnb.repository.RoomTypeInfoRepository;
+import WebApplication.AirBnb.service.IRoomTypeInfoService;
 
 @Service
-public class RatingServiceImpl implements IRatingService{
+public class RoomTypeInfoServiceImpl implements IRoomTypeInfoService{
 	@Autowired
-	private RatingRepository repository;
+	private RoomTypeInfoRepository repository;
 
 	@Override
-	public <S extends Ratings> S save(S entity) {
+	public <S extends RoomTypeInfos> S save(S entity) {
 		return repository.save(entity);
 	}
 
 	@Override
-	public <S extends Ratings> Optional<S> findOne(Example<S> example) {
+	public <S extends RoomTypeInfos> Optional<S> findOne(Example<S> example) {
 		return repository.findOne(example);
 	}
 
 	@Override
-	public Page<Ratings> findAll(Pageable pageable) {
+	public Page<RoomTypeInfos> findAll(Pageable pageable) {
 		return repository.findAll(pageable);
 	}
 
 	@Override
-	public List<Ratings> findAll() {
+	public List<RoomTypeInfos> findAll() {
 		return repository.findAll();
 	}
 
 	@Override
-	public List<Ratings> findAll(Sort sort) {
+	public List<RoomTypeInfos> findAll(Sort sort) {
 		return repository.findAll(sort);
 	}
 
 	@Override
-	public List<Ratings> findAllById(Iterable<Long> ids) {
+	public List<RoomTypeInfos> findAllById(Iterable<Long> ids) {
 		return repository.findAllById(ids);
 	}
 
 	@Override
-	public Optional<Ratings> findById(Long id) {
+	public Optional<RoomTypeInfos> findById(Long id) {
 		return repository.findById(id);
 	}
 
 	@Override
-	public <S extends Ratings> List<S> saveAll(Iterable<S> entities) {
+	public <S extends RoomTypeInfos> List<S> saveAll(Iterable<S> entities) {
 		return repository.saveAll(entities);
 	}
 
@@ -65,7 +65,7 @@ public class RatingServiceImpl implements IRatingService{
 	}
 
 	@Override
-	public <S extends Ratings> S saveAndFlush(S entity) {
+	public <S extends RoomTypeInfos> S saveAndFlush(S entity) {
 		return repository.saveAndFlush(entity);
 	}
 
@@ -75,32 +75,32 @@ public class RatingServiceImpl implements IRatingService{
 	}
 
 	@Override
-	public <S extends Ratings> List<S> saveAllAndFlush(Iterable<S> entities) {
+	public <S extends RoomTypeInfos> List<S> saveAllAndFlush(Iterable<S> entities) {
 		return repository.saveAllAndFlush(entities);
 	}
 
 	@Override
-	public <S extends Ratings> Page<S> findAll(Example<S> example, Pageable pageable) {
+	public <S extends RoomTypeInfos> Page<S> findAll(Example<S> example, Pageable pageable) {
 		return repository.findAll(example, pageable);
 	}
 
 	@Override
-	public void deleteInBatch(Iterable<Ratings> entities) {
+	public void deleteInBatch(Iterable<RoomTypeInfos> entities) {
 		repository.deleteInBatch(entities);
 	}
 
 	@Override
-	public <S extends Ratings> long count(Example<S> example) {
+	public <S extends RoomTypeInfos> long count(Example<S> example) {
 		return repository.count(example);
 	}
 
 	@Override
-	public <S extends Ratings> boolean exists(Example<S> example) {
+	public <S extends RoomTypeInfos> boolean exists(Example<S> example) {
 		return repository.exists(example);
 	}
 
 	@Override
-	public void deleteAllInBatch(Iterable<Ratings> entities) {
+	public void deleteAllInBatch(Iterable<RoomTypeInfos> entities) {
 		repository.deleteAllInBatch(entities);
 	}
 
@@ -120,7 +120,7 @@ public class RatingServiceImpl implements IRatingService{
 	}
 
 	@Override
-	public void delete(Ratings entity) {
+	public void delete(RoomTypeInfos entity) {
 		repository.delete(entity);
 	}
 
@@ -135,12 +135,12 @@ public class RatingServiceImpl implements IRatingService{
 	}
 
 	@Override
-	public Ratings getOne(Long id) {
+	public RoomTypeInfos getOne(Long id) {
 		return repository.getOne(id);
 	}
 
 	@Override
-	public void deleteAll(Iterable<? extends Ratings> entities) {
+	public void deleteAll(Iterable<? extends RoomTypeInfos> entities) {
 		repository.deleteAll(entities);
 	}
 
@@ -150,17 +150,17 @@ public class RatingServiceImpl implements IRatingService{
 	}
 
 	@Override
-	public Ratings getById(Long id) {
+	public RoomTypeInfos getById(Long id) {
 		return repository.getById(id);
 	}
 
 	@Override
-	public <S extends Ratings> List<S> findAll(Example<S> example) {
+	public <S extends RoomTypeInfos> List<S> findAll(Example<S> example) {
 		return repository.findAll(example);
 	}
 
 	@Override
-	public <S extends Ratings> List<S> findAll(Example<S> example, Sort sort) {
+	public <S extends RoomTypeInfos> List<S> findAll(Example<S> example, Sort sort) {
 		return repository.findAll(example, sort);
 	}
 	

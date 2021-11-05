@@ -24,7 +24,7 @@
                         <div class="overlay-form none-block">
                             <form:form action="dang-nhap" modelAttribute="account">
                                 <div class="overlay-form-header">
-                                    <p class="">${LoginInfo.Ten }</p>
+                                    <p class="">${LoginInfo.name }</p>
                                     <i class="fas fa-times"></i>
                                 </div>
                                 <div class="overlay-form-content">
@@ -32,12 +32,12 @@
                                         <div class="overlay-form-data-item">
                                             <i class="far fa-user"></i>
                                             <!-- <input type="text" placeholder="Username"> -->
-                                            <form:input type="text" placeholder="Nhập email" path="Mail" />
+                                            <form:input type="text" placeholder="Nhập email" path="mail" />
                                         </div>
                                         <div class="overlay-form-data-item">
                                             <i class="fas fa-unlock-alt"></i>
                                             <!-- <input type="text" placeholder="Password"> -->
-                                            <form:input type="password" placeholder="Nhập mật khẩu" path="Password" />
+                                            <form:input type="password" placeholder="Nhập mật khẩu" path="password" />
                                         </div>
                                     </div>
                                     <div class="overlay-form-button">
@@ -57,22 +57,22 @@
                                         <div class="form-content-item">
                                             <p>Họ và tên</p>
                                             <!-- <input type="text"> -->
-                                            <form:input type="text" path="Ten" />
+                                            <form:input type="text" path="name" />
                                         </div>
                                         <div class="form-content-item">
                                             <p>Địa chỉ</p>
                                             <!-- <input type="text"> -->
-                                            <form:input type="text" path="DiaChi" />
+                                            <form:input type="text" path="address" />
                                         </div>
                                         <div class="form-content-item">
                                             <p>Ngày sinh</p>
                                             <!-- <input type="text"> -->
-                                            <form:input type="date" path="NgaySinh" />
+                                            <form:input type="date" path="dateOfBirth" />
                                         </div>
                                         <div class="form-content-item">
                                             <p>Giới tính</p>
                                             <!-- <input type="text"> -->
-                                            <form:input type="text" path="GioiTinh" />
+                                            <form:input type="text" path="sex" />
                                         </div>
                                         <div class="form-content-item">
                                             <p>Căn cước công dân</p>
@@ -82,16 +82,16 @@
                                         <div class="form-content-item">
                                             <p>Số điện thoại</p>
                                             <!-- <input type="text"> -->
-                                            <form:input type="text" path="SDT" />
+                                            <form:input type="text" path="phoneNumber" />
                                         </div>
                                         <div class="form-content-item">
                                             <p class="">Mail</p>
-                                            <form:input type="text" path="Mail" />
+                                            <form:input type="text" path="mail" />
                                         </div>
                                         <div class="form-content-item">
                                             <p>Password</p>
                                             <!-- <input type="password"> -->
-                                            <form:input type="password" path="Password" />
+                                            <form:input type="password" path="password" />
                                         </div>
                                         <div class="form-content-avatar">
                                             <p>Ảnh đại diện</p>

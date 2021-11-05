@@ -15,38 +15,40 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import WebApplication.AirBnb.domain.NguoiDung;
-import WebApplication.AirBnb.domain.Quyen;
-import WebApplication.AirBnb.domain.TaiKhoan;
-import WebApplication.AirBnb.model.NguoiDungDTO;
-import WebApplication.AirBnb.model.TaiKhoanDTO;
-import WebApplication.AirBnb.model.User_AccountDTO;
-import WebApplication.AirBnb.service.TaiKhoanBLL;
-import WebApplication.AirBnb.service.impl.NguoiDungServiceImpl;
+import WebApplication.AirBnb.domain.Users;
+import WebApplication.AirBnb.domain.Roles;
+import WebApplication.AirBnb.domain.Accounts;
+import WebApplication.AirBnb.model.UserDto;
+import WebApplication.AirBnb.model.AccountDto;
+import WebApplication.AirBnb.model.UserAccDto;
+import WebApplication.AirBnb.service.IAccountService;
+import WebApplication.AirBnb.service.impl.UserServiceImpl;
+import WebApplication.AirBnb.service.impl.AccountServiceImpl;
 
 
 
 @Controller
 public class HomeController{
 	@Autowired
-	TaiKhoanBLL taiKhoanService;
+	AccountServiceImpl accountService;
 	@Autowired
-	NguoiDungServiceImpl nguoiDungService;
+	UserServiceImpl userService;
 	@Autowired
 	private HttpSession session;
+	
 	@GetMapping(value = "")
 	private String index(Model model) {
-		model.addAttribute("useracc", new User_AccountDTO());
-		model.addAttribute("account", new TaiKhoanDTO());
+		model.addAttribute("useracc", new UserAccDto());
+		model.addAttribute("account", new AccountDto());
 		return "index";
 	}
 	
 	@RequestMapping(value = "/dang-nhap", method = RequestMethod.POST)
-	public ModelAndView Login(HttpSession session, @ModelAttribute("account") TaiKhoanDTO account, ModelMap model) {
+	public ModelAndView Login(HttpSession session, @ModelAttribute("account") AccountDto account, ModelMap model) {
 		
 		//model.addAttribute("account", new TaiKhoanDTO());
-		User_AccountDTO useracc = new User_AccountDTO();
-		useracc = taiKhoanService.login(account);
+		UserAccDto useracc = new UserAccDto();
+		useracc = accountService.login(account);
 		if (useracc != null)
 		{
 			//model.addAttribute("statusLog","Đăng nhập thành công!");
@@ -60,10 +62,10 @@ public class HomeController{
 	}
 	
 	@RequestMapping(value = "/dang-ki", method = RequestMethod.POST)
-	public ModelAndView Register(@ModelAttribute("useracc") User_AccountDTO useracc, ModelMap model) {
-		boolean isSuccess = taiKhoanService.register(useracc);
-		model.addAttribute("useracc", new User_AccountDTO());
-		model.addAttribute("account", new TaiKhoanDTO());
+	public ModelAndView Register(@ModelAttribute("useracc") UserAccDto useracc, ModelMap model) {
+		boolean isSuccess = accountService.register(useracc);
+		model.addAttribute("useracc", new UserAccDto());
+		model.addAttribute("account", new AccountDto());
 		if (isSuccess == true)
 			model.addAttribute("statusReg","Đăng kí tài khoản thành công!");
 		else {

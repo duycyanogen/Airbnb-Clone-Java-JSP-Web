@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class RatingDTO{
+public class RatingDto{
 	
 	private int SoSao;
 	private String Comment;

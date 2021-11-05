@@ -13,11 +13,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import WebApplication.AirBnb.domain.TaiKhoan;
-import WebApplication.AirBnb.domain.Tin;
-import WebApplication.AirBnb.model.TinDTO;
-import WebApplication.AirBnb.repository.TaiKhoanDAO;
-import WebApplication.AirBnb.service.impl.TinServiceImpl;
+import WebApplication.AirBnb.domain.Accounts;
+import WebApplication.AirBnb.domain.Posts;
+import WebApplication.AirBnb.model.PostDto;
+import WebApplication.AirBnb.repository.AccountRepository;
+import WebApplication.AirBnb.service.impl.PostServiceImpl;
 
 
 
@@ -25,7 +25,7 @@ import WebApplication.AirBnb.service.impl.TinServiceImpl;
 @RequestMapping("posts")
 public class PostsController {
 	@Autowired
-	TinServiceImpl service;
+	PostServiceImpl service;
 	
 	@GetMapping("/{IDTin}")
 	private String postdetails(ModelMap model, @PathVariable("IDTin") Long IDTin) {
@@ -35,17 +35,17 @@ public class PostsController {
 	
 	@GetMapping("add")
 	private String add(Model model) {
-		model.addAttribute("post",new TinDTO());
+		model.addAttribute("post",new PostDto());
 		return "post/AddOrEdit";
 	}
 	
 	@GetMapping("edit/{IDTin}")
 	private ModelAndView edit(ModelMap model, @PathVariable("IDTin") Long IDTin) {
-		Optional<Tin> opt = service.findById(IDTin);
-		TinDTO dto = new TinDTO();
+		Optional<Posts> opt = service.findById(IDTin);
+		PostDto dto = new PostDto();
 		if (opt.isPresent())
 		{
-			Tin entity = opt.get();
+			Posts entity = opt.get();
 			BeanUtils.copyProperties(entity, dto);
 			return new ModelAndView("posts/AddOrEdit",model);
 		}
@@ -59,8 +59,8 @@ public class PostsController {
 	}
 	
 	@GetMapping("saveOrUpdate")
-	private ModelAndView saveOrUpdate(ModelMap model, TinDTO dto) {
-		Tin entity = new Tin();
+	private ModelAndView saveOrUpdate(ModelMap model, PostDto dto) {
+		Posts entity = new Posts();
 		BeanUtils.copyProperties(dto, entity);
 		service.save(entity); 
 		return new ModelAndView("redirect:/post",model);
@@ -73,7 +73,7 @@ public class PostsController {
 	
 	@GetMapping("")
 	public String listPost(ModelMap model) {
-		List<Tin> list = service.findAll();
+		List<Posts> list = service.findAll();
 		model.addAttribute("posts",list);
 		return "posts/list";
 	}

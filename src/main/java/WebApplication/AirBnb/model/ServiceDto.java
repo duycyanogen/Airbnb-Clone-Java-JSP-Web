@@ -4,9 +4,13 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
-public class PaginatesDto {
-	private int currentPage, limit, start, end, totalPage;
+@NoArgsConstructor
+public class ServiceDto{
+	
+	
+	private String TenTienNghi;
+	
 }
