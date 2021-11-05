@@ -7,11 +7,10 @@
 }
 
 :root {
-  --btn-color: #FF385C;
+  --btn-color: #ff385c;
   --btn-color-hover: #fc7e95;
   --height-btn: 45px;
   --text-lable-font: 16px;
- 
 }
 
 html {
@@ -52,6 +51,18 @@ html {
 
 a {
   text-decoration: none;
+  color: #717171;
+  
+}
+
+input {
+  outline: none;
+}
+
+input:-webkit-autofill {
+  background-color: white !important;
+  background-image:none !important;
+  color: #000000 !important;
 }
 
 .negative {
@@ -87,7 +98,4 @@ a {
 ul {
   padding: 0px;
   list-style: none;
-}
-
-li {
 }

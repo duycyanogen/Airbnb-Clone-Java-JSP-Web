@@ -1,4 +1,5 @@
 package WebApplication.AirBnb.controller;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.BeanUtils;
@@ -41,28 +42,44 @@ public class HomeController{
 	}
 	
 	@RequestMapping(value = "/dang-nhap", method = RequestMethod.POST)
-	public String login(@ModelAttribute("account") TaiKhoanDTO account, Model model) {
+	public ModelAndView Login(HttpSession session, @ModelAttribute("account") TaiKhoanDTO account, ModelMap model) {
 		
 		//model.addAttribute("account", new TaiKhoanDTO());
 		User_AccountDTO useracc = new User_AccountDTO();
 		useracc = taiKhoanService.login(account);
 		if (useracc != null)
-			model.addAttribute("statusLog","Đăng nhập thành công!");
+		{
+			//model.addAttribute("statusLog","Đăng nhập thành công!");
+			session.setAttribute("LoginInfor", useracc);
+		}
 		else
 			model.addAttribute("statusLog", "Sai mật khẩu hoặc tài khoản không tồn tại");
-		return "redirect:/";
+		//model.addAttribute("useracc", new User_AccountDTO());
+		//model.addAttribute("account", new TaiKhoanDTO());
+		return new ModelAndView("redirect:/",model);
 	}
 	
 	@RequestMapping(value = "/dang-ki", method = RequestMethod.POST)
-	public String register(@ModelAttribute("useracc") User_AccountDTO useracc, Model model) {
+	public ModelAndView Register(@ModelAttribute("useracc") User_AccountDTO useracc, ModelMap model) {
 		boolean isSuccess = taiKhoanService.register(useracc);
+		model.addAttribute("useracc", new User_AccountDTO());
+		model.addAttribute("account", new TaiKhoanDTO());
 		if (isSuccess == true)
 			model.addAttribute("statusReg","Đăng kí tài khoản thành công!");
 		else {
 			model.addAttribute("statusReg", "Đăng kí tài khoản thất bại, tài khoản này đã tồn tại!");
+			return new ModelAndView("redirect:/",model);
 			//return "index";
 		}
-		return "redirect:/";
+		
+		return new ModelAndView("index",model);
+	}
+	
+	@RequestMapping(value = "dang-xuat", method = RequestMethod.GET)
+	public String Logout(HttpSession session, HttpServletRequest request)
+	{
+		session.removeAttribute("LoginInfor");
+		return "redirect:"+request.getHeader("Referer");
 	}
 	
 //	@PostMapping("login")

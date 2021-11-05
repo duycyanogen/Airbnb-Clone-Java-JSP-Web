@@ -39,8 +39,8 @@ public class TaiKhoanServiceImpl implements TaiKhoanBLL {
 	public boolean register(User_AccountDTO useracc) {
 		try {
 			TaiKhoan entity = new TaiKhoan();
-			entity.setMail(useracc.getMail());
-			entity.setPassword(useracc.getPassword());
+			entity.setMail(useracc.getMail());			
+			entity.setPassword(bCryptPasswordEncoder.encode(useracc.getPassword()));
 			Quyen quyen = new Quyen();
 			quyen.setIDQuyen(2l);
 			entity.setQuyen(quyen);
