@@ -18,7 +18,7 @@ public class ServiceDetailId implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	@Column
-	private Long servicesDetailId;
+	private Long serviceId;
 	@Column
 	private Long roomTypeInfoId;
 }

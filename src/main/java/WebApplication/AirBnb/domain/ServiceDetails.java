@@ -28,11 +28,9 @@ public class ServiceDetails implements Serializable {
 	
 	@ManyToOne
 	@MapsId("roomTypeInfoId")
-	//@JoinColumn(name = "idtt")
     private RoomTypeInfos roomTypeInfo;
 	
 	@ManyToOne
-	@MapsId("servicesId") 
-	//@JoinColumn(name = "idtien_nghi")
+	@MapsId("serviceId") 
 	private Services service;	
 }

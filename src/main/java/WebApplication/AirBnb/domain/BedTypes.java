@@ -30,5 +30,5 @@ public class BedTypes implements Serializable {
 	private String bedTypeName;
 	
 	@OneToMany(mappedBy = "bedType")
-	private List<RoomTypeDetails> lstRoomTypeDetails;
+	private List<BedTypeDetails> lstRoomTypeDetails;
 }

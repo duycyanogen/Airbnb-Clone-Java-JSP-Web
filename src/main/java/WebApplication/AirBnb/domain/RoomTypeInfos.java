@@ -32,7 +32,7 @@ public class RoomTypeInfos implements Serializable {
 	private Double area;
 	private Double price;
 	@OneToMany(mappedBy = "roomTypeInfo")
-    private List<RoomTypeDetails> lstRoomTypeDetails;
+    private List<BedTypeDetails> lstRoomTypeDetails;
 	
 	@OneToMany(mappedBy = "service")
     private List<ServiceDetails> lstServiceDetails;

@@ -3,8 +3,11 @@ package WebApplication.AirBnb.domain;
 import java.io.Serializable;
 
 import javax.persistence.Embeddable;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
 
@@ -21,15 +24,16 @@ public class Ratings implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	@EmbeddedId
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long ratingId;
+	private Long accountId;
 	private int starsNumber;
 	private String comment;
-	
-		
+			
 	@ManyToOne
-	@MapsId("postsId")
-	//@JoinColumn(name = "idtin")
+	//@MapsId("postId")
+	@JoinColumn(name = "post_id")
     private Posts post;
 	
 	

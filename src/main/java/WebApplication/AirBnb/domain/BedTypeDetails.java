@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class RoomTypeDetails implements Serializable {
+public class BedTypeDetails implements Serializable {
 	/**
 	 * 
 	 */
@@ -24,18 +24,18 @@ public class RoomTypeDetails implements Serializable {
 
 
 	@EmbeddedId
-	private BedTypeId bedTypeId;
+	private BedTypeDetailId bedTypeDetailId;
 	
 	
 	@ManyToOne
 	@MapsId("roomTypeInfoId")
-	//@JoinColumn(name = "idtt")
     private RoomTypeInfos roomTypeInfo;
 	
 	@ManyToOne
-	@MapsId("roomTypeId")
-	//@JoinColumn(name = "idloai_giuong")
+	//@MapsId("roomTypeId")
+	@MapsId("bedTypeId")
     private BedTypes bedType;	
+	
 	private String description;
 	
 }

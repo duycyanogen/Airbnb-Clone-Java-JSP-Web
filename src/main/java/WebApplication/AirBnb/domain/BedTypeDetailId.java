@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class BedTypeId implements Serializable {
+public class BedTypeDetailId implements Serializable {
 	/**
 	 * 
 	 */
