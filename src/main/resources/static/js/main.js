@@ -66,3 +66,26 @@ const formSignUp_Close = document.querySelector(".sign-up-form-content i");
 formSignUp_Close.onclick = function() {
   overlay.classList.add("none-block");
 }
+
+//INDEX_DETAIL
+const heartIconList = document.querySelectorAll(".content-info-title i");
+for(let i=0; i<heartIconList.length; i++) {
+  heartIconList[i].onclick = function() {
+    if(heartIconList[i].style.color == ""){
+      heartIconList[i].style.color = "#ff385c";
+      console.log(heartIconList[i].style.color);
+      console.log("ok1");
+    }
+    else if(heartIconList[i].style.color == "rgb(207, 207, 207)"){
+      heartIconList[i].style.color = "#ff385c";
+      console.log("ok2");
+    }
+    else if(  heartIconList[i].style.color == "rgb(255, 56, 92)"){
+      heartIconList[i].style.color = "rgb(207, 207, 207)";
+      console.log("ok3");
+    }
+  }
+}
+
+
+

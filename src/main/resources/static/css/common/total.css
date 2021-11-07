@@ -48,11 +48,6 @@
   border-radius: 50%;
   background-color: #ff385c;
   color: #fff;
-  cursor: pointer;
-}
-
-.search-btn:hover {
-  opacity: 0.95;
 }
 
 .user-frame {
@@ -137,6 +132,13 @@
   transition: display 0.25s linear;
 }
 
+.header-down-account-list li > a {
+  height: 100%;
+  width: 100%;
+  display: block;
+  /* padding: 0px 100px 0px 0px; */
+}
+
 .header-down::before {
   content: "";
   /* background-color: red; */
@@ -154,13 +156,6 @@
 .header-down-account-list li {
   height: 50px;
   padding-left: 20px;
-}
-
-.header-down-account-list li > a {
-  height: 100%;
-  width: 100%;
-  display: block;
-  /* padding: 0px 100px 0px 0px; */
 }
 
 .header-down-account-list li:hover {

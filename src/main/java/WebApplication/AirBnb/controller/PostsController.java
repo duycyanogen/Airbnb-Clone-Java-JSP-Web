@@ -15,14 +15,16 @@ import org.springframework.web.servlet.ModelAndView;
 
 import WebApplication.AirBnb.domain.Accounts;
 import WebApplication.AirBnb.domain.Posts;
+import WebApplication.AirBnb.model.AccountDto;
 import WebApplication.AirBnb.model.PostDto;
+import WebApplication.AirBnb.model.UserAccDto;
 import WebApplication.AirBnb.repository.AccountRepository;
 import WebApplication.AirBnb.service.impl.PostServiceImpl;
 
 
 
 @Controller
-@RequestMapping("posts")
+@RequestMapping("danh-sach-tin")
 public class PostsController {
 	@Autowired
 	PostServiceImpl service;
@@ -73,9 +75,11 @@ public class PostsController {
 	
 	@GetMapping("")
 	public String listPost(ModelMap model) {
-		List<Posts> list = service.findAll();
-		model.addAttribute("posts",list);
-		return "posts/list";
+		//List<Posts> list = service.findAll();
+		//model.addAttribute("posts",list);
+		model.addAttribute("useracc", new UserAccDto());
+		model.addAttribute("account", new AccountDto());
+		return "posts/posts";
 	}
 	
 	

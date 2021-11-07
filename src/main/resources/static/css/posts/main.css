@@ -1,3 +1,5 @@
+
+
 /* container */
 
 /* slider */
@@ -36,7 +38,7 @@
   /* transform: scale(1.2); */
 }
 
-.slider__search-frame a {
+.slider__search-frame span {
   font-weight: 600;
   font-size: 18px;
   background: linear-gradient(to right, #30cfd0 0%, #330867 100%);
@@ -183,3 +185,4 @@
 .footer .section:last-child {
   border-bottom: 1px solid #aaa;
 }
+

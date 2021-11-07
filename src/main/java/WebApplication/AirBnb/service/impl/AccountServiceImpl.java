@@ -43,7 +43,7 @@ public class AccountServiceImpl implements IAccountService {
 			accountEntity.setPassword(bCryptPasswordEncoder.encode(useracc.getPassword()));
 			Roles role = new Roles();
 			role.setRoleId(2l);
-			//entity.setRole(role);
+			accountEntity.setRole(role);
 			accountRepository.save(accountEntity);
 			//Lưu tài khoản
 			Users userEntity = new Users();
@@ -53,7 +53,8 @@ public class AccountServiceImpl implements IAccountService {
 			userEntity.setSex(useracc.getSex());
 			userEntity.setDateOfBirth(useracc.getDateOfBirth());
 			userEntity.setCCCD(useracc.getCCCD());
-			userEntity.setAvatar(useracc.getAvatar());			
+			userEntity.setAvatar(useracc.getAvatar());		
+			userEntity.setAccount(accountEntity);
 			userRepository.save(userEntity);
 			return true;
 		} catch (Exception e) {

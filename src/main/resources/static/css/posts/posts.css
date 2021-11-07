@@ -1,22 +1,21 @@
 :root {
     --text-font: 18px;
-    --text-font-detail : 14px;
+    --text-font-detail: 14px;
     --item-block-height: 200px;
     --text-color-detail: rgb(113, 113, 113);
 }
 
 .header {
-    padding: 10px 25px;
+    padding: 10px 120px;
 }
 
-
-p{
+p {
     font-size: var(--text-font);
 }
-.container{
+.container {
     width: 100%;
     background-color: #fff;
-    padding: 80px 25px 0px;
+    padding: 80px 120px;
     display: flex;
 }
 .container-main {
@@ -27,39 +26,34 @@ p{
     height: calc(100vh - 80px);
 }
 
-
-
 .container-start {
-
 }
 
 .container-content {
-    width: 65%;
+    z-index: 2;
+    width: 885px;
     overflow-y: scroll;
 }
 
-.container-content-title{
+.container-content-title {
     font-size: 30px;
     font-weight: 600;
     padding: 10px 0px;
 }
 
-.container-content::-webkit-scrollbar{
+.container-content::-webkit-scrollbar {
     width: 5px;
-  background: rgb(255, 255, 255); 
+    background: rgb(255, 255, 255);
+}
 
-} 
-
-.container-content::-webkit-scrollbar-thumb{
-  background: rgb(0, 0, 0); 
-  border-radius: 6px;
-    background:  #ff385c;
-} 
-
-
+.container-content::-webkit-scrollbar-thumb {
+    background: rgb(0, 0, 0);
+    border-radius: 6px;
+    background: #ff385c;
+}
 
 .container-under-backround {
-    width: 35%;
+    width: 70%;
     background-color: transparent;
 }
 
@@ -87,11 +81,9 @@ p{
     width: 40%;
     overflow: hidden;
     border-radius: 10px;
-
 }
 .content-img img {
     width: 100%;
-   
 }
 
 .content-info {
@@ -110,7 +102,7 @@ p{
 }
 
 .content-info-title p {
-    font-size:  var(--text-font-detail);
+    font-size: var(--text-font-detail);
     color: var(--text-color-detail);
 }
 
@@ -118,14 +110,11 @@ p{
     font-size: 22px;
     cursor: pointer;
     color: rgb(207, 207, 207);
-
 }
 
 .heart-active {
     color: #ff385c;
 }
-
-
 
 .content-info-name {
     width: 100%;
@@ -144,7 +133,7 @@ p{
 }
 
 .content-info-detail {
-    height: calc( 100% - 20px - 35px);
+    height: calc(100% - 20px - 35px);
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -152,7 +141,7 @@ p{
 }
 
 .content-info-detail p:first-child {
-    font-size:  var(--text-font-detail);
+    font-size: var(--text-font-detail);
     color: var(--text-color-detail);
 }
 
@@ -170,19 +159,19 @@ p{
 }
 
 .info-evalution i {
-    font-size:  var(--text-font-detail);
+    font-size: var(--text-font-detail);
     margin-right: 5px;
     color: #ff385c;
 }
 
 .star-point {
     margin-right: 5px;
-    font-size:  var(--text-font-detail);
+    font-size: var(--text-font-detail);
     color: var(--text-color-detail);
 }
 
 .star-number {
-    font-size:  var(--text-font-detail);
+    font-size: var(--text-font-detail);
     color: var(--text-color-detail);
 }
 
@@ -194,21 +183,18 @@ p{
 }
 
 .info-price p:first-child {
-    font-size:  18px;
+    font-size: 18px;
     font-weight: bold;
     color: black;
     margin-right: 5px;
-    
 }
-
 
 .info-price-time {
     font-size: 18px;
-
 }
 
-.container-content nav{
-    font-size:16px;
+.container-content nav {
+    font-size: 16px;
     margin-top: 30px;
     display: flex;
     justify-content: center;
@@ -218,7 +204,7 @@ p{
 .contaier-pagin {
     display: flex;
     justify-content: center;
-    margin : 30px 0px 30px;
+    margin: 30px 0px 30px;
     padding: 20px 0px;
 }
 
@@ -226,7 +212,7 @@ p{
     display: flex;
 }
 
-.contaier-pagin ul li{
+.contaier-pagin ul li {
     width: 35px;
     height: 35px;
     margin: 0px 7px;
@@ -237,18 +223,16 @@ p{
     cursor: pointer;
 }
 
-
-.page-link-item:hover{
+.page-link-item:hover {
     background-color: rgb(223, 223, 223);
 }
 
-.page-link-item a{
+.page-link-item a {
     color: rgb(71, 71, 71);
 }
 
-.page-link-item a i{
+.page-link-item a i {
     color: rgb(97, 97, 97);
-    
 }
 
 .active-page {
@@ -259,16 +243,10 @@ p{
     color: #fff;
 }
 
-.active-page:hover{
+.active-page:hover {
     color: #fff;
     background-color: rgb(58, 58, 58);
-   
 }
-
-
-
-
-
 
 .footer {
     margin-top: 0px;
@@ -277,33 +255,13 @@ p{
 /* CONTAINER_BACKGROUND */
 .contairer-background {
     position: absolute;
-    background-image: url(/assets/Image/bgContainer1.jpg);
-    width: 35%;
+    background-image: url(https://images.unsplash.com/photo-1635667026386-81c96a456adf?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=735&q=80);
+    background-size: fill;
+    background-position: center; /* Center the image */
+    background-repeat: no-repeat;
+    width: 52%;
     top: 80px;
     bottom: 0px;
     right: 0px;
-    min-height: calc( 100vh - 80px);
+    min-height: calc(100vh - 80px);
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
