@@ -2,15 +2,16 @@ package WebApplication.AirBnb.domain;
 
 import java.io.Serializable;
 
-
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+
+import org.hibernate.annotations.Nationalized;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -28,8 +29,11 @@ public class Users implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long userId;
 	@NotNull
+	@Nationalized
 	private String name;
+	@Column(columnDefinition = "nvarchar")
 	private String address;
+	@Column(columnDefinition = "nvarchar")
 	private String sex;	
 	private String dateOfBirth;
 	private String CCCD;

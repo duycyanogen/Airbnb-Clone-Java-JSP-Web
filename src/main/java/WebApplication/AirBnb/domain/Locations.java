@@ -26,7 +26,7 @@ public class Locations implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long locationId;
-	@Column(unique = true, nullable = false)
+	@Column(nullable = false, columnDefinition = "nvarchar", length = 200)	
 	private String locationName;
 	@OneToMany(mappedBy = "location")	
 	private List<Hotels> lstHotels;

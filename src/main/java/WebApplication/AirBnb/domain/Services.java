@@ -3,6 +3,7 @@ package WebApplication.AirBnb.domain;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -25,6 +26,7 @@ public class Services implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long serviceId;
+	@Column(nullable = false, columnDefinition = "nvarchar", length = 200)	
 	private String serviceName;
 	private String icon;
 	@OneToMany(mappedBy = "service")

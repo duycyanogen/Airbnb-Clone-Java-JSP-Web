@@ -2,6 +2,7 @@ package WebApplication.AirBnb.domain;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
@@ -35,7 +36,7 @@ public class BedTypeDetails implements Serializable {
 	//@MapsId("roomTypeId")
 	@MapsId("bedTypeId")
     private BedTypes bedType;	
-	
+	@Column(columnDefinition = "nvarchar", length = 255)
 	private String description;
 	
 }

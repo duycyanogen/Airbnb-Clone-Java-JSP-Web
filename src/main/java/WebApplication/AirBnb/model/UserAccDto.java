@@ -26,7 +26,7 @@ public class UserAccDto {
 	private String dateOfBirth;
 	private String CCCD;
 	private String avatar;
-	@NotBlank(message = "Bạn chưa nhập số điện thoại")
+	//@NotBlank(message = "Bạn chưa nhập số điện thoại")
 	@Pattern(regexp="^[0-9]{9,11}",message="Số điện thoại phải bao gồm 9-11 chữ số")  
 	private String phoneNumber;
 	@Email(message = "Email không hợp lệ")

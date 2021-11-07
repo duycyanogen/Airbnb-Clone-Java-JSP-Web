@@ -21,14 +21,17 @@
 				</head>
 
 				<body>
-					<div class="overlay none-block">
-						<div class="overlay-form none-block">
-							<form:form action="dang-nhap" modelAttribute="account">
+					<div class="overlay ${empty showOverlay ? " none-block" : "" }">
+						<form:form action="dang-nhap" modelAttribute="account">
+							<div class="overlay-form ${empty showFormLogin ? " none-block" : "" }">
 								<div class="overlay-form-header">
-									<p class="">${LoginInfo.name }</p>
+									<p class="">Đăng nhập</p>
 									<i class="fas fa-times"></i>
 								</div>
 								<div class="overlay-form-content">
+									<c:if test="${not empty failtureLoginMessage}">
+										<div class="isa_error">${ failtureLoginMessage}</div>
+									</c:if>
 									<div class="overlay-form-data">
 										<div class="overlay-form-data-item">
 											<i class="far fa-user"></i>
@@ -45,20 +48,24 @@
 										<button type="submit">Đăng nhập</button>
 									</div>
 								</div>
-							</form:form>
-						</div>
+							</div>
+						</form:form>
 						<form:form action="dang-ki" modelAttribute="useracc">
-							<div class="sign-up-form">
+							<div class="sign-up-form ${empty showFormRegis ? " none-block" : "" }">
 								<div class="sign-up-form-content">
 									<div class="sign-up-form-header">
 										<p>Đăng ký</p>
 										<i class="fas fa-times"></i>
 									</div>
 									<div class="sign-up-form-block">
+										<c:if test="${validatedRegis == true }">
+											<form:errors path="mail" element="div" class="isa_error" />
+										</c:if>
 										<div class="form-content-item">
 											<p>Họ và tên</p>
-											<!-- <input type="text"> -->
 											<form:input type="text" path="name" />
+											<form:errors path="name" element="div" class="isa_error" />
+
 										</div>
 										<div class="form-content-item">
 											<p>Địa chỉ</p>
@@ -67,8 +74,8 @@
 										</div>
 										<div class="form-content-item">
 											<p>Ngày sinh</p>
-											<!-- <input type="text"> -->
 											<form:input type="date" path="dateOfBirth" />
+											<form:errors path="dateOfBirth" element="div" class="isa_error" />
 										</div>
 										<div class="form-content-item">
 											<p>Giới tính</p>
@@ -77,22 +84,24 @@
 										</div>
 										<div class="form-content-item">
 											<p>Căn cước công dân</p>
-											<!-- <input type="text"> -->
 											<form:input type="text" path="CCCD" />
 										</div>
 										<div class="form-content-item">
 											<p>Số điện thoại</p>
-											<!-- <input type="text"> -->
 											<form:input type="text" path="phoneNumber" />
+											<form:errors path="phoneNumber" element="div" class="isa_error" />
 										</div>
 										<div class="form-content-item">
 											<p class="">Mail</p>
 											<form:input type="text" path="mail" />
+											<form:errors path="mail" element="div" class="isa_error" />
 										</div>
 										<div class="form-content-item">
 											<p>Password</p>
-											<!-- <input type="password"> -->
+
 											<form:input type="password" path="password" />
+											<form:errors path="password" element="div" class="isa_error" />
+
 										</div>
 										<div class="form-content-avatar">
 											<p>Ảnh đại diện</p>
@@ -105,7 +114,7 @@
 										</div>
 
 										<div class="sign-up-form-btn">
-											<button type="submit" class="sign-up-continue">CONTINUE</button>
+											<button type="submit" class="sign-up-continue">Đăng ký</button>
 										</div>
 									</div>
 								</div>

@@ -3,6 +3,7 @@ package WebApplication.AirBnb.domain;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -27,7 +28,9 @@ public class Posts implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long postId;
 	private String postDate;
+	@Column(nullable = false, columnDefinition = "nvarchar", length = 200)	
 	private String title;
+	@Column(nullable = false, columnDefinition = "nvarchar", length = 500)	
 	private String content;
 	private int status;
 		

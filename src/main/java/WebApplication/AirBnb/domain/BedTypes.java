@@ -26,7 +26,7 @@ public class BedTypes implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long bedTypeId;
-	@Column(length = 60,unique = true, nullable = false)
+	@Column(length = 200,unique = true, nullable = false, columnDefinition = "nvarchar")	
 	private String bedTypeName;
 	
 	@OneToMany(mappedBy = "bedType")

@@ -1,5 +1,8 @@
 package WebApplication.AirBnb.controller;
 
+import java.io.File;
+
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -16,6 +19,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import WebApplication.AirBnb.domain.Users;
@@ -65,21 +70,46 @@ public class HomeController {
 			model.remove("showFormRegis");
 			model.addAttribute("showOverlay", "true");		
 			model.addAttribute("showFormLogin","true");	
+			model.addAttribute("failtureLoginMessage", "Tên đăng nhập hoặc mật khẩu không chính xác, vui lòng kiểm tra lại!");
 		}
+		
 		return new ModelAndView("index", model);
 	}
-
+	@Autowired ServletContext context;
 	@RequestMapping(value = "/dang-ki", method = RequestMethod.POST)
-	public ModelAndView Register(ModelMap model, @Validated @ModelAttribute("useracc") UserAccDto useracc, BindingResult errors) {
+	public ModelAndView Register(ModelMap model, @Validated @ModelAttribute("useracc") UserAccDto useracc, 
+			BindingResult errors,@RequestParam("image") MultipartFile image) {
+		if (!image.isEmpty())
+		{
+			try {
+				String photoPath = context.getRealPath("/avatarimage/"+image.getOriginalFilename());
+				image.transferTo(new File(photoPath));
+				useracc.setAvatar(image.getOriginalFilename());
+				System.out.println(useracc.getAvatar());
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+		}
 		model.addAttribute("useracc", new UserAccDto());
 		model.addAttribute("account", new AccountDto());
+		System.out.println(errors.getAllErrors());
 		if (!errors.hasErrors()) {
+			System.out.println(errors.getAllErrors());
+			System.out.println(useracc.getAvatar());
 			boolean isSuccess = accountService.register(useracc);
 			if (isSuccess == true)
+			{
 				model.addAttribute("statusReg", "Đăng kí tài khoản thành công!");
-			else {
-				model.addAttribute("statusReg", "Đăng kí tài khoản thất bại, tài khoản này đã tồn tại!");
 				return new ModelAndView("redirect:/", model);
+			}
+			else {
+				model.remove("showFormLogin");
+				model.addAttribute("showOverlay", "true");
+				model.addAttribute("showFormRegis","true");
+				model.addAttribute("validatedRegis", true);
+				errors.rejectValue("mail","useracc", "Đăng kí tài khoản thất bại, tài khoản này đã tồn tại!");
+				//model.addAttribute("statusReg", "Đăng kí tài khoản thất bại, tài khoản này đã tồn tại!");
+				return new ModelAndView("index", errors.getModel());
 				// return "index";
 			}
 		}
@@ -89,7 +119,7 @@ public class HomeController {
 			model.addAttribute("showFormRegis","true");
 		}
 		
-		return new ModelAndView("index", model);
+		return new ModelAndView("index",errors.getModel());
 	}
 
 	@RequestMapping(value = "dang-xuat", method = RequestMethod.GET)
