@@ -49,6 +49,12 @@ public class HomeController {
 		return "index";
 	}
 
+	@GetMapping(value = "thong-tin-ca-nhan")
+	private String UserInfo(Model model) {
+
+		return "account/accountinfo";
+	}
+
 	@GetMapping(value = "trang-chu")
 	private String home(Model model) {
 		model.addAttribute("useracc", new UserAccDto());
@@ -65,24 +71,26 @@ public class HomeController {
 		if (useracc != null) {
 			session.setAttribute("LoginInfor", useracc);
 			return new ModelAndView("redirect:/", model);
-		} else
-		{
+		} else {
 			model.remove("showFormRegis");
-			model.addAttribute("showOverlay", "true");		
-			model.addAttribute("showFormLogin","true");	
-			model.addAttribute("failtureLoginMessage", "Tên đăng nhập hoặc mật khẩu không chính xác, vui lòng kiểm tra lại!");
+			model.addAttribute("showOverlay", "true");
+			model.addAttribute("showFormLogin", "true");
+			model.addAttribute("failtureLoginMessage",
+					"Tên đăng nhập hoặc mật khẩu không chính xác, vui lòng kiểm tra lại!");
 		}
-		
+
 		return new ModelAndView("index", model);
 	}
-	@Autowired ServletContext context;
+
+	@Autowired
+	ServletContext context;
+
 	@RequestMapping(value = "/dang-ki", method = RequestMethod.POST)
-	public ModelAndView Register(ModelMap model, @Validated @ModelAttribute("useracc") UserAccDto useracc, 
-			BindingResult errors,@RequestParam("image") MultipartFile image) {
-		if (!image.isEmpty())
-		{
+	public ModelAndView Register(ModelMap model, @Validated @ModelAttribute("useracc") UserAccDto useracc,
+			BindingResult errors, @RequestParam("image") MultipartFile image) {
+		if (!image.isEmpty()) {
 			try {
-				String photoPath = context.getRealPath("/avatarimage/"+image.getOriginalFilename());
+				String photoPath = context.getRealPath("/avatarimage/" + image.getOriginalFilename());
 				image.transferTo(new File(photoPath));
 				useracc.setAvatar(image.getOriginalFilename());
 				System.out.println(useracc.getAvatar());
@@ -97,29 +105,27 @@ public class HomeController {
 			System.out.println(errors.getAllErrors());
 			System.out.println(useracc.getAvatar());
 			boolean isSuccess = accountService.register(useracc);
-			if (isSuccess == true)
-			{
+			if (isSuccess == true) {
 				model.addAttribute("statusReg", "Đăng kí tài khoản thành công!");
 				return new ModelAndView("redirect:/", model);
-			}
-			else {
+			} else {
 				model.remove("showFormLogin");
 				model.addAttribute("showOverlay", "true");
-				model.addAttribute("showFormRegis","true");
+				model.addAttribute("showFormRegis", "true");
 				model.addAttribute("validatedRegis", true);
-				errors.rejectValue("mail","useracc", "Đăng kí tài khoản thất bại, tài khoản này đã tồn tại!");
-				//model.addAttribute("statusReg", "Đăng kí tài khoản thất bại, tài khoản này đã tồn tại!");
+				errors.rejectValue("mail", "useracc", "Đăng kí tài khoản thất bại, tài khoản này đã tồn tại!");
+				// model.addAttribute("statusReg", "Đăng kí tài khoản thất bại, tài khoản này đã
+				// tồn tại!");
 				return new ModelAndView("index", errors.getModel());
 				// return "index";
 			}
-		}
-		else {
+		} else {
 			model.remove("showFormLogin");
 			model.addAttribute("showOverlay", "true");
-			model.addAttribute("showFormRegis","true");
+			model.addAttribute("showFormRegis", "true");
 		}
-		
-		return new ModelAndView("index",errors.getModel());
+
+		return new ModelAndView("index", errors.getModel());
 	}
 
 	@RequestMapping(value = "dang-xuat", method = RequestMethod.GET)
@@ -127,6 +133,5 @@ public class HomeController {
 		session.removeAttribute("LoginInfor");
 		return "redirect:" + request.getHeader("Referer");
 	}
-
 
 }

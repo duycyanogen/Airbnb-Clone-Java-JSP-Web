@@ -87,5 +87,15 @@ for (let i = 0; i < heartIconList.length; i++) {
   }
 }
 
-
+const handleList_btn = document.querySelectorAll(".handle-edit");
+console.log(handleList_btn);
+var handleInfoListItem;
+for (let i = 0; i < handleList_btn.length; i++) {
+  handleList_btn[i].onclick = function () {
+    handleInfoListItem = handleList_btn[i].parentElement;
+    console.log(handleInfoListItem)
+    console.log(handleInfoListItem.querySelector("div .handle-value"));
+    handleInfoListItem.querySelector("div .handle-value").focus();
+  }
+}
 

@@ -149,7 +149,7 @@
 								<span>Trở thành chủ nhà </span>
 							</c:if>
 							<c:if test="${ not empty sessionScope.LoginInfor }">
-								<span>${sessionScope.LoginInfor.getName() }</span>
+								<span><a href="thong-tin-ca-nhan">${sessionScope.LoginInfor.getName() }</a></span>
 							</c:if>
 							<div class="global-icon">
 								<i class="fas fa-globe-europe"></i>
@@ -179,7 +179,7 @@
 												<li class="account-sign-in"">Đăng nhập</li>
 							</c:if>
 							<c:if test= "${not empty sessionScope.LoginInfor }">
-												<li class="account-log-out""><a href=" dang-xuat">Đăng
+												<li class="account-log-out""><a href="dang-xuat">Đăng
 													xuất</a></li>
 											</c:if>
 										</ul>

@@ -144,15 +144,7 @@
   display: block;
 }
 .header-down {
-  /* background-color:#fff;
-  width: 240px;
-  position: absolute;
-  top: 55px;
-  right: 0px;
-  border-radius: 6px;
-  box-shadow: -2px 2px 4px 2px #b4b4b4a8;
-  display: none; */
-
+  
   display: none;
   position: absolute;
   box-shadow: 1px 1px 10px #888888;
