@@ -7,22 +7,22 @@ const signIn_Btn = document.querySelector(".overlay-form-button button")
 //Load Avatar_signUp
 const avatarBlock = document.querySelector(".form-content-avatar-block");
 const avatarImgBlock = document.querySelector(".form-content-avatar img");
-//const avatar_addIcon = document.querySelector(".form-content-avatar-block label i");
-// avatar_addIcon.onclick = function() {  
-//   $('document').ready(function () {
-//     $("#imgload").change(function () {
-//         if (this.files && this.files[0]) {
-//             var reader = new FileReader();
-//             reader.onload = function (e) {
-//                 $('#imgshow').attr('src', e.target.result);
-//             }
-//             reader.readAsDataURL(this.files[0]);
-//         }
-//     });
-//   });
-//   avatarBlock.classList.add("none-block");
-//   avatarImgBlock.classList.remove("none-block");  
-// }
+const avatar_addIcon = document.querySelector(".form-content-avatar-block label i");
+avatar_addIcon.onclick = function () {
+  $('document').ready(function () {
+    $("#imgload").change(function () {
+      if (this.files && this.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+          $('#imgshow').attr('src', e.target.result);
+        }
+        reader.readAsDataURL(this.files[0]);
+      }
+    });
+  });
+  avatarBlock.classList.add("none-block");
+  avatarImgBlock.classList.remove("none-block");
+}
 
 
 //Xử lí ẩn hiện overlay

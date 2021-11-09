@@ -105,14 +105,14 @@
 										</div>
 										<div class="form-content-avatar">
 											<p>Ảnh đại diện</p>
-											<!-- <img src="#" id="imgshow" class="none-block"> -->
-											<input type="file" name="image" />
-											<!-- <div class="form-content-avatar-block ">
-												<input type="file" id="imgload"> 
+											<img src="#" id="imgshow" class="none-block">
+											<!-- <input type="file" name="image" /> -->
+											<div class="form-content-avatar-block ">
+												<input type="file" id="imgload" name="image">
 												<label for="imgload">
 													<i class="fas fa-plus-circle"></i>
 												</label>
-											</div> -->
+											</div>
 										</div>
 
 										<div class="sign-up-form-btn">
@@ -178,8 +178,8 @@
 											<c:if test="${empty sessionScope.LoginInfor }">
 												<li class="account-sign-in"">Đăng nhập</li>
 							</c:if>
-							<c:if test= "${not empty sessionScope.LoginInfor }">
-												<li class="account-log-out""><a href="dang-xuat">Đăng
+							<c:if test="${not empty sessionScope.LoginInfor }">
+												<li class="account-log-out""><a href=" dang-xuat">Đăng
 													xuất</a></li>
 											</c:if>
 										</ul>
