@@ -60,6 +60,10 @@ public interface IUserService {
 
 	Optional<Users> findById(Long id);
 
+	Optional<Users> findByAccountId(Long id);
+	
+	Users findByEmail(String mail);
+	
 	List<Users> findAllById(Iterable<Long> ids);
 
 	List<Users> findAll(Sort sort);

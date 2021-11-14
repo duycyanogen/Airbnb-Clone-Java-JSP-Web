@@ -163,5 +163,17 @@ public class UserServiceImpl implements IUserService{
 	public <S extends Users> List<S> findAll(Example<S> example, Sort sort) {
 		return repository.findAll(example, sort);
 	}
+
+	@Override
+	public Optional<Users> findByAccountId(Long id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Users findByEmail(String mail) {
+		// TODO Auto-generated method stub
+		return repository.findByEmail(mail);
+	}
 	
 }

@@ -14,4 +14,5 @@ public interface AccountRepository extends JpaRepository<Accounts, Long>{
 	@Query("SELECT new WebApplication.AirBnb.model.UserAccDto(n.name , n.address , n.sex , n.dateOfBirth , "
 			+ "n.CCCD , n.avatar , n.phoneNumber , t.mail, t.password) from Accounts t join t.user n WHERE t.mail = :mail")
 	UserAccDto getUserAccountByMail(@Param("mail") String mail);
+	
 }

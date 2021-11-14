@@ -221,4 +221,10 @@ public class AccountServiceImpl implements IAccountService {
 		return accountRepository.findAll(example, sort);
 	}
 
+	@Override
+	public boolean updateUserInfo(UserAccDto useracc) {
+		
+		return false;
+	}
+
 }

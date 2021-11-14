@@ -11,6 +11,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -22,16 +23,16 @@ public class UserAccDto {
 	private String name;
 	private String address;
 	private String sex;
-	@DateTimeFormat(pattern="yyyy-MM-dd")	
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private String dateOfBirth;
 	private String CCCD;
 	private String avatar;
-	//@NotBlank(message = "Bạn chưa nhập số điện thoại")
-	@Pattern(regexp="^[0-9]{9,11}",message="Số điện thoại phải bao gồm 9-11 chữ số")  
+	// @NotBlank(message = "Bạn chưa nhập số điện thoại")
+	@Pattern(regexp = "^[0-9]{9,11}", message = "Số điện thoại phải bao gồm 9-11 chữ số")
 	private String phoneNumber;
 	@Email(message = "Email không hợp lệ")
 	private String mail;
 	@Length(min = 6, message = "Password phải từ 6 kí tự trở lên")
 	private String password;
-	
+
 }

@@ -51,7 +51,8 @@ public class HomeController {
 
 	@GetMapping(value = "thong-tin-ca-nhan")
 	private String UserInfo(Model model) {
-
+		UserAccDto objUserAccDto = (UserAccDto) session.getAttribute("LoginInfor");
+		model.addAttribute("objUserAccDto", objUserAccDto);
 		return "account/accountinfo";
 	}
 
@@ -132,6 +133,19 @@ public class HomeController {
 	public String Logout(HttpSession session, HttpServletRequest request) {
 		session.removeAttribute("LoginInfor");
 		return "redirect:" + request.getHeader("Referer");
+	}
+	
+	@PostMapping(value = "updateInfo")
+	private String home(@ModelAttribute("objUserAccDto") UserAccDto objUserAccDto) {
+		UserAccDto objUserAccDtoSession = (UserAccDto) session.getAttribute("LoginInfor");
+		Users objUsers = userService.findByEmail(objUserAccDtoSession.getMail());
+		objUsers.setName(objUserAccDto.getName());
+		objUsers.setSex(objUserAccDto.getSex());
+		objUsers.setDateOfBirth(objUserAccDto.getDateOfBirth());
+		objUsers.setPhoneNumber(objUserAccDto.getPhoneNumber());
+		objUsers.setAddress(objUserAccDto.getAddress());
+		userService.save(objUsers);
+		return "redirect:/thong-tin-ca-nhan";
 	}
 
 }

@@ -75,6 +75,8 @@ public interface IAccountService {
 	boolean register(UserAccDto useracc);
 
 	UserAccDto login(AccountDto account);
+	
+	boolean updateUserInfo(UserAccDto useracc);
 
 
 }
