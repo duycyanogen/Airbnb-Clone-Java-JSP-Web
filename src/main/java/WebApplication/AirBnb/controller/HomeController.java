@@ -138,13 +138,16 @@ public class HomeController {
 	@PostMapping(value = "updateInfo")
 	private String home(@ModelAttribute("objUserAccDto") UserAccDto objUserAccDto) {
 		UserAccDto objUserAccDtoSession = (UserAccDto) session.getAttribute("LoginInfor");
-		Users objUsers = userService.findByEmail(objUserAccDtoSession.getMail());
+		String email = objUserAccDtoSession.getMail();
+		Users objUsers = userService.findByEmail(email);
 		objUsers.setName(objUserAccDto.getName());
 		objUsers.setSex(objUserAccDto.getSex());
 		objUsers.setDateOfBirth(objUserAccDto.getDateOfBirth());
 		objUsers.setPhoneNumber(objUserAccDto.getPhoneNumber());
 		objUsers.setAddress(objUserAccDto.getAddress());
 		userService.save(objUsers);
+		objUserAccDtoSession = accountService.getUserAccountByMail(email);
+		session.setAttribute("LoginInfor",objUserAccDtoSession);
 		return "redirect:/thong-tin-ca-nhan";
 	}
 

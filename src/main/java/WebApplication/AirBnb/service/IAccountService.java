@@ -78,5 +78,7 @@ public interface IAccountService {
 	
 	boolean updateUserInfo(UserAccDto useracc);
 
+	UserAccDto getUserAccountByMail(String email);
+
 
 }

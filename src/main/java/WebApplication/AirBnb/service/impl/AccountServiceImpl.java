@@ -82,6 +82,11 @@ public class AccountServiceImpl implements IAccountService {
 	}
 
 	@Override
+	public UserAccDto getUserAccountByMail(String email) {
+		return accountRepository.getUserAccountByMail(email);
+	}
+	
+	@Override
 	public <S extends Accounts> Optional<S> findOne(Example<S> example) {
 		return accountRepository.findOne(example);
 	}
