@@ -15,7 +15,113 @@
 </head>
 
 <body>
-    <div class="header">
+	<div class="overlay ${empty showOverlay ? "none-block" : "" }">
+		<form:form action="dang-nhap" modelAttribute="account">
+			<div class="overlay-form ${empty showFormLogin ? "none-block" : "" }">
+				<div class="overlay-form-header">
+					<p class="">Đăng nhập</p>
+					<i class="fas fa-times"></i>
+				</div>
+				<div class="overlay-form-content">
+					<c:if test="${not empty failtureLoginMessage}">
+						<div class="isa_error">${ failtureLoginMessage}</div>
+					</c:if>
+					<div class="overlay-form-data">
+						<div class="overlay-form-data-item">
+							<i class="far fa-user"></i>
+							<!-- <input type="text" placeholder="Username"> -->
+							<form:input type="text" placeholder="Nhập email" path="mail" />
+						</div>
+						<div class="overlay-form-data-item">
+							<i class="fas fa-unlock-alt"></i>
+							<!-- <input type="text" placeholder="Password"> -->
+							<form:input type="password" placeholder="Nhập mật khẩu"
+								path="password" />
+						</div>
+					</div>
+					<div class="overlay-form-button">
+						<button type="submit">Đăng nhập</button>
+					</div>
+				</div>
+			</div>
+		</form:form>
+		<form:form action="dang-ki" modelAttribute="useracc"
+			enctype="multipart/form-data">
+			<div class="sign-up-form ${empty showFormRegis ? "none-block" : "" }">
+				<div class="sign-up-form-content">
+					<div class="sign-up-form-header">
+						<p>Đăng ký</p>
+						<i class="fas fa-times"></i>
+					</div>
+					<div class="sign-up-form-block">
+						<c:if test="${validatedRegis == true }">
+							<form:errors path="mail" element="div" class="isa_error" />
+						</c:if>
+						<div class="form-content-item">
+							<p>Họ và tên</p>
+							<form:input type="text" path="name" />
+							<form:errors path="name" element="div" class="isa_error" />
+
+						</div>
+						<div class="form-content-item">
+							<p>Địa chỉ</p>
+							<!-- <input type="text"> -->
+							<form:input type="text" path="address" />
+						</div>
+						<div class="form-content-item">
+							<p>Ngày sinh</p>
+							<form:input type="date" path="dateOfBirth" />
+							<form:errors path="dateOfBirth" element="div" class="isa_error" />
+						</div>
+						<div class="form-content-item">
+							<p>Giới tính</p>
+							<!-- <input type="text"> -->
+							<form:input type="text" path="sex" />
+						</div>
+						<div class="form-content-item">
+							<p>Căn cước công dân</p>
+							<form:input type="text" path="CCCD" />
+						</div>
+						<div class="form-content-item">
+							<p>Số điện thoại</p>
+							<form:input type="text" path="phoneNumber" />
+							<form:errors path="phoneNumber" element="div" class="isa_error" />
+						</div>
+						<div class="form-content-item">
+							<p class="">Mail</p>
+							<form:input type="text" path="mail" />
+							<form:errors path="mail" element="div" class="isa_error" />
+						</div>
+						<div class="form-content-item">
+							<p>Password</p>
+
+							<form:input type="password" path="password" />
+							<form:errors path="password" element="div" class="isa_error" />
+
+						</div>
+						<div class="form-content-avatar">
+							<p>Ảnh đại diện</p>
+							<!-- <img src="#" id="imgshow" class="none-block"> -->
+							<input type="file" name="image" />
+							<!-- <div class="form-content-avatar-block ">
+												<input type="file" id="imgload"> 
+												<label for="imgload">
+													<i class="fas fa-plus-circle"></i>
+												</label>
+											</div> -->
+						</div>
+
+						<div class="sign-up-form-btn">
+							<button type="submit" class="sign-up-continue">Đăng ký</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</form:form>
+
+	</div>
+	</div>
+	<div class="header">
 
         <div class="header__logo">
             <a href="https://www.airbnb.com.vn">

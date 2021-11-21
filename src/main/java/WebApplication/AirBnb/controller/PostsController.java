@@ -38,7 +38,7 @@ public class PostsController {
 	@GetMapping("add")
 	private String add(Model model) {
 		model.addAttribute("post",new PostDto());
-		return "post/AddOrEdit";
+		return "posts/postadd";
 	}
 	
 	@GetMapping("edit/{IDTin}")
