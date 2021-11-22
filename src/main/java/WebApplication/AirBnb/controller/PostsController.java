@@ -4,14 +4,18 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import WebApplication.AirBnb.domain.Accounts;
@@ -55,7 +59,7 @@ public class PostsController {
 	
 	@GetMapping("dang-tin")
 	private String add(Model model) {
-		//model.addAttribute("post",new PostDto());
+		model.addAttribute("post",new PostDto());
 		List<BedTypes> lstBedTypes = new ArrayList<BedTypes>();
 		lstBedTypes = bedTypeService.findAll();
 		List<RoomTypes> lstRoomTypes = new ArrayList<RoomTypes>();
@@ -71,33 +75,11 @@ public class PostsController {
 		return "posts/postadd";
 	}
 	
-	@GetMapping("edit/{IDTin}")
-	private ModelAndView edit(ModelMap model, @PathVariable("IDTin") Long IDTin) {
-		Optional<Posts> opt = postService.findById(IDTin);
-		PostDto dto = new PostDto();
-		if (opt.isPresent())
-		{
-			Posts entity = opt.get();
-			BeanUtils.copyProperties(entity, dto);
-			return new ModelAndView("posts/AddOrEdit",model);
-		}
-		model.addAttribute("message", "Tin này không còn tồn tại!");
-		return new ModelAndView("redirect:/post",model);
+	@RequestMapping(value = "/luu-tin", method = RequestMethod.POST)
+	public ModelAndView save(@ModelAttribute("post") PostDto post, ModelMap model) {
+		
+		return new ModelAndView("index", model);
 	}
-	
-	@GetMapping("delete/{IDTin}")
-	private String delete() {
-		return "redirect:/post";
-	}
-	
-	@GetMapping("saveOrUpdate")
-	private ModelAndView saveOrUpdate(ModelMap model, PostDto dto) {
-		Posts entity = new Posts();
-		BeanUtils.copyProperties(dto, entity);
-		postService.save(entity); 
-		return new ModelAndView("redirect:/post",model);
-	}
-	
 	@GetMapping("search")
 	public String search() {
 		return "posts/search";

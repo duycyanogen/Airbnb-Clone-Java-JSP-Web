@@ -100,141 +100,150 @@
 	<div class="container">
 		<div class="container-main">
 			<div class="container-content">
-				<p class="container-content-title">Tạo tin</p>
-				<div class="container-content-item">
-					<p>Tiêu đề</p>
-					<input type="text">
-				</div>
-				<div class="container-content-item">
-					<p>Nội dung tin</p>
-					<input type="text">
-				</div>
-				<div class="container-content-item">
-					<p>Tên căn hộ</p>
-					<input type="text">
-				</div>
-				<div class="container-content-item">
-					<p>Thành phố</p>
-					<select name="type-room" id="type-bed"
-						class="container-content-item-comboBox">
-						<c:forEach items="${lstLocations}" var="item">
-							<option value="${item.locationId}">${item.locationName}</option>
-						</c:forEach>
-					</select>
-				</div>
-				<div class="container-content-item">
-					<p>Địa chỉ</p>
-					<input type="text">
-				</div>
-				<div class="container-content-item">
-					<p>Diện tích(m2)</p>
-					<input type="text">
-				</div>
-				<div class="container-content-item">
-					<p>Số phòng</p>
-					<input type="text">
-				</div>
-				<div class="container-content-item">
-					<p>Giá phòng</p>
-					<input type="text">
-				</div>
-				<div class="container-content-item">
-					<p>Loại phòng</p>
-					<select name="type-room" id="type-room"
-						class="container-content-item-comboBox">
-						<c:forEach items="${lstRoomTypes}" var="item">
-							<option value="${item.roomTypeId}">${item.roomTypeName}</option>
-						</c:forEach>
-					</select>
-				</div>
-				<div class="container-content-item">
-					<p>Loại giường</p>
-					<select name="type-room" id="type-bed"
-						class="container-content-item-comboBox">
-						<c:forEach items="${lstBedTypes}" var="item">
-							<option value="${item.bedTypeId}">${item.bedTypeName}</option>
-						</c:forEach>
-					</select>
-				</div>
-				<div class="content-convenient-block">
-					<p>Tiện nghi</p>
-					<div class="container-content-item-convenient">
-						<div class="convenient-select-row grid-row-cpy">
-							<c:forEach items="${lstServices}" var="item">
-								<div class="convenient-select-column grid-column-2">
-									<input type="checkbox" id="${item.serviceId}"
-										name="${item.serviceId}" value="${item.serviceId}"> <label
-										for="${item.serviceId}" class="temp"></label>
-									<p>${item.serviceName}</p>
-								</div>
-						</c:forEach>
+				<form:form action="luu-tin" modelAttribute="post">
+					<p class="container-content-title">Tạo tin</p>
+					<div class="container-content-item">
+						<p>Tiêu đề</p>
+						<form:input type="text" path="title" />
+						<form:errors path="title" element="div" class="isa_error" />
+					</div>
+					<div class="container-content-item">
+						<p>Nội dung tin</p>
+						<form:input type="text" path="content" />
+						<form:errors path="content" element="div" class="isa_error" />
+					</div>
+					<div class="container-content-item">
+						<p>Tên căn hộ</p>
+						<form:input type="text" path="hotelName" />
+						<form:errors path="hotelName" element="div" class="isa_error" />
+					</div>
+					<div class="container-content-item">
+						<p>Thành phố</p>
+						<select name="type-room" id="type-bed"
+							class="container-content-item-comboBox">
+							<c:forEach items="${lstLocations}" var="item">
+								<option value="${item.locationId}">${item.locationName}</option>
+							</c:forEach>
+						</select>
+					</div>
+					<div class="container-content-item">
+						<p>Địa chỉ</p>
+						<form:input type="text" path="address" />
+						<form:errors path="address" element="div" class="isa_error" />
+					</div>
+					<div class="container-content-item">
+						<p>Diện tích(m2)</p>
+						<form:input type="text" path="area" />
+						<form:errors path="area" element="div" class="isa_error" />
+					</div>
+					<div class="container-content-item">
+						<p>Số phòng</p>
+						<form:input type="roomAmount" path="hotelName" />
+						<form:errors path="roomAmount" element="div" class="isa_error" />
+					</div>
+					<div class="container-content-item">
+						<p>Giá phòng</p>
+						<form:input type="text" path="price" />
+						<form:errors path="price" element="div" class="isa_error" />
+					</div>
+					<div class="container-content-item">
+						<p>Loại phòng</p>
+						<form:select name="type-room" id="type-room"
+							class="container-content-item-comboBox" path="roomTypeId">
+							<c:forEach items="${lstRoomTypes}" var="item">
+								<option value="${item.roomTypeId}">${item.roomTypeName}</option>
+							</c:forEach>
+						</form:select>
+					</div>
+					<div class="container-content-item">
+						<p>Loại giường</p>
+						<form:select name="type-bed" id="type-bed"
+							class="container-content-item-comboBox" path="bedTypeId">
+							<c:forEach items="${lstBedTypes}" var="item">
+								<option value="${item.bedTypeId}">${item.bedTypeName}</option>
+							</c:forEach>
+						</form:select>
+					</div>
+					<div class="content-convenient-block">
+						<p>Tiện nghi</p>
+						<div class="container-content-item-convenient">
+							<div class="convenient-select-row grid-row-cpy">
+								<c:forEach items="${lstServices}" var="item">
+									<div class="convenient-select-column grid-column-2">
+										<form:checkbox id="${item.serviceId}" name="${item.serviceId}"
+											value="${item.serviceId}" path="lstServices" />
+										<label for="${item.serviceId}" class="temp"></label>
+										<p>${item.serviceName}</p>
+									</div>
+								</c:forEach>
+							</div>
 						</div>
 					</div>
-				</div>
-				<div class="content-img-block">
-					<p>Tải lên 5 ảnh</p>
-					<div class="content-img-block-main">
-						<div class="content-img-block-label">
-							<input type="file" id="content-img-block-1"> <label
-								for="content-img-block-1">
-								<div class="img-wait-load">
-									<i class="fas fa-arrow-circle-up"></i>
-								</div>
-								<div class="img-done-load none-block">
-									<i class="fas fa-check"></i>
-								</div>
-							</label>
-						</div>
-						<div class="content-img-block-label">
-							<input type="file" id="content-img-block-2"> <label
-								for="content-img-block-2">
-								<div class="img-wait-load">
-									<i class="fas fa-arrow-circle-up"></i>
-								</div>
-								<div class="img-done-load none-block">
-									<i class="fas fa-check"></i>
-								</div>
-							</label>
-						</div>
-						<div class="content-img-block-label">
-							<input type="file" id="content-img-block-3"> <label
-								for="content-img-block-3">
-								<div class="img-wait-load">
-									<i class="fas fa-arrow-circle-up"></i>
-								</div>
-								<div class="img-done-load none-block">
-									<i class="fas fa-check"></i>
-								</div>
-							</label>
-						</div>
-						<div class="content-img-block-label">
-							<input type="file" id="content-img-block-4"> <label
-								for="content-img-block-4">
-								<div class="img-wait-load">
-									<i class="fas fa-arrow-circle-up"></i>
-								</div>
-								<div class="img-done-load none-block">
-									<i class="fas fa-check"></i>
-								</div>
-							</label>
-						</div>
-						<div class="content-img-block-label">
-							<input type="file" id="content-img-block-5"> <label
-								for="content-img-block-5">
-								<div class="img-wait-load">
-									<i class="fas fa-arrow-circle-up"></i>
-								</div>
-								<div class="img-done-load none-block">
-									<i class="fas fa-check"></i>
-								</div>
-							</label>
-						</div>
+					<div class="content-img-block">
+						<p>Tải lên 5 ảnh</p>
+						<div class="content-img-block-main">
+							<div class="content-img-block-label">
+								<form:input type="file" id="content-img-block-1" path="image1" />
+								<label for="content-img-block-1">
+									<div class="img-wait-load">
+										<i class="fas fa-arrow-circle-up"></i>
+									</div>
+									<div class="img-done-load none-block">
+										<i class="fas fa-check"></i>
+									</div>
+								</label>
+							</div>
+							<div class="content-img-block-label">
+								<form:input type="file" id="content-img-block-1" path="image2" />
+								<label for="content-img-block-2">
+									<div class="img-wait-load">
+										<i class="fas fa-arrow-circle-up"></i>
+									</div>
+									<div class="img-done-load none-block">
+										<i class="fas fa-check"></i>
+									</div>
+								</label>
+							</div>
+							<div class="content-img-block-label">
+								<form:input type="file" id="content-img-block-1" path="image3" />
+								<label for="content-img-block-3">
+									<div class="img-wait-load">
+										<i class="fas fa-arrow-circle-up"></i>
+									</div>
+									<div class="img-done-load none-block">
+										<i class="fas fa-check"></i>
+									</div>
+								</label>
+							</div>
+							<div class="content-img-block-label">
+								<form:input type="file" id="content-img-block-1" path="image4" />
+								<label for="content-img-block-4">
+									<div class="img-wait-load">
+										<i class="fas fa-arrow-circle-up"></i>
+									</div>
+									<div class="img-done-load none-block">
+										<i class="fas fa-check"></i>
+									</div>
+								</label>
+							</div>
+							<div class="content-img-block-label">
+								<form:input type="file" id="content-img-block-1" path="image5" />
+								<label for="content-img-block-5">
+									<div class="img-wait-load">
+										<i class="fas fa-arrow-circle-up"></i>
+									</div>
+									<div class="img-done-load none-block">
+										<i class="fas fa-check"></i>
+									</div>
+								</label>
+							</div>
 
+						</div>
 					</div>
-				</div>
-				<div class="container-content-button">
-					<button>Tạo tin</button>
-				</div>
+					<div class="container-content-button">
+						<button type="submit">Tạo tin</button>
+					</div>
+				</form:form>
 			</div>
 		</div>
 		<div class="contairer-background"></div>
