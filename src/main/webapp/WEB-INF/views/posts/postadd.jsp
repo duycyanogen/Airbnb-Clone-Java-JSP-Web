@@ -417,6 +417,25 @@
 	</div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/js/main.js"></script>
+
+	<script>
+		const imgLoadList = document
+				.querySelectorAll(".content-img-block-label label");
+		for (let i = 0; i < imgLoadList.length; i++) {
+			imgLoadList[i].onclick = function() {
+				console
+						.log(imgLoadList[i].parentElement
+								.querySelector("input"));
+				imgLoadList[i].parentElement.querySelector("input").onchange = function() {
+					imgLoadList[i].querySelector(".img-wait-load").classList
+							.add("none-block");
+					imgLoadList[i].querySelector(".img-done-load").classList
+							.remove("none-block");
+				}
+			}
+		}
+	</script>
+
 </body>
 
 </html>
