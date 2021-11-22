@@ -7,9 +7,8 @@
 
 
 .header {
-    padding: 10px 25px;
-    /* ThEM */
-    padding: 10px 140px;
+    
+    padding: 10px 250px;
 }
 
 
@@ -28,8 +27,8 @@ option {
 
     /* THEM */
 
-    padding-left: 140px;
-    padding-right: 140px;
+    padding-left: 250px;
+    padding-right: 250px;
 }
 .container-main {
     padding-top: 30px;

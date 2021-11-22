@@ -35,7 +35,7 @@ public class PostsController {
 		return "posts/postDetails";
 	}	
 	
-	@GetMapping("add")
+	@GetMapping("dang-tin")
 	private String add(Model model) {
 		model.addAttribute("post",new PostDto());
 		return "posts/postadd";

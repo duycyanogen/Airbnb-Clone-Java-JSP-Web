@@ -14,18 +14,17 @@
 <link rel="stylesheet" type="text/css"
 	href="<c:url value='${pageContext.request.contextPath}/css/common/base.css'/>" />
 <link rel="stylesheet" type="text/css"
-	href="<c:url value='${pageContext.request.contextPath}/css/posts/mainAdd.css'/>" />
-<link rel="stylesheet" type="text/css"
 	href="<c:url value='${pageContext.request.contextPath}/css/common/total.css'/>" />
 <link rel="stylesheet" type="text/css"
+	href="<c:url value='${pageContext.request.contextPath}/css/posts/mainAdd.css'/>" />
+<link rel="stylesheet" type="text/css"
+
 	href="<c:url value='${pageContext.request.contextPath}/Fonts/fontawesome-free-5.15.3-web/css/all.min.css'/>" />
 <title>Airbnd - Add</title>
 </head>
 
-<body>
-	
+<body>	
 	<div class="header">
-
 		<div class="logo-frame">
 			<div class="_1grlqto">
 				<a href="/trang-chu" style="color: #ff385c;"> <svg width="102"
@@ -60,7 +59,8 @@
 				</div>
 				<c:if test="${ not empty sessionScope.LoginInfor }">
 					<div class="user-icon">
-						<img src="${pageContext.request.contextPath}/avatarimage/${sessionScope.LoginInfor.getAvatar() }"
+						<img
+							src="${pageContext.request.contextPath}/avatarimage/${sessionScope.LoginInfor.getAvatar() }"
 							alt=""> <span class="noti"></span>
 					</div>
 				</c:if>
@@ -327,6 +327,25 @@
 		src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 	<script type="text/javascript"
 		src="${pageContext.request.contextPath}/js/main.js"></script>
+
+	<script>
+		const imgLoadList = document
+				.querySelectorAll(".content-img-block-label label");
+		for (let i = 0; i < imgLoadList.length; i++) {
+			imgLoadList[i].onclick = function() {
+				console
+						.log(imgLoadList[i].parentElement
+								.querySelector("input"));
+				imgLoadList[i].parentElement.querySelector("input").onchange = function() {
+					imgLoadList[i].querySelector(".img-wait-load").classList
+							.add("none-block");
+					imgLoadList[i].querySelector(".img-done-load").classList
+							.remove("none-block");
+				}
+			}
+		}
+	</script>
+
 </body>
 
 </html>
