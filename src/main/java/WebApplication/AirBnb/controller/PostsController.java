@@ -1,5 +1,6 @@
 package WebApplication.AirBnb.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -14,12 +15,21 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import WebApplication.AirBnb.domain.Accounts;
+import WebApplication.AirBnb.domain.BedTypes;
+import WebApplication.AirBnb.domain.Locations;
 import WebApplication.AirBnb.domain.Posts;
+import WebApplication.AirBnb.domain.RoomTypes;
+import WebApplication.AirBnb.domain.Services;
 import WebApplication.AirBnb.model.AccountDto;
+import WebApplication.AirBnb.model.BedTypeDto;
 import WebApplication.AirBnb.model.PostDto;
 import WebApplication.AirBnb.model.UserAccDto;
 import WebApplication.AirBnb.repository.AccountRepository;
+import WebApplication.AirBnb.service.impl.BedTypeServiceImpl;
+import WebApplication.AirBnb.service.impl.LocationServiceImpl;
 import WebApplication.AirBnb.service.impl.PostServiceImpl;
+import WebApplication.AirBnb.service.impl.RoomTypeServiceImpl;
+import WebApplication.AirBnb.service.impl.ServiceServiceImpl;
 
 
 
@@ -27,7 +37,15 @@ import WebApplication.AirBnb.service.impl.PostServiceImpl;
 @RequestMapping("danh-sach-tin")
 public class PostsController {
 	@Autowired
-	PostServiceImpl service;
+	PostServiceImpl postService;
+	@Autowired
+	RoomTypeServiceImpl roomTypeService;
+	@Autowired
+	BedTypeServiceImpl bedTypeService;
+	@Autowired
+	ServiceServiceImpl serviceService;
+	@Autowired
+	LocationServiceImpl locationService;
 	
 	@GetMapping("/{IDTin}")
 	private String postdetails(ModelMap model, @PathVariable("IDTin") Long IDTin) {
@@ -37,13 +55,25 @@ public class PostsController {
 	
 	@GetMapping("dang-tin")
 	private String add(Model model) {
-		model.addAttribute("post",new PostDto());
+		//model.addAttribute("post",new PostDto());
+		List<BedTypes> lstBedTypes = new ArrayList<BedTypes>();
+		lstBedTypes = bedTypeService.findAll();
+		List<RoomTypes> lstRoomTypes = new ArrayList<RoomTypes>();
+		lstRoomTypes = roomTypeService.findAll();
+		List<Services> lstServices = new ArrayList<Services>();
+		lstServices = serviceService.findAll();
+		List<Locations> lstLocations = new ArrayList<Locations>();
+		lstLocations = locationService.findAll();
+		model.addAttribute("lstBedTypes",lstBedTypes);
+		model.addAttribute("lstRoomTypes",lstRoomTypes);
+		model.addAttribute("lstServices",lstServices);
+		model.addAttribute("lstLocations",lstLocations);
 		return "posts/postadd";
 	}
 	
 	@GetMapping("edit/{IDTin}")
 	private ModelAndView edit(ModelMap model, @PathVariable("IDTin") Long IDTin) {
-		Optional<Posts> opt = service.findById(IDTin);
+		Optional<Posts> opt = postService.findById(IDTin);
 		PostDto dto = new PostDto();
 		if (opt.isPresent())
 		{
@@ -64,7 +94,7 @@ public class PostsController {
 	private ModelAndView saveOrUpdate(ModelMap model, PostDto dto) {
 		Posts entity = new Posts();
 		BeanUtils.copyProperties(dto, entity);
-		service.save(entity); 
+		postService.save(entity); 
 		return new ModelAndView("redirect:/post",model);
 	}
 	

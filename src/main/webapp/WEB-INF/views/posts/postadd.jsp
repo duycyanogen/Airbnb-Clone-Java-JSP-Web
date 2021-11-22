@@ -18,12 +18,11 @@
 <link rel="stylesheet" type="text/css"
 	href="<c:url value='${pageContext.request.contextPath}/css/posts/mainAdd.css'/>" />
 <link rel="stylesheet" type="text/css"
-
 	href="<c:url value='${pageContext.request.contextPath}/Fonts/fontawesome-free-5.15.3-web/css/all.min.css'/>" />
 <title>Airbnd - Add</title>
 </head>
 
-<body>	
+<body>
 	<div class="header">
 		<div class="logo-frame">
 			<div class="_1grlqto">
@@ -100,9 +99,16 @@
 	</div>
 	<div class="container">
 		<div class="container-main">
-
 			<div class="container-content">
 				<p class="container-content-title">Tạo tin</p>
+				<div class="container-content-item">
+					<p>Tiêu đề</p>
+					<input type="text">
+				</div>
+				<div class="container-content-item">
+					<p>Nội dung tin</p>
+					<input type="text">
+				</div>
 				<div class="container-content-item">
 					<p>Tên căn hộ</p>
 					<input type="text">
@@ -111,13 +117,21 @@
 					<p>Thành phố</p>
 					<select name="type-room" id="type-bed"
 						class="container-content-item-comboBox">
-						<option value="Loại 1">Thành phố Hồ Chí Minh</option>
-						<option value="Loại 2">Vũng Tàu</option>
-						<option value="Loại 3">Tây Ninh</option>
+						<c:forEach items="${lstLocations}" var="item">
+							<option value="${item.locationId}">${item.locationName}</option>
+						</c:forEach>
 					</select>
 				</div>
 				<div class="container-content-item">
 					<p>Địa chỉ</p>
+					<input type="text">
+				</div>
+				<div class="container-content-item">
+					<p>Diện tích(m2)</p>
+					<input type="text">
+				</div>
+				<div class="container-content-item">
+					<p>Số phòng</p>
 					<input type="text">
 				</div>
 				<div class="container-content-item">
@@ -128,66 +142,32 @@
 					<p>Loại phòng</p>
 					<select name="type-room" id="type-room"
 						class="container-content-item-comboBox">
-						<option value="Loại 1">Loại 1</option>
-						<option value="Loại 2">Loại 2</option>
-						<option value="Loại 3">Loại 3</option>
-						<option value="Loại 4">Loại 4</option>
+						<c:forEach items="${lstRoomTypes}" var="item">
+							<option value="${item.roomTypeId}">${item.roomTypeName}</option>
+						</c:forEach>
 					</select>
 				</div>
 				<div class="container-content-item">
 					<p>Loại giường</p>
 					<select name="type-room" id="type-bed"
 						class="container-content-item-comboBox">
-						<option value="Loại 1">Loại 1</option>
-						<option value="Loại 2">Loại 2</option>
-						<option value="Loại 3">Loại 3</option>
-						<option value="Loại 4">Loại 4</option>
+						<c:forEach items="${lstBedTypes}" var="item">
+							<option value="${item.bedTypeId}">${item.bedTypeName}</option>
+						</c:forEach>
 					</select>
 				</div>
 				<div class="content-convenient-block">
 					<p>Tiện nghi</p>
 					<div class="container-content-item-convenient">
-						<div class="convenient-select-row">
-							<div class="convenient-select-column">
-								<input type="checkbox" id="convenient-1" name="convenient-1"
-									value="convenient-1"> <label for="convenient-1"
-									class="temp"></label>
-								<p>Tiện nghi 1</p>
-							</div>
-							<div class="convenient-select-column">
-								<input type="checkbox" id="convenient-2" name="convenient-1"
-									value="convenient-1"> <label for="convenient-2">
-								</label>
-								<p>Tiện nghi 2</p>
-							</div>
-						</div>
-						<div class="convenient-select-row">
-							<div class="convenient-select-column">
-								<input type="checkbox" id="convenient-3" name="convenient-1"
-									value="convenient-1"> <label for="convenient-3"
-									class="temp"></label>
-								<p>Tiện nghi 3</p>
-							</div>
-							<div class="convenient-select-column">
-								<input type="checkbox" id="convenient-4" name="convenient-1"
-									value="convenient-1"> <label for="convenient-4">
-								</label>
-								<p>Tiện nghi 4</p>
-							</div>
-						</div>
-						<div class="convenient-select-row">
-							<div class="convenient-select-column">
-								<input type="checkbox" id="convenient-5" name="convenient-1"
-									value="convenient-1"> <label for="convenient-5"
-									class="temp"></label>
-								<p>Tiện nghi 5</p>
-							</div>
-							<div class="convenient-select-column">
-								<input type="checkbox" id="convenient-6" name="convenient-1"
-									value="convenient-1"> <label for="convenient-6">
-								</label>
-								<p>Tiện nghi 6</p>
-							</div>
+						<div class="convenient-select-row grid-row-cpy">
+							<c:forEach items="${lstServices}" var="item">
+								<div class="convenient-select-column grid-column-2">
+									<input type="checkbox" id="${item.serviceId}"
+										name="${item.serviceId}" value="${item.serviceId}"> <label
+										for="${item.serviceId}" class="temp"></label>
+									<p>${item.serviceName}</p>
+								</div>
+						</c:forEach>
 						</div>
 					</div>
 				</div>

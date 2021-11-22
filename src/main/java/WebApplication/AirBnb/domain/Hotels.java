@@ -32,7 +32,7 @@ public class Hotels implements Serializable {
 	private String hotelName;
 	@Column(columnDefinition = "nvarchar", length = 200)	
 	private String description;
-	
+	private String address;
 	@ManyToOne
 	@JoinColumn(name = "location_id")
 	private Locations location;
