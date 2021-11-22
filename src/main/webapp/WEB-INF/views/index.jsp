@@ -14,7 +14,8 @@
 					<link rel="stylesheet" type="text/css" href="<c:url value='css/common/total.css'/>" />
 					<link rel="stylesheet" type="text/css" href="<c:url value='css/home/main.css'/>" />
 					<link rel="stylesheet" type="text/css"
-						href="<c:url value='Fonts/fontawesome-free-5.15.3-web/css/all.min.css'/>" />
+						href="Fonts/fontawesome-free-5.15.3-web/css/all.min.css" />
+					
 					<%-- <link rel="stylesheet" href="<c:url value='image'/>" /> --%>
 					<base href="${pageContext.servletContext.contextPath}">
 					<title>Home</title>
@@ -198,6 +199,8 @@
 
 						</div>
 					</div>
+
+
 
 					<div class="container">
 						<!-- <h1>${successReg}</h1>
