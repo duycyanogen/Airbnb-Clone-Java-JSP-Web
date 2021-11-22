@@ -5,24 +5,21 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-<meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" type="text/css"
-	href="<c:url value='css/common/reset.css'/>" />
-<link rel="stylesheet" type="text/css"
-	href="<c:url value='css/common/base.css'/>" />
-<link rel="stylesheet" type="text/css"
-	href="<c:url value='css/common/total.css'/>" />
-<link rel="stylesheet" type="text/css"
-	href="<c:url value='css/home/main.css'/>" />
-<link rel="stylesheet" type="text/css"
-	href="<c:url value='Fonts/fontawesome-free-5.15.3-web/css/all.min.css'/>" />
-<%-- <link rel="stylesheet" href="<c:url value='image'/>" /> --%>
-<base href="${pageContext.servletContext.contextPath}">
-<title>Home</title>
-</head>
+				<head>
+					<meta charset="UTF-8">
+					<meta http-equiv="X-UA-Compatible" content="IE=edge">
+					<meta name="viewport" content="width=device-width, initial-scale=1.0">
+					<link rel="stylesheet" type="text/css" href="<c:url value='css/common/reset.css'/>" />
+					<link rel="stylesheet" type="text/css" href="<c:url value='css/common/base.css'/>" />
+					<link rel="stylesheet" type="text/css" href="<c:url value='css/common/total.css'/>" />
+					<link rel="stylesheet" type="text/css" href="<c:url value='css/home/main.css'/>" />
+					<link rel="stylesheet" type="text/css"
+						href="Fonts/fontawesome-free-5.15.3-web/css/all.min.css" />
+					
+					<%-- <link rel="stylesheet" href="<c:url value='image'/>" /> --%>
+					<base href="${pageContext.servletContext.contextPath}">
+					<title>Home</title>
+				</head>
 
 <body>
 	<div class="overlay ${empty showOverlay ? "none-block" : "" }">
@@ -204,8 +201,10 @@
 		</div>
 	</div>
 
-	<div class="container">
-		<!-- <h1>${successReg}</h1>
+
+
+					<div class="container">
+						<!-- <h1>${successReg}</h1>
                         <h1>${failtureReg}</h1> -->
 		<div class="slider">
 			<div class="slider__content">
