@@ -16,10 +16,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class UserAccDto {
+	
 	@NotBlank(message = "Bạn chưa nhập tên người dùng")
-//	@Pattern(regexp="^[a-zA-ZÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴ"
-//			+ "ẶẸẺẼỀỀỂẾưăạảấầẩẫậắằẳẵặẹẻẽềềểếỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứ"
-//			+ "ừỬỮỰỲỴÝỶỸửữựỳỵỷỹ\\s\\W|_]",message="Tên chỉ bao gồm chữ, không được chứa kí tự lạ")
 	private String name;
 	private String address;
 	private String sex;
@@ -30,6 +28,7 @@ public class UserAccDto {
 	// @NotBlank(message = "Bạn chưa nhập số điện thoại")
 	@Pattern(regexp = "^[0-9]{9,11}", message = "Số điện thoại phải bao gồm 9-11 chữ số")
 	private String phoneNumber;
+	private long accountId;
 	@Email(message = "Email không hợp lệ")
 	private String mail;
 	@Length(min = 6, message = "Password phải từ 6 kí tự trở lên")

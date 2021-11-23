@@ -1,5 +1,10 @@
 package WebApplication.AirBnb.service.impl;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -10,159 +15,283 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import WebApplication.AirBnb.domain.Accounts;
+import WebApplication.AirBnb.domain.BedTypeDetailId;
+import WebApplication.AirBnb.domain.BedTypeDetails;
+import WebApplication.AirBnb.domain.BedTypes;
+import WebApplication.AirBnb.domain.Hotels;
+import WebApplication.AirBnb.domain.Images;
+import WebApplication.AirBnb.domain.Locations;
 import WebApplication.AirBnb.domain.Posts;
+import WebApplication.AirBnb.domain.Roles;
+import WebApplication.AirBnb.domain.RoomTypeInfos;
+import WebApplication.AirBnb.domain.RoomTypes;
+import WebApplication.AirBnb.domain.ServiceDetailId;
+import WebApplication.AirBnb.domain.ServiceDetails;
+import WebApplication.AirBnb.domain.Services;
+import WebApplication.AirBnb.domain.Users;
+import WebApplication.AirBnb.model.PostDto;
+import WebApplication.AirBnb.model.UserAccDto;
+import WebApplication.AirBnb.repository.BedTypeDetailRepository;
+import WebApplication.AirBnb.repository.BedTypeRepository;
+import WebApplication.AirBnb.repository.HotelRepository;
+import WebApplication.AirBnb.repository.ImageRepository;
 import WebApplication.AirBnb.repository.PostRepository;
+import WebApplication.AirBnb.repository.RoomTypeInfoRepository;
+import WebApplication.AirBnb.repository.RoomTypeRepository;
+import WebApplication.AirBnb.repository.ServiceDetailRepository;
+import WebApplication.AirBnb.repository.ServiceRepository;
 import WebApplication.AirBnb.service.IPostService;
 
 @Service
-public class PostServiceImpl implements IPostService{
+public class PostServiceImpl implements IPostService {
 	@Autowired
-	private PostRepository repository;
+	private PostRepository postRepository;
+	@Autowired
+	private ImageRepository imageRepository;
+	@Autowired
+	private RoomTypeInfoRepository roomTypeInfoRepository;
+	@Autowired
+	private HotelRepository hotelRepository;
+	@Autowired
+	private BedTypeDetailRepository bedTypeDetailRepository;
+	@Autowired
+	private ServiceRepository serviceRepository;
+	@Autowired
+	private ServiceDetailRepository serviceDetailRepository;
+
+	@Override
+	public boolean postAdd(PostDto postDto) {
+		try {
+			// Save post entity
+			Posts postEntity = new Posts();
+			Accounts account = new Accounts();
+			account.setAccountId(postDto.getAccountId());
+			postEntity.setAccount(account);// set accountID
+			postEntity.setTitle(postDto.getTitle());// setTitle
+			postEntity.setContent(postDto.getContent());// setContent
+			postEntity.setStatus(1);// setStatus
+			Date date = Calendar.getInstance().getTime();
+			DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
+			String strDate = dateFormat.format(date);
+			postEntity.setPostDate(strDate);// setPostDate = currentDate
+			postRepository.save(postEntity);//
+			// Save 5 images
+			Images imageEntity1 = new Images();
+			imageEntity1.setPath(postDto.getImage1());
+			imageEntity1.setPost(postEntity);
+			imageRepository.save(imageEntity1);// Save first image
+			Images imageEntity2 = new Images();
+			imageEntity2.setPath(postDto.getImage2());
+			imageEntity2.setPost(postEntity);
+			imageRepository.save(imageEntity2);// Save second image
+			Images imageEntity3 = new Images();
+			imageEntity3.setPath(postDto.getImage3());
+			imageEntity3.setPost(postEntity);
+			imageRepository.save(imageEntity3);// Save third image
+			Images imageEntity4 = new Images();
+			imageEntity4.setPath(postDto.getImage4());
+			imageEntity4.setPost(postEntity);
+			imageRepository.save(imageEntity4);// Save fourth image
+			Images imageEntity5 = new Images();
+			imageEntity5.setPath(postDto.getImage5());
+			imageEntity5.setPost(postEntity);
+			imageRepository.save(imageEntity5);// Save fifth image
+			// Save hotel
+			Hotels hotelEntity = new Hotels();
+			hotelEntity.setHotelName(postDto.getHotelName());
+			hotelEntity.setAddress(postDto.getAddress());
+			Locations locationEntity = new Locations();
+			locationEntity.setLocationId(postDto.getLocationId());
+
+			hotelEntity.setLocation(locationEntity);
+			hotelRepository.save(hotelEntity);
+			// Save roomtypeinfos
+			RoomTypeInfos roomTypeInfoEntity = new RoomTypeInfos();
+			roomTypeInfoEntity.setArea(postDto.getArea());
+			roomTypeInfoEntity.setPrice(postDto.getPrice());
+			roomTypeInfoEntity.setRoomAmount(postDto.getRoomAmount());
+			roomTypeInfoEntity.setHotel(hotelEntity);
+			roomTypeInfoEntity.setPost(postEntity);
+			RoomTypes roomTypeEntity = new RoomTypes();
+			roomTypeEntity.setRoomTypeId(postDto.getRoomTypeId());
+			roomTypeInfoEntity.setRoomType(roomTypeEntity);
+			roomTypeInfoRepository.save(roomTypeInfoEntity);
+			// Save bedTypeDetails
+			BedTypeDetailId bedTypeDetailId = new BedTypeDetailId();
+			bedTypeDetailId.setBedTypeId(postDto.getBedTypeId());
+			bedTypeDetailId.setRoomTypeInfoId(roomTypeInfoEntity.getRoomTypeInfoId());
+			BedTypeDetails bedTypeDetailEntity = new BedTypeDetails();
+			BedTypes bedTypeEntity = new BedTypes();
+			bedTypeEntity.setBedTypeId(postDto.getBedTypeId());
+			bedTypeDetailEntity.setBedType(bedTypeEntity);
+			bedTypeDetailEntity.setRoomTypeInfo(roomTypeInfoEntity);
+			bedTypeDetailEntity.setBedTypeDetailId(bedTypeDetailId);
+			bedTypeDetailRepository.save(bedTypeDetailEntity);
+			// Save serviceDetail
+			for (int i = 0; i < postDto.getLstServices().size(); i++) {
+				ServiceDetailId serviceDetailId = new ServiceDetailId();
+				serviceDetailId.setRoomTypeInfoId(roomTypeInfoEntity.getRoomTypeInfoId());
+				serviceDetailId.setServiceId(postDto.getLstServices().get(i));
+				ServiceDetails serviceDetailEntity = new ServiceDetails();
+				Services serviceEntity = new Services();
+				serviceEntity.setServiceId(postDto.getLstServices().get(i));
+				serviceDetailEntity.setRoomTypeInfo(roomTypeInfoEntity);
+				serviceDetailEntity.setService(serviceEntity);
+				serviceDetailEntity.setDescription("OK");
+				serviceDetailEntity.setServiceDetailId(serviceDetailId);
+				serviceDetailRepository.save(serviceDetailEntity);
+			}
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
 
 	@Override
 	public <S extends Posts> S save(S entity) {
-		return repository.save(entity);
+		return postRepository.save(entity);
 	}
 
 	@Override
 	public <S extends Posts> Optional<S> findOne(Example<S> example) {
-		return repository.findOne(example);
+		return postRepository.findOne(example);
 	}
 
 	@Override
 	public Page<Posts> findAll(Pageable pageable) {
-		return repository.findAll(pageable);
+		return postRepository.findAll(pageable);
 	}
 
 	@Override
 	public List<Posts> findAll() {
-		return repository.findAll();
+		return postRepository.findAll();
 	}
 
 	@Override
 	public List<Posts> findAll(Sort sort) {
-		return repository.findAll(sort);
+		return postRepository.findAll(sort);
 	}
 
 	@Override
 	public List<Posts> findAllById(Iterable<Long> ids) {
-		return repository.findAllById(ids);
+		return postRepository.findAllById(ids);
 	}
 
 	@Override
 	public Optional<Posts> findById(Long id) {
-		return repository.findById(id);
+		return postRepository.findById(id);
 	}
 
 	@Override
 	public <S extends Posts> List<S> saveAll(Iterable<S> entities) {
-		return repository.saveAll(entities);
+		return postRepository.saveAll(entities);
 	}
 
 	@Override
 	public void flush() {
-		repository.flush();
+		postRepository.flush();
 	}
 
 	@Override
 	public <S extends Posts> S saveAndFlush(S entity) {
-		return repository.saveAndFlush(entity);
+		return postRepository.saveAndFlush(entity);
 	}
 
 	@Override
 	public boolean existsById(Long id) {
-		return repository.existsById(id);
+		return postRepository.existsById(id);
 	}
 
 	@Override
 	public <S extends Posts> List<S> saveAllAndFlush(Iterable<S> entities) {
-		return repository.saveAllAndFlush(entities);
+		return postRepository.saveAllAndFlush(entities);
 	}
 
 	@Override
 	public <S extends Posts> Page<S> findAll(Example<S> example, Pageable pageable) {
-		return repository.findAll(example, pageable);
+		return postRepository.findAll(example, pageable);
 	}
 
 	@Override
 	public void deleteInBatch(Iterable<Posts> entities) {
-		repository.deleteInBatch(entities);
+		postRepository.deleteInBatch(entities);
 	}
 
 	@Override
 	public <S extends Posts> long count(Example<S> example) {
-		return repository.count(example);
+		return postRepository.count(example);
 	}
 
 	@Override
 	public <S extends Posts> boolean exists(Example<S> example) {
-		return repository.exists(example);
+		return postRepository.exists(example);
 	}
 
 	@Override
 	public void deleteAllInBatch(Iterable<Posts> entities) {
-		repository.deleteAllInBatch(entities);
+		postRepository.deleteAllInBatch(entities);
 	}
 
 	@Override
 	public long count() {
-		return repository.count();
+		return postRepository.count();
 	}
 
 	@Override
 	public void deleteById(Long id) {
-		repository.deleteById(id);
+		postRepository.deleteById(id);
 	}
 
 	@Override
 	public void deleteAllByIdInBatch(Iterable<Long> ids) {
-		repository.deleteAllByIdInBatch(ids);
+		postRepository.deleteAllByIdInBatch(ids);
 	}
 
 	@Override
 	public void delete(Posts entity) {
-		repository.delete(entity);
+		postRepository.delete(entity);
 	}
 
 	@Override
 	public void deleteAllById(Iterable<? extends Long> ids) {
-		repository.deleteAllById(ids);
+		postRepository.deleteAllById(ids);
 	}
 
 	@Override
 	public void deleteAllInBatch() {
-		repository.deleteAllInBatch();
+		postRepository.deleteAllInBatch();
 	}
 
 	@Override
 	public Posts getOne(Long id) {
-		return repository.getOne(id);
+		return postRepository.getOne(id);
 	}
 
 	@Override
 	public void deleteAll(Iterable<? extends Posts> entities) {
-		repository.deleteAll(entities);
+		postRepository.deleteAll(entities);
 	}
 
 	@Override
 	public void deleteAll() {
-		repository.deleteAll();
+		postRepository.deleteAll();
 	}
 
 	@Override
 	public Posts getById(Long id) {
-		return repository.getById(id);
+		return postRepository.getById(id);
 	}
 
 	@Override
 	public <S extends Posts> List<S> findAll(Example<S> example) {
-		return repository.findAll(example);
+		return postRepository.findAll(example);
 	}
 
 	@Override
 	public <S extends Posts> List<S> findAll(Example<S> example, Sort sort) {
-		return repository.findAll(example, sort);
+		return postRepository.findAll(example, sort);
 	}
 
-	
 }

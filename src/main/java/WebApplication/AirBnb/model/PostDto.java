@@ -3,7 +3,9 @@ package WebApplication.AirBnb.model;
 import java.sql.Date;
 import java.util.List;
 
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -13,22 +15,26 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class PostDto {
-	
+	private long accountId;
 	private String postDate;
-	@NotEmpty
+	@NotBlank(message = "Bạn chưa nhập tiêu đề")
 	private String title;
+	@NotBlank(message = "Bạn chưa nhập nội dung tin")
 	private String content;
-	private int hotelName;
+	@NotBlank(message = "Bạn chưa nhập tên khách sạn!")
+	private String hotelName;
 	private int status;
-	@NotEmpty
-	private Double price;
-	private int locationId;
+	@NotNull(message = "Bạn chưa nhập giá!")
+	private Double price;	
+	private long locationId;
+	@NotEmpty(message = "Bạn chưa nhập địa chỉ!")
 	private String address;
-	private int area;
+	private double area;
+	@NotNull(message = "Bạn chưa nhập số phòng!")
 	private int roomAmount;
-	private int roomTypeId;
-	private int bedTypeId;
-	private List lstServices;
+	private long roomTypeId;
+	private long bedTypeId;
+	private List<Long> lstServices;	
 	private String image1;
 	private String image2;
 	private String image3;

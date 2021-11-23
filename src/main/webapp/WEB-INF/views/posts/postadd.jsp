@@ -100,50 +100,50 @@
 	<div class="container">
 		<div class="container-main">
 			<div class="container-content">
-				<form:form action="luu-tin" modelAttribute="post">
+				<form:form action="luu-tin" modelAttribute="post" enctype="multipart/form-data">
 					<p class="container-content-title">Tạo tin</p>
 					<div class="container-content-item">
 						<p>Tiêu đề</p>
-						<form:input type="text" path="title" />
+						<form:input type="text" path="title" value="Cho thuê căn hộ sang trọng"/>
 						<form:errors path="title" element="div" class="isa_error" />
 					</div>
 					<div class="container-content-item">
 						<p>Nội dung tin</p>
-						<form:input type="text" path="content" />
+						<form:input type="text" path="content" value="Cho thuê căn hộ sang trọng"/>
 						<form:errors path="content" element="div" class="isa_error" />
 					</div>
 					<div class="container-content-item">
 						<p>Tên căn hộ</p>
-						<form:input type="text" path="hotelName" />
+						<form:input type="text" path="hotelName" value="Royal City"/>
 						<form:errors path="hotelName" element="div" class="isa_error" />
 					</div>
 					<div class="container-content-item">
 						<p>Thành phố</p>
-						<select name="type-room" id="type-bed"
-							class="container-content-item-comboBox">
+						<form:select name="location" id="location"
+							class="container-content-item-comboBox" path="locationId">
 							<c:forEach items="${lstLocations}" var="item">
 								<option value="${item.locationId}">${item.locationName}</option>
 							</c:forEach>
-						</select>
+						</form:select>
 					</div>
 					<div class="container-content-item">
 						<p>Địa chỉ</p>
-						<form:input type="text" path="address" />
+						<form:input type="text" path="address" value="763/68 Nguyễn Kiệm, Phú Nhuận"/>
 						<form:errors path="address" element="div" class="isa_error" />
 					</div>
 					<div class="container-content-item">
-						<p>Diện tích(m2)</p>
-						<form:input type="text" path="area" />
+						<p>Diện tích (m2)</p>
+						<form:input type="number" path="area" value="200"/>
 						<form:errors path="area" element="div" class="isa_error" />
 					</div>
 					<div class="container-content-item">
 						<p>Số phòng</p>
-						<form:input type="roomAmount" path="hotelName" />
+						<form:input type="roomAmount" path="roomAmount" value="10"/>
 						<form:errors path="roomAmount" element="div" class="isa_error" />
 					</div>
 					<div class="container-content-item">
 						<p>Giá phòng</p>
-						<form:input type="text" path="price" />
+						<form:input type="text" path="price" value="300000"/>
 						<form:errors path="price" element="div" class="isa_error" />
 					</div>
 					<div class="container-content-item">
@@ -171,7 +171,7 @@
 								<c:forEach items="${lstServices}" var="item">
 									<div class="convenient-select-column grid-column-2">
 										<form:checkbox id="${item.serviceId}" name="${item.serviceId}"
-											value="${item.serviceName}" path="lstServices" class="123"/>
+											value="${item.serviceId}" path="lstServices" class="123"/>
 										<label for="${item.serviceId}" class="temp"></label>
 										<p>${item.serviceName}</p>
 									</div>
@@ -183,7 +183,8 @@
 						<p>Tải lên 5 ảnh</p>
 						<div class="content-img-block-main">
 							<div class="content-img-block-label">
-								<form:input type="file" id="content-img-block-1" path="image1" />
+								<input type="file" id="content-img-block-1" name="img1"/>
+								
 								<label for="content-img-block-1">
 									<div class="img-wait-load">
 										<i class="fas fa-arrow-circle-up"></i>
@@ -194,7 +195,8 @@
 								</label>
 							</div>
 							<div class="content-img-block-label">
-								<form:input type="file" id="content-img-block-1" path="image2" />
+								<input type="file" id="content-img-block-2" name="img2"/>
+								
 								<label for="content-img-block-2">
 									<div class="img-wait-load">
 										<i class="fas fa-arrow-circle-up"></i>
@@ -205,7 +207,7 @@
 								</label>
 							</div>
 							<div class="content-img-block-label">
-								<form:input type="file" id="content-img-block-1" path="image3" />
+								<input type="file" id="content-img-block-3" name="img3"/>
 								<label for="content-img-block-3">
 									<div class="img-wait-load">
 										<i class="fas fa-arrow-circle-up"></i>
@@ -216,7 +218,7 @@
 								</label>
 							</div>
 							<div class="content-img-block-label">
-								<form:input type="file" id="content-img-block-1" path="image4" />
+								<input type="file" id="content-img-block-4" name="img4"/>
 								<label for="content-img-block-4">
 									<div class="img-wait-load">
 										<i class="fas fa-arrow-circle-up"></i>
@@ -227,7 +229,7 @@
 								</label>
 							</div>
 							<div class="content-img-block-label">
-								<form:input type="file" id="content-img-block-1" path="image5" />
+								<input type="file" id="content-img-block-5" name="img5"/>
 								<label for="content-img-block-5">
 									<div class="img-wait-load">
 										<i class="fas fa-arrow-circle-up"></i>

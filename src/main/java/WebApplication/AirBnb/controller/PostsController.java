@@ -1,9 +1,11 @@
 package WebApplication.AirBnb.controller;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.BeanUtils;
@@ -11,11 +13,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import WebApplication.AirBnb.domain.Accounts;
@@ -74,11 +80,59 @@ public class PostsController {
 		model.addAttribute("lstLocations",lstLocations);
 		return "posts/postadd";
 	}
-	
+	@Autowired
+	ServletContext context;
 	@RequestMapping(value = "/luu-tin", method = RequestMethod.POST)
-	public ModelAndView save(@ModelAttribute("post") PostDto post, ModelMap model) {
-		
-		return new ModelAndView("posts/postadd", model);
+	public ModelAndView save(HttpSession session, ModelMap model, @Validated @ModelAttribute("post") PostDto post,
+			BindingResult errors, @RequestParam("img1") MultipartFile img1,
+			@RequestParam("img2") MultipartFile img2, @RequestParam("img3") MultipartFile img3,
+			@RequestParam("img4") MultipartFile img4, @RequestParam("img5") MultipartFile img5) {
+		if (!img1.isEmpty() && !img2.isEmpty() && !img3.isEmpty() && !img4.isEmpty()  && !img5.isEmpty()) {
+			try {
+				String photoPath = context.getRealPath("/avatarimage/" + img1.getOriginalFilename());
+				img1.transferTo(new File(photoPath));
+				post.setImage1(img1.getOriginalFilename());
+				
+				photoPath = context.getRealPath("/avatarimage/" + img2.getOriginalFilename());
+				img2.transferTo(new File(photoPath));
+				post.setImage2(img2.getOriginalFilename());
+				photoPath = context.getRealPath("/avatarimage/" + img3.getOriginalFilename());
+				img3.transferTo(new File(photoPath));
+				post.setImage3(img3.getOriginalFilename());
+				photoPath = context.getRealPath("/avatarimage/" + img4.getOriginalFilename());
+				img4.transferTo(new File(photoPath));
+				post.setImage4(img4.getOriginalFilename());
+				photoPath = context.getRealPath("/avatarimage/" + img5.getOriginalFilename());
+				img5.transferTo(new File(photoPath));
+				post.setImage5(img5.getOriginalFilename());
+				
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+		}
+		UserAccDto objUserAccDto = (UserAccDto) session.getAttribute("LoginInfor");
+		post.setAccountId(objUserAccDto.getAccountId());
+		model.addAttribute("post",new PostDto());
+		model.addAttribute("useracc", new UserAccDto());
+		model.addAttribute("account", new AccountDto());
+		System.out.println(errors.getAllErrors());
+		if (!errors.hasErrors()) {
+			
+			boolean isSuccess = postService.postAdd(post);
+			if (isSuccess == true) {
+				model.addAttribute("statusReg", "Đăng tin thành công!");
+				return new ModelAndView("redirect:/", model);
+			} else {								
+				return new ModelAndView("posts/postadd", errors.getModel());
+			}
+		} else {
+			model.remove("showFormLogin");
+			model.addAttribute("showOverlay", "true");
+			model.addAttribute("showFormRegis", "true");
+		}
+
+		return new ModelAndView("posts/postadd", errors.getModel());
+				
 	}
 	@GetMapping("search")
 	public String search() {

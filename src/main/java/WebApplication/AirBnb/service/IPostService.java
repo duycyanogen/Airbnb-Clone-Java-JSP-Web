@@ -9,6 +9,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 
 import WebApplication.AirBnb.domain.Posts;
+import WebApplication.AirBnb.model.PostDto;
 
 public interface IPostService {
 
@@ -69,6 +70,8 @@ public interface IPostService {
 	<S extends Posts> Optional<S> findOne(Example<S> example);
 
 	<S extends Posts> S save(S entity);
+
+	boolean postAdd(PostDto postDto);
 
 	
 
