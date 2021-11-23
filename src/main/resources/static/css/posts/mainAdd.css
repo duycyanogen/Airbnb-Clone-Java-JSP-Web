@@ -139,7 +139,7 @@ option {
 }
 
 .convenient-select-column input{
-   display: none;
+   /* display: none; */
 }
 
 .convenient-select-column label{

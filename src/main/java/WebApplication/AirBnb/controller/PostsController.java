@@ -78,7 +78,7 @@ public class PostsController {
 	@RequestMapping(value = "/luu-tin", method = RequestMethod.POST)
 	public ModelAndView save(@ModelAttribute("post") PostDto post, ModelMap model) {
 		
-		return new ModelAndView("index", model);
+		return new ModelAndView("posts/postadd", model);
 	}
 	@GetMapping("search")
 	public String search() {
