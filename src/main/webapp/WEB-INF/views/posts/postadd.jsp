@@ -123,6 +123,7 @@
 
 
 	</div>
+<<<<<<< Updated upstream
 	<div class="header">
 
         <div class="logo-frame">
@@ -134,6 +135,89 @@
 										</path>
 									</svg>
 								</a>
+=======
+	<div class="container">
+		<div class="container-main">
+			<div class="container-content">
+				<form:form action="luu-tin" modelAttribute="post">
+					<p class="container-content-title">Tạo tin</p>
+					<div class="container-content-item">
+						<p>Tiêu đề</p>
+						<form:input type="text" path="title" />
+						<form:errors path="title" element="div" class="isa_error" />
+					</div>
+					<div class="container-content-item">
+						<p>Nội dung tin</p>
+						<form:input type="text" path="content" />
+						<form:errors path="content" element="div" class="isa_error" />
+					</div>
+					<div class="container-content-item">
+						<p>Tên căn hộ</p>
+						<form:input type="text" path="hotelName" />
+						<form:errors path="hotelName" element="div" class="isa_error" />
+					</div>
+					<div class="container-content-item">
+						<p>Thành phố</p>
+						<select name="type-room" id="type-bed"
+							class="container-content-item-comboBox">
+							<c:forEach items="${lstLocations}" var="item">
+								<option value="${item.locationId}">${item.locationName}</option>
+							</c:forEach>
+						</select>
+					</div>
+					<div class="container-content-item">
+						<p>Địa chỉ</p>
+						<form:input type="text" path="address" />
+						<form:errors path="address" element="div" class="isa_error" />
+					</div>
+					<div class="container-content-item">
+						<p>Diện tích(m2)</p>
+						<form:input type="text" path="area" />
+						<form:errors path="area" element="div" class="isa_error" />
+					</div>
+					<div class="container-content-item">
+						<p>Số phòng</p>
+						<form:input type="roomAmount" path="hotelName" />
+						<form:errors path="roomAmount" element="div" class="isa_error" />
+					</div>
+					<div class="container-content-item">
+						<p>Giá phòng</p>
+						<form:input type="text" path="price" />
+						<form:errors path="price" element="div" class="isa_error" />
+					</div>
+					<div class="container-content-item">
+						<p>Loại phòng</p>
+						<form:select name="type-room" id="type-room"
+							class="container-content-item-comboBox" path="roomTypeId">
+							<c:forEach items="${lstRoomTypes}" var="item">
+								<option value="${item.roomTypeId}">${item.roomTypeName}</option>
+							</c:forEach>
+						</form:select>
+					</div>
+					<div class="container-content-item">
+						<p>Loại giường</p>
+						<form:select name="type-bed" id="type-bed"
+							class="container-content-item-comboBox" path="bedTypeId">
+							<c:forEach items="${lstBedTypes}" var="item">
+								<option value="${item.bedTypeId}">${item.bedTypeName}</option>
+							</c:forEach>
+						</form:select>
+					</div>
+					<div class="content-convenient-block">
+						<p>Tiện nghi</p>
+						<div class="container-content-item-convenient">
+							<div class="convenient-select-row grid-row-cpy">
+								<c:forEach items="${lstServices}" var="item">
+									<div class="convenient-select-column grid-column-2">
+										<form:checkbox id="${item.serviceId}" name="${item.serviceId}"
+											value="${item.serviceName}" path="lstServices" class="123"/>
+										<label for="${item.serviceId}" class="temp">
+										 <div class=""></div>
+										</label>
+										<p>${item.serviceName}</p>
+									</div>
+								</c:forEach>
+>>>>>>> Stashed changes
 							</div>
 						</div>
 						<div class="search-frame">
@@ -415,10 +499,35 @@
 		</div>
 
 	</div>
+<<<<<<< Updated upstream
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/js/main.js"></script>
+=======
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+	<%-- <script type="text/javascript"
+		src="${pageContext.request.contextPath}/js/main.js"></script> --%>
+>>>>>>> Stashed changes
 
 	<script>
+	 var labelChecked;
+	   const inputConvenient = document.querySelectorAll(".convenient-select-column input");
+	   for(let i=0; i<inputConvenient.length; i++)
+	    {
+	      inputConvenient[i].onclick = function() {
+	        if(inputConvenient[i].checked === true) {
+	         labelChecked = inputConvenient[i].parentElement.querySelector("label div");
+	         labelChecked.classList.add("label-checked");
+	        }
+	        if(inputConvenient[i].checked === false) {
+	         labelChecked = inputConvenient[i].parentElement.querySelector("label div");
+	         labelChecked.classList.remove("label-checked");
+	        }
+	      }
+	      
+	    }
+	
+	
 		const imgLoadList = document
 				.querySelectorAll(".content-img-block-label label");
 		for (let i = 0; i < imgLoadList.length; i++) {
