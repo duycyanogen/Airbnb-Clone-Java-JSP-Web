@@ -320,6 +320,22 @@
 		src="${pageContext.request.contextPath}/js/main.js"></script>
 
 	<script>
+	 var labelChecked;
+	   const inputConvenient = document.querySelectorAll(".convenient-select-column input");
+	   for(let i=0; i<inputConvenient.length; i++)
+	    {
+	      inputConvenient[i].onclick = function() {
+	        if(inputConvenient[i].checked === true) {
+	         labelChecked = inputConvenient[i].parentElement.querySelector("label div");
+	         labelChecked.classList.add("label-checked");
+	        }
+	        if(inputConvenient[i].checked === false) {
+	         labelChecked = inputConvenient[i].parentElement.querySelector("label div");
+	         labelChecked.classList.remove("label-checked");
+	        }
+	      }
+	      
+	    }
 		const imgLoadList = document
 				.querySelectorAll(".content-img-block-label label");
 		for (let i = 0; i < imgLoadList.length; i++) {

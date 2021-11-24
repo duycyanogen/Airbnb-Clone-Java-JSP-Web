@@ -73,6 +73,8 @@ public interface IPostService {
 
 	boolean postAdd(PostDto postDto);
 
+	List<PostDto> getAllPost();
+
 	
 
 }

@@ -39,7 +39,7 @@ public class Posts implements Serializable {
 	private Accounts account;
 	
 	@OneToMany(mappedBy = "post")
-	private List<Ratings> lstRating;
+	private List<Ratings> lstRatings;
 	
 	@OneToMany(mappedBy = "post")
 	private List<Images> lstImages;

@@ -152,6 +152,10 @@ public class PostServiceImpl implements IPostService {
 	}
 
 	@Override
+	public List<PostDto> getAllPost(){
+		return postRepository.getAllPost();
+	}
+	@Override
 	public <S extends Posts> S save(S entity) {
 		return postRepository.save(entity);
 	}

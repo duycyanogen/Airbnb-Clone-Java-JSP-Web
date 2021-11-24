@@ -27,9 +27,9 @@ import WebApplication.AirBnb.domain.Services;
 import WebApplication.AirBnb.model.AccountDto;
 import WebApplication.AirBnb.model.PostDto;
 import WebApplication.AirBnb.model.UserAccDto;
+import WebApplication.AirBnb.service.IPostService;
 import WebApplication.AirBnb.service.impl.BedTypeServiceImpl;
 import WebApplication.AirBnb.service.impl.LocationServiceImpl;
-import WebApplication.AirBnb.service.impl.PostServiceImpl;
 import WebApplication.AirBnb.service.impl.RoomTypeServiceImpl;
 import WebApplication.AirBnb.service.impl.ServiceServiceImpl;
 
@@ -39,7 +39,7 @@ import WebApplication.AirBnb.service.impl.ServiceServiceImpl;
 @RequestMapping("danh-sach-tin")
 public class PostsController {
 	@Autowired
-	PostServiceImpl postService;
+	IPostService postService;
 	@Autowired
 	RoomTypeServiceImpl roomTypeService;
 	@Autowired
@@ -149,6 +149,9 @@ public class PostsController {
 	public String listPost(ModelMap model) {
 		//List<Posts> list = service.findAll();
 		//model.addAttribute("posts",list);
+		List<PostDto> lstPosts= new ArrayList();
+		lstPosts = postService.getAllPost();
+		
 		model.addAttribute("useracc", new UserAccDto());
 		model.addAttribute("account", new AccountDto());
 		return "posts/posts";
