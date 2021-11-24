@@ -155,7 +155,7 @@ option {
     cursor: pointer;
 }
 
-/*.convenient-select-column label:after{
+.convenient-select-column label:after{
     content: "";
     width: 24px;
     height: 24px;
@@ -169,35 +169,10 @@ option {
 }
 .convenient-select-column input:checked + label::after {
    left: 25px;
-} */
-
-
+}
 .convenient-select-column input:checked + label {
     background-color:  #ffd1d9;
  }
- 
-.convenient-select-column div{
-    content: "";
-    width: 24px;
-    height: 24px;
-    border-radius: 50%;
-    position: absolute;
-    background-color:  #ff385c;
-    top:2px;
-    left: 3px;
-    -webkit-transition: left 0.25s ease;
-    transition: left 0.25s ease;
-}
-
-.label-checked {
-    margin-left: 19px;
-}
-
-
-
-
-
-
 
 
 .convenient-select-column p{
@@ -318,21 +293,6 @@ option {
 }
 
 
-
-
-@media screen and (max-width:1400px){
-  .header {
-    
-    padding-left: 10%;
-    padding-right: 10%;
-  }
-  
-  .container{
-   padding-left: 10%;
-   padding-right: 10%;
-  }
- 
-}
 
 
 
