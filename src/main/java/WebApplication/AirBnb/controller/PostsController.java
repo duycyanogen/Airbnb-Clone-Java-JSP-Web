@@ -3,14 +3,11 @@ package WebApplication.AirBnb.controller;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
-
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
-
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -23,18 +20,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
-
-import WebApplication.AirBnb.domain.Accounts;
 import WebApplication.AirBnb.domain.BedTypes;
 import WebApplication.AirBnb.domain.Locations;
-import WebApplication.AirBnb.domain.Posts;
 import WebApplication.AirBnb.domain.RoomTypes;
 import WebApplication.AirBnb.domain.Services;
 import WebApplication.AirBnb.model.AccountDto;
-import WebApplication.AirBnb.model.BedTypeDto;
 import WebApplication.AirBnb.model.PostDto;
 import WebApplication.AirBnb.model.UserAccDto;
-import WebApplication.AirBnb.repository.AccountRepository;
 import WebApplication.AirBnb.service.impl.BedTypeServiceImpl;
 import WebApplication.AirBnb.service.impl.LocationServiceImpl;
 import WebApplication.AirBnb.service.impl.PostServiceImpl;
@@ -82,7 +74,7 @@ public class PostsController {
 	}
 	@Autowired
 	ServletContext context;
-	@RequestMapping(value = "/luu-tin", method = RequestMethod.POST)
+	@RequestMapping(value = "/luu-tin", method = RequestMethod.POST)	
 	public ModelAndView save(HttpSession session, ModelMap model, @Validated @ModelAttribute("post") PostDto post,
 			BindingResult errors, @RequestParam("img1") MultipartFile img1,
 			@RequestParam("img2") MultipartFile img2, @RequestParam("img3") MultipartFile img3,
@@ -115,14 +107,28 @@ public class PostsController {
 		model.addAttribute("post",new PostDto());
 		model.addAttribute("useracc", new UserAccDto());
 		model.addAttribute("account", new AccountDto());
+		List<BedTypes> lstBedTypes = new ArrayList<BedTypes>();
+		lstBedTypes = bedTypeService.findAll();
+		List<RoomTypes> lstRoomTypes = new ArrayList<RoomTypes>();
+		lstRoomTypes = roomTypeService.findAll();
+		List<Services> lstServices = new ArrayList<Services>();
+		lstServices = serviceService.findAll();
+		List<Locations> lstLocations = new ArrayList<Locations>();
+		lstLocations = locationService.findAll();
+		model.addAttribute("lstBedTypes",lstBedTypes);
+		model.addAttribute("lstRoomTypes",lstRoomTypes);
+		model.addAttribute("lstServices",lstServices);
+		model.addAttribute("lstLocations",lstLocations);
 		System.out.println(errors.getAllErrors());
 		if (!errors.hasErrors()) {
 			
 			boolean isSuccess = postService.postAdd(post);
 			if (isSuccess == true) {
 				model.addAttribute("statusReg", "Đăng tin thành công!");
-				return new ModelAndView("redirect:/", model);
-			} else {								
+				return new ModelAndView("redirect:/danh-sach-tin", model);
+			} else {
+				//model.addAttribute("post",new PostDto());
+				
 				return new ModelAndView("posts/postadd", errors.getModel());
 			}
 		} else {

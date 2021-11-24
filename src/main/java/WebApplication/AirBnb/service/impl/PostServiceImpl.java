@@ -14,6 +14,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import WebApplication.AirBnb.domain.Accounts;
 import WebApplication.AirBnb.domain.BedTypeDetailId;
@@ -61,6 +62,7 @@ public class PostServiceImpl implements IPostService {
 	private ServiceDetailRepository serviceDetailRepository;
 
 	@Override
+	@Transactional(rollbackFor = {Exception.class, Throwable.class})
 	public boolean postAdd(PostDto postDto) {
 		try {
 			// Save post entity
