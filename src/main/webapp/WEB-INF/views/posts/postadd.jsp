@@ -65,7 +65,7 @@
 				</c:if>
 				<c:if test="${ empty sessionScope.LoginInfor }">
 					<div class="user-icon">
-						<img src="image/bg_form9.jpg" alt=""> <span class="noti"></span>
+						<img src="${pageContext.request.contextPath}/image/bg_form9.jpg" alt=""> <span class="noti"></span>
 					</div>
 				</c:if>
 				<div class="header-down">

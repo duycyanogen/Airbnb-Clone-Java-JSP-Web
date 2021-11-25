@@ -131,7 +131,6 @@
 		</form:form>
 
 	</div>
-	</div>
 	<div class="header">
 		<div class="logo-frame">
 			<div class="_1grlqto">

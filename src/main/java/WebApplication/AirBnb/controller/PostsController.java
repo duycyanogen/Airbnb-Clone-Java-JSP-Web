@@ -49,10 +49,13 @@ public class PostsController {
 	@Autowired
 	LocationServiceImpl locationService;
 	
-	@GetMapping("/{IDTin}")
-	private String postdetails(ModelMap model, @PathVariable("IDTin") Long IDTin) {
-		
-		return "posts/postDetails";
+	@GetMapping("/{postId}")
+	private String postdetails(ModelMap model, @PathVariable("postId") Long postId) {
+		PostDto post = postService.getPostById(postId);		
+		model.addAttribute("post", post);
+		model.addAttribute("useracc", new UserAccDto());
+		model.addAttribute("account", new AccountDto());
+		return "posts/postdetail";
 	}	
 	
 	@GetMapping("dang-tin")
