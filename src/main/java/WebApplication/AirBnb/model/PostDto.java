@@ -6,6 +6,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
+import WebApplication.AirBnb.domain.Ratings;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -41,11 +42,15 @@ public class PostDto {
 	private long bedTypeId;
 	private String bedTypeName;
 	private List<Long> lstServices;	
+	private List<String> lstServiceNames;	
+	private List<Ratings> lstRatings;
 	private String image1;
 	private String image2;
 	private String image3;
 	private String image4;
 	private String image5;
+	private int ratingAmount;
+	private double avarageStarNumber;
 	public PostDto(long postId, long romTypeInfoId, String userName, String postDate,
 			@NotBlank(message = "Bạn chưa nhập tiêu đề") String title,
 			@NotBlank(message = "Bạn chưa nhập nội dung tin") String content,

@@ -81,20 +81,20 @@ public class PostsController {
 			@RequestParam("img4") MultipartFile img4, @RequestParam("img5") MultipartFile img5) {
 		if (!img1.isEmpty() && !img2.isEmpty() && !img3.isEmpty() && !img4.isEmpty()  && !img5.isEmpty()) {
 			try {
-				String photoPath = context.getRealPath("/avatarimage/" + img1.getOriginalFilename());
+				String photoPath = context.getRealPath("/roomimage/" + img1.getOriginalFilename());
 				img1.transferTo(new File(photoPath));
 				post.setImage1(img1.getOriginalFilename());
 				
-				photoPath = context.getRealPath("/avatarimage/" + img2.getOriginalFilename());
+				photoPath = context.getRealPath("/roomimage/" + img2.getOriginalFilename());
 				img2.transferTo(new File(photoPath));
 				post.setImage2(img2.getOriginalFilename());
-				photoPath = context.getRealPath("/avatarimage/" + img3.getOriginalFilename());
+				photoPath = context.getRealPath("/roomimage/" + img3.getOriginalFilename());
 				img3.transferTo(new File(photoPath));
 				post.setImage3(img3.getOriginalFilename());
-				photoPath = context.getRealPath("/avatarimage/" + img4.getOriginalFilename());
+				photoPath = context.getRealPath("/roomimage/" + img4.getOriginalFilename());
 				img4.transferTo(new File(photoPath));
 				post.setImage4(img4.getOriginalFilename());
-				photoPath = context.getRealPath("/avatarimage/" + img5.getOriginalFilename());
+				photoPath = context.getRealPath("/roomimage/" + img5.getOriginalFilename());
 				img5.transferTo(new File(photoPath));
 				post.setImage5(img5.getOriginalFilename());
 				
@@ -149,9 +149,8 @@ public class PostsController {
 	public String listPost(ModelMap model) {
 		//List<Posts> list = service.findAll();
 		//model.addAttribute("posts",list);
-		List<PostDto> lstPosts= new ArrayList();
-		lstPosts = postService.getAllPost();
-		
+		List<PostDto> lstPosts = postService.getAllPost();		
+		model.addAttribute("posts", lstPosts);
 		model.addAttribute("useracc", new UserAccDto());
 		model.addAttribute("account", new AccountDto());
 		return "posts/posts";

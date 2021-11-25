@@ -24,6 +24,7 @@ import WebApplication.AirBnb.domain.Hotels;
 import WebApplication.AirBnb.domain.Images;
 import WebApplication.AirBnb.domain.Locations;
 import WebApplication.AirBnb.domain.Posts;
+import WebApplication.AirBnb.domain.Ratings;
 import WebApplication.AirBnb.domain.Roles;
 import WebApplication.AirBnb.domain.RoomTypeInfos;
 import WebApplication.AirBnb.domain.RoomTypes;
@@ -38,6 +39,7 @@ import WebApplication.AirBnb.repository.BedTypeRepository;
 import WebApplication.AirBnb.repository.HotelRepository;
 import WebApplication.AirBnb.repository.ImageRepository;
 import WebApplication.AirBnb.repository.PostRepository;
+import WebApplication.AirBnb.repository.RatingRepository;
 import WebApplication.AirBnb.repository.RoomTypeInfoRepository;
 import WebApplication.AirBnb.repository.RoomTypeRepository;
 import WebApplication.AirBnb.repository.ServiceDetailRepository;
@@ -60,7 +62,8 @@ public class PostServiceImpl implements IPostService {
 	private ServiceRepository serviceRepository;
 	@Autowired
 	private ServiceDetailRepository serviceDetailRepository;
-
+	@Autowired
+	private RatingRepository ratingRepository;
 	@Override
 	@Transactional(rollbackFor = {Exception.class, Throwable.class})
 	public boolean postAdd(PostDto postDto) {
@@ -153,7 +156,36 @@ public class PostServiceImpl implements IPostService {
 
 	@Override
 	public List<PostDto> getAllPost(){
-		return postRepository.getAllPost();
+		List<PostDto> tempList = new ArrayList<PostDto>();
+		tempList = postRepository.getAllPost();
+		for (PostDto postDto : tempList) {
+			postDto.setLstServiceNames(serviceRepository.getServiceNameByRoomTypeInfoId(postDto.getRomTypeInfoId()));
+			List<String> lstImagePath = new ArrayList<String>();
+			lstImagePath = imageRepository.getImagePathByPostId(postDto.getPostId());
+			if (lstImagePath.size() == 5)
+			{
+				postDto.setImage1(lstImagePath.get(0));
+				postDto.setImage2(lstImagePath.get(1));
+				postDto.setImage3(lstImagePath.get(2));
+				postDto.setImage4(lstImagePath.get(3));
+				postDto.setImage5(lstImagePath.get(4));
+			}
+			List<Ratings> lstRatings = ratingRepository.getAllRatingByPostId(postDto.getPostId());			
+			postDto.setLstRatings(lstRatings);
+			int ratingAmount = 0;			
+			int totalStarNumber = 0;
+			for (Ratings rating : lstRatings) {
+				ratingAmount++;
+				totalStarNumber+=rating.getStarsNumber();
+			}
+			
+			postDto.setRatingAmount(ratingAmount);
+			if (ratingAmount != 0)
+			postDto.setAvarageStarNumber(totalStarNumber/ratingAmount);
+			else
+				postDto.setAvarageStarNumber(0);
+		}
+		return tempList;
 	}
 	@Override
 	public <S extends Posts> S save(S entity) {

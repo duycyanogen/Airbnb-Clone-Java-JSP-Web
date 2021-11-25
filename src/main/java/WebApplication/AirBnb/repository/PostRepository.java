@@ -8,6 +8,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository; 
 
 import WebApplication.AirBnb.domain.Posts;
+import WebApplication.AirBnb.domain.Ratings;
 import WebApplication.AirBnb.model.PostDto;
 
 @Repository
@@ -25,4 +26,6 @@ public interface PostRepository extends JpaRepository<Posts, Long>{
 			+ "join roomTypeInfos.roomType roomType "
 			+ "join bedTypeDetails.bedType bedType join hotel.location location")
 	List<PostDto> getAllPost();
+	
+	
 }
