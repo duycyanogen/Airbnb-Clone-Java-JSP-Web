@@ -41,8 +41,9 @@ public class PostDto {
 	private String roomTypeName;
 	private long bedTypeId;
 	private String bedTypeName;
-	private List<Long> lstServices;	
-	private List<String> lstServiceNames;	
+	private List<Long> lstServiceIds;	
+	private List<String> lstServiceNames;
+	private List<ServiceDto> lstServices;
 	private List<Ratings> lstRatings;
 	private String image1;
 	private String image2;

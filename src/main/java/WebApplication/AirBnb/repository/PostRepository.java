@@ -27,5 +27,18 @@ public interface PostRepository extends JpaRepository<Posts, Long>{
 			+ "join bedTypeDetails.bedType bedType join hotel.location location")
 	List<PostDto> getAllPost();
 	
+	@Query("SELECT new WebApplication.AirBnb.model.PostDto(post.postId, roomTypeInfos.roomTypeInfoId, "
+			+ "user.name , post.postDate , post.title , "
+			+ "post.content , hotel.hotelName , post.status , roomTypeInfos.price, location.locationName , "
+			+ "hotel.address , roomTypeInfos.area , roomTypeInfos.roomAmount , roomType.roomTypeName , "
+			+ "bedType.bedTypeName)"
+			+ "from Posts post join post.account acc join acc.user user "
+			+ "join post.lstRoomTypeInfos roomTypeInfos "
+			+ "join roomTypeInfos.lstBedTypeDetails bedTypeDetails "
+			+ "join roomTypeInfos.hotel hotel "
+			+ "join roomTypeInfos.roomType roomType "
+			+ "join bedTypeDetails.bedType bedType join hotel.location location where post.postId = ?1")
+	PostDto getPostById(long postId);
+	
 	
 }

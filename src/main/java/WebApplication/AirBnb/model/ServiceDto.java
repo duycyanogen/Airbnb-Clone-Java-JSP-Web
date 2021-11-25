@@ -10,7 +10,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class ServiceDto{
 	
-	
-	private String TenTienNghi;
+	private long serviceId;
+	private String serviceName;
+	private String icon;
 	
 }

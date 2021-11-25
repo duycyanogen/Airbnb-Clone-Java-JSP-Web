@@ -64,8 +64,9 @@ public class PostServiceImpl implements IPostService {
 	private ServiceDetailRepository serviceDetailRepository;
 	@Autowired
 	private RatingRepository ratingRepository;
+
 	@Override
-	@Transactional(rollbackFor = {Exception.class, Throwable.class})
+	@Transactional(rollbackFor = { Exception.class, Throwable.class })
 	public boolean postAdd(PostDto postDto) {
 		try {
 			// Save post entity
@@ -137,10 +138,10 @@ public class PostServiceImpl implements IPostService {
 			for (int i = 0; i < postDto.getLstServices().size(); i++) {
 				ServiceDetailId serviceDetailId = new ServiceDetailId();
 				serviceDetailId.setRoomTypeInfoId(roomTypeInfoEntity.getRoomTypeInfoId());
-				serviceDetailId.setServiceId(postDto.getLstServices().get(i));
+				serviceDetailId.setServiceId(postDto.getLstServiceIds().get(i));
 				ServiceDetails serviceDetailEntity = new ServiceDetails();
 				Services serviceEntity = new Services();
-				serviceEntity.setServiceId(postDto.getLstServices().get(i));
+				serviceEntity.setServiceId(postDto.getLstServiceIds().get(i));
 				serviceDetailEntity.setRoomTypeInfo(roomTypeInfoEntity);
 				serviceDetailEntity.setService(serviceEntity);
 				serviceDetailEntity.setDescription("OK");
@@ -155,38 +156,69 @@ public class PostServiceImpl implements IPostService {
 	}
 
 	@Override
-	public List<PostDto> getAllPost(){
+	public List<PostDto> getAllPost() {
 		List<PostDto> tempList = new ArrayList<PostDto>();
 		tempList = postRepository.getAllPost();
 		for (PostDto postDto : tempList) {
 			postDto.setLstServiceNames(serviceRepository.getServiceNameByRoomTypeInfoId(postDto.getRomTypeInfoId()));
 			List<String> lstImagePath = new ArrayList<String>();
 			lstImagePath = imageRepository.getImagePathByPostId(postDto.getPostId());
-			if (lstImagePath.size() == 5)
-			{
+			if (lstImagePath.size() == 5) {
 				postDto.setImage1(lstImagePath.get(0));
 				postDto.setImage2(lstImagePath.get(1));
 				postDto.setImage3(lstImagePath.get(2));
 				postDto.setImage4(lstImagePath.get(3));
 				postDto.setImage5(lstImagePath.get(4));
 			}
-			List<Ratings> lstRatings = ratingRepository.getAllRatingByPostId(postDto.getPostId());			
+			List<Ratings> lstRatings = ratingRepository.getAllRatingByPostId(postDto.getPostId());
 			postDto.setLstRatings(lstRatings);
-			int ratingAmount = 0;			
+			int ratingAmount = 0;
 			int totalStarNumber = 0;
 			for (Ratings rating : lstRatings) {
 				ratingAmount++;
-				totalStarNumber+=rating.getStarsNumber();
+				totalStarNumber += rating.getStarsNumber();
 			}
-			
+
 			postDto.setRatingAmount(ratingAmount);
 			if (ratingAmount != 0)
-			postDto.setAvarageStarNumber(totalStarNumber/ratingAmount);
+				postDto.setAvarageStarNumber(totalStarNumber / ratingAmount);
 			else
 				postDto.setAvarageStarNumber(0);
 		}
 		return tempList;
 	}
+
+	@Override
+	public PostDto getPostById(long postId) {
+		PostDto postDto = postRepository.getPostById(postId);
+		postDto.setLstServices(serviceRepository.getServiceByRoomTypeInfoId(postDto.getRomTypeInfoId()));
+		List<String> lstImagePath = new ArrayList<String>();
+		lstImagePath = imageRepository.getImagePathByPostId(postDto.getPostId());
+		if (lstImagePath.size() == 5) {
+			postDto.setImage1(lstImagePath.get(0));
+			postDto.setImage2(lstImagePath.get(1));
+			postDto.setImage3(lstImagePath.get(2));
+			postDto.setImage4(lstImagePath.get(3));
+			postDto.setImage5(lstImagePath.get(4));
+		}
+		List<Ratings> lstRatings = ratingRepository.getAllRatingByPostId(postDto.getPostId());
+		postDto.setLstRatings(lstRatings);
+		int ratingAmount = 0;
+		int totalStarNumber = 0;
+		for (Ratings rating : lstRatings) {
+			ratingAmount++;
+			totalStarNumber += rating.getStarsNumber();
+		}
+
+		postDto.setRatingAmount(ratingAmount);
+		if (ratingAmount != 0)
+			postDto.setAvarageStarNumber(totalStarNumber / ratingAmount);
+		else
+			postDto.setAvarageStarNumber(0);
+
+		return postDto;
+	}
+
 	@Override
 	public <S extends Posts> S save(S entity) {
 		return postRepository.save(entity);

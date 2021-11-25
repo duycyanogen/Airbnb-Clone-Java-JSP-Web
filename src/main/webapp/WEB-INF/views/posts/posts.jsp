@@ -56,7 +56,8 @@
 				</div>
 			</div>
 		</form:form>
-		<form:form action="dang-ki" modelAttribute="useracc">
+		<form:form action="dang-ki" modelAttribute="useracc"
+			enctype="multipart/form-data">
 			<div class="sign-up-form ${empty showFormRegis ? "none-block" : "" }">
 				<div class="sign-up-form-content">
 					<div class="sign-up-form-header">
@@ -112,9 +113,10 @@
 						<div class="form-content-avatar">
 							<p>Ảnh đại diện</p>
 							<img src="#" id="imgshow" class="none-block">
+							<!-- <input type="file" name="image" /> -->
 							<div class="form-content-avatar-block ">
-								<input type="file" id="imgload"> <label for="imgload">
-									<i class="fas fa-plus-circle"></i>
+								<input type="file" id="imgload" name="image"> <label
+									for="imgload"> <i class="fas fa-plus-circle"></i>
 								</label>
 							</div>
 						</div>
@@ -126,6 +128,7 @@
 				</div>
 			</div>
 		</form:form>
+
 
 	</div>
 	</div>

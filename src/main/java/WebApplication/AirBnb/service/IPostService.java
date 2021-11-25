@@ -75,6 +75,8 @@ public interface IPostService {
 
 	List<PostDto> getAllPost();
 
+	PostDto getPostById(long postId);
+
 	
 
 }
