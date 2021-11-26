@@ -33,6 +33,7 @@ import WebApplication.AirBnb.domain.ServiceDetails;
 import WebApplication.AirBnb.domain.Services;
 import WebApplication.AirBnb.domain.Users;
 import WebApplication.AirBnb.model.PostDto;
+import WebApplication.AirBnb.model.RatingDto;
 import WebApplication.AirBnb.model.UserAccDto;
 import WebApplication.AirBnb.repository.BedTypeDetailRepository;
 import WebApplication.AirBnb.repository.BedTypeRepository;
@@ -203,9 +204,17 @@ public class PostServiceImpl implements IPostService {
 		}
 		List<Ratings> lstRatings = ratingRepository.getAllRatingByPostId(postDto.getPostId());
 		postDto.setLstRatings(lstRatings);
+		List<RatingDto> lstRatingDtos = ratingRepository.getAllRatingDtoByPostId(postDto.getPostId());
+		postDto.setLstRatingDtos(lstRatingDtos);
+		for (RatingDto ratingDto : lstRatingDtos) {
+			System.out.print(ratingDto.getStarsNumber()+"star");
+			System.out.print(ratingDto.getComment()+" comment");
+			System.out.print(ratingDto.getUserAvatar()+" avt");
+			System.out.print(ratingDto.getUserName()+" Teen");
+		}
 		int ratingAmount = 0;
 		int totalStarNumber = 0;
-		for (Ratings rating : lstRatings) {
+		for (RatingDto rating : lstRatingDtos) {
 			ratingAmount++;
 			totalStarNumber += rating.getStarsNumber();
 		}

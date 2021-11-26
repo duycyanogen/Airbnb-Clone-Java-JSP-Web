@@ -8,6 +8,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class RatingDto{
 	
-	private int SoSao;
-	private String Comment;
+	private int starsNumber;
+	private String comment;
+	private String userName;
+	private String userAvatar;
+	private String raingDate;
 }

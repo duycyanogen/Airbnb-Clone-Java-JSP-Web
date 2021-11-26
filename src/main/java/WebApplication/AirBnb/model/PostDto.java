@@ -46,6 +46,7 @@ public class PostDto {
 	private List<String> lstServiceNames;
 	private List<Services> lstServices;
 	private List<Ratings> lstRatings;
+	private List<RatingDto> lstRatingDtos;
 	private String image1;
 	private String image2;
 	private String image3;
