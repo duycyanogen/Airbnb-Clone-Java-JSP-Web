@@ -7,6 +7,7 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 import WebApplication.AirBnb.domain.Ratings;
+import WebApplication.AirBnb.domain.Services;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -43,13 +44,15 @@ public class PostDto {
 	private String bedTypeName;
 	private List<Long> lstServiceIds;	
 	private List<String> lstServiceNames;
-	private List<ServiceDto> lstServices;
+	private List<Services> lstServices;
 	private List<Ratings> lstRatings;
 	private String image1;
 	private String image2;
 	private String image3;
 	private String image4;
 	private String image5;
+	private String authorImage;
+	private String authorPhoneNumber;
 	private int ratingAmount;
 	private double avarageStarNumber;
 	public PostDto(long postId, long romTypeInfoId, String userName, String postDate,
@@ -58,7 +61,7 @@ public class PostDto {
 			@NotBlank(message = "Bạn chưa nhập tên khách sạn!") String hotelName, int status,
 			@NotNull(message = "Bạn chưa nhập giá!") Double price, String locationName,
 			@NotEmpty(message = "Bạn chưa nhập địa chỉ!") String address, double area,
-			@NotNull(message = "Bạn chưa nhập số phòng!") int roomAmount, String roomTypeName, String bedTypeName) {
+			@NotNull(message = "Bạn chưa nhập số phòng!") int roomAmount, String roomTypeName, String bedTypeName, String authorImage, String authorPhoneNumber) {
 		super();
 		this.postId = postId;
 		this.romTypeInfoId = romTypeInfoId;
@@ -75,6 +78,8 @@ public class PostDto {
 		this.roomAmount = roomAmount;
 		this.roomTypeName = roomTypeName;
 		this.bedTypeName = bedTypeName;
+		this.authorImage = authorImage;
+		this.authorPhoneNumber = authorPhoneNumber;
 	}
 	
 	

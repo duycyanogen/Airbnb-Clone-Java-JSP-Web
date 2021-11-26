@@ -162,13 +162,15 @@
 				</div>
 				<c:if test="${ not empty sessionScope.LoginInfor }">
 					<div class="user-icon">
-						<img src="${pageContext.request.contextPath}/avatarimage/${sessionScope.LoginInfor.getAvatar() }"
+						<img
+							src="${pageContext.request.contextPath}/avatarimage/${sessionScope.LoginInfor.getAvatar() }"
 							alt=""> <span class="noti"></span>
 					</div>
 				</c:if>
 				<c:if test="${ empty sessionScope.LoginInfor }">
 					<div class="user-icon">
-						<img src="${pageContext.request.contextPath}/image/bg_form9.jpg" alt=""> <span class="noti"></span>
+						<img src="${pageContext.request.contextPath}/image/bg_form9.jpg"
+							alt=""> <span class="noti"></span>
 					</div>
 				</c:if>
 				<div class="header-down">
@@ -207,11 +209,11 @@
 			<div class="overview__detail">
 				<div class="overview__info">
 					<span class="overview__star-icon"> <i class="fas fa-star"></i>
-					</span> <span class="overview__star-rating"> ${post.avarageStarNumber} </span> <span
-						class="overview__rating-amount"> <span class="text">(${post.ratingAmount}
-							đánh giá)</span>
-					</span> <span class="overview__location"> ${post.address}, ${post.locationName}, Việt
-						Nam </span>
+					</span> <span class="overview__star-rating">
+						${post.avarageStarNumber} </span> <span class="overview__rating-amount">
+						<span class="text">(${post.ratingAmount} đánh giá)</span>
+					</span> <span class="overview__location"> ${post.address},
+						${post.locationName}, Việt Nam </span>
 				</div>
 				<div class="overview__operation">
 					<span class="overview__share"> <span class="share-icon">
@@ -226,23 +228,33 @@
 		</section>
 		<section class="image-zone grid-row">
 			<div class="image-zone__left grid-column-2">
-				<img src="${pageContext.request.contextPath}/roomimage/${post.getImage1()}" alt="">
+				<img
+					src="${pageContext.request.contextPath}/roomimage/${post.getImage1()}"
+					alt="">
 			</div>
 			<div class="image-zone__right grid-column-2 grid-column">
 				<div class="right-top grid-row-2 grid-row">
 					<div class="top-left grid-column-2  ">
-						<img src="${pageContext.request.contextPath}/roomimage/${post.getImage2()}" alt="">
+						<img
+							src="${pageContext.request.contextPath}/roomimage/${post.getImage2()}"
+							alt="">
 					</div>
 					<div class="top-right grid-column-2">
-						<img src="${pageContext.request.contextPath}/roomimage/${post.getImage3()}" alt="">
+						<img
+							src="${pageContext.request.contextPath}/roomimage/${post.getImage3()}"
+							alt="">
 					</div>
 				</div>
 				<div class="right-bottom grid-row-2 grid-row">
 					<div class="bottom-left grid-column-2">
-						<img src="${pageContext.request.contextPath}/roomimage/${post.getImage4()}" alt="">
+						<img
+							src="${pageContext.request.contextPath}/roomimage/${post.getImage4()}"
+							alt="">
 					</div>
 					<div class="bottom-right grid-column-2">
-						<img src="${pageContext.request.contextPath}/roomimage/${post.getImage5()}" alt="">
+						<img
+							src="${pageContext.request.contextPath}/roomimage/${post.getImage5()}"
+							alt="">
 					</div>
 				</div>
 			</div>
@@ -251,9 +263,11 @@
 			<div class="room-info__benefit">
 				<div class="host">
 					<div class="host-info">
-						<div class="host-name">Toàn bộ nhà phố. Chủ nhà ${post.getUserName()}</div>
-						<div class="basic-info">.${post.getRoomTypeName()} .${post.getBedTypeName()}
-						<c:forEach items="${post.getLstServices()}" var="service">
+						<div class="host-name">Toàn bộ nhà phố. Chủ nhà
+							${post.getUserName()}</div>
+						<div class="basic-info">
+							.${post.getRoomTypeName()} .${post.getBedTypeName()}
+							<c:forEach items="${post.getLstServices()}" var="service">
 										. ${service.getServiceName()}
 										</c:forEach>
 						</div>
@@ -280,39 +294,13 @@
 					<h2>Nơi đây có gì cho bạn?</h2>
 				</div>
 				<div class="benefits grid-row">
-					<div class="benefit grid-column-2">
-						<span class="benefit-icon"> <i class="fas fa-sink"></i>
-						</span> <span class="benefit-name">Bếp</span>
-					</div>
-					<div class="benefit grid-column-2">
-						<span class="benefit-icon"> <i class="fas fa-car"></i>
-						</span> <span class="benefit-name">Chỗ đỗ xe miễn phí tại nơi ở</span>
-					</div>
-					<div class="benefit grid-column-2">
-						<span class="benefit-icon"> <i class="fas fa-tv"></i>
-						</span> <span class="benefit-name">TV với truyền hình cáp tiêu
-							chuẩn</span>
-					</div>
-					<div class="benefit grid-column-2">
-						<span class="benefit-icon"> <i class="fas fa-recycle"></i>
-						</span> <span class="benefit-name">Máy giặt</span>
-					</div>
-					<div class="benefit grid-column-2">
-						<span class="benefit-icon"> <i class="fas fa-fan"></i>
-						</span> <span class="benefit-name">Điều hòa nhiệt độ</span>
-					</div>
-					<div class="benefit grid-column-2">
-						<span class="benefit-icon"> <i class="fas fa-wifi"></i>
-						</span> <span class="benefit-name">Wifi</span>
-					</div>
-					<div class="benefit grid-column-2">
-						<span class="benefit-icon"> <i class="fas fa-archive"></i>
-						</span> <span class="benefit-name">Cho phép gửi hành lý</span>
-					</div>
-					<div class="benefit grid-column-2">
-						<span class="benefit-icon"> <i class="fas fa-cube"></i>
-						</span> <span class="benefit-name">Máy phát hiện khí CO</span>
-					</div>
+					<c:forEach items="${post.getLstServices()}" var="service">
+						<div class="benefit grid-column-2">
+							<span class="benefit-icon"> ${service.getIcon()}
+							</span> <span class="benefit-name">${service.getServiceName()}</span>
+						</div>
+					</c:forEach>
+					
 				</div>
 
 			</div>
