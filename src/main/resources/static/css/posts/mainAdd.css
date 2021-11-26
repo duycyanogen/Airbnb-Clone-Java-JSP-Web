@@ -7,8 +7,9 @@
 
 
 .header {
-    
-    padding: 10px 250px;
+    padding: 10px 25px;
+    /* ThEM */
+    padding: 10px 140px;
 }
 
 
@@ -27,8 +28,8 @@ option {
 
     /* THEM */
 
-    padding-left: 250px;
-    padding-right: 250px;
+    padding-left: 140px;
+    padding-right: 140px;
 }
 .container-main {
     padding-top: 30px;
@@ -139,7 +140,7 @@ option {
 }
 
 .convenient-select-column input{
-   /* display: none; */
+   display: none;
 }
 
 .convenient-select-column label{
@@ -155,7 +156,7 @@ option {
     cursor: pointer;
 }
 
-.convenient-select-column label:after{
+/* .convenient-select-column label:after{
     content: "";
     width: 24px;
     height: 24px;
@@ -172,7 +173,36 @@ option {
 }
 .convenient-select-column input:checked + label {
     background-color:  #ffd1d9;
- }
+ } */
+
+
+/* sua cai label k hoat dong */
+.convenient-select-column label div{
+    content: "";
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    position: absolute;
+    background-color:  #ff385c;
+    top:2px;
+    left: 3px;
+    -webkit-transition: left 0.25s ease;
+    transition: left 0.25s ease;
+}
+
+.label-checked {
+    margin-left: 19px;
+}
+
+.label-checked-active {
+    background-color: #ffd1d9 !important;
+ 
+}
+
+
+
+
+
 
 
 .convenient-select-column p{
@@ -293,24 +323,13 @@ option {
 }
 
 
+/* responsive */
+@media screen and (max-width:1400px){
+.header{
+  padding-left: 10%;
+  padding-right: 10%;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+}
+}
+   
 

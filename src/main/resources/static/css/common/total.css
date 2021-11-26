@@ -431,8 +431,10 @@
 
 .form-content-avatar img {
   width: 220px;
-  height: 220px;
-  margin-top: 50px;
+    height: 220px;
+    margin-top: 50px;
+    border-radius: 50%;
+    object-fit: cover;
 }
 
 .form-content-avatar-block {

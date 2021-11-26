@@ -151,7 +151,7 @@
 				<span>Trở thành chủ nhà </span>
 			</c:if>
 			<c:if test="${ not empty sessionScope.LoginInfor }">
-				<span><a href="thong-tin-ca-nhan">${sessionScope.LoginInfor.getName() }</a></span>
+				<span><a href="/thong-tin-ca-nhan">${sessionScope.LoginInfor.getName() }</a></span>
 			</c:if>
 			<div class="global-icon">
 				<i class="fas fa-globe-europe"></i>

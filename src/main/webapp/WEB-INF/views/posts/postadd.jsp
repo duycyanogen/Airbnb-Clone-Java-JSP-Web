@@ -65,7 +65,8 @@
 				</c:if>
 				<c:if test="${ empty sessionScope.LoginInfor }">
 					<div class="user-icon">
-						<img src="${pageContext.request.contextPath}/image/bg_form9.jpg" alt=""> <span class="noti"></span>
+						<img src="${pageContext.request.contextPath}/image/bg_form9.jpg"
+							alt=""> <span class="noti"></span>
 					</div>
 				</c:if>
 				<div class="header-down">
@@ -100,21 +101,24 @@
 	<div class="container">
 		<div class="container-main">
 			<div class="container-content">
-				<form:form action="luu-tin" modelAttribute="post" enctype="multipart/form-data">
+				<form:form action="luu-tin" modelAttribute="post"
+					enctype="multipart/form-data">
 					<p class="container-content-title">Tạo tin</p>
 					<div class="container-content-item">
 						<p>Tiêu đề</p>
-						<form:input type="text" path="title" value="Cho thuê căn hộ sang trọng"/>
+						<form:input type="text" path="title"
+							value="Cho thuê căn hộ sang trọng" />
 						<form:errors path="title" element="div" class="isa_error" />
 					</div>
 					<div class="container-content-item">
 						<p>Nội dung tin</p>
-						<form:input type="text" path="content" value="Cho thuê căn hộ sang trọng"/>
+						<form:input type="text" path="content"
+							value="Cho thuê căn hộ sang trọng" />
 						<form:errors path="content" element="div" class="isa_error" />
 					</div>
 					<div class="container-content-item">
 						<p>Tên căn hộ</p>
-						<form:input type="text" path="hotelName" value="Royal City"/>
+						<form:input type="text" path="hotelName" value="Royal City" />
 						<form:errors path="hotelName" element="div" class="isa_error" />
 					</div>
 					<div class="container-content-item">
@@ -128,22 +132,23 @@
 					</div>
 					<div class="container-content-item">
 						<p>Địa chỉ</p>
-						<form:input type="text" path="address" value="763/68 Nguyễn Kiệm, Phú Nhuận"/>
+						<form:input type="text" path="address"
+							value="763/68 Nguyễn Kiệm, Phú Nhuận" />
 						<form:errors path="address" element="div" class="isa_error" />
 					</div>
 					<div class="container-content-item">
 						<p>Diện tích (m2)</p>
-						<form:input type="number" path="area" value="200"/>
+						<form:input type="number" path="area" value="200" />
 						<form:errors path="area" element="div" class="isa_error" />
 					</div>
 					<div class="container-content-item">
 						<p>Số phòng</p>
-						<form:input type="roomAmount" path="roomAmount" value="10"/>
+						<form:input type="roomAmount" path="roomAmount" value="10" />
 						<form:errors path="roomAmount" element="div" class="isa_error" />
 					</div>
 					<div class="container-content-item">
 						<p>Giá phòng</p>
-						<form:input type="text" path="price" value="300000"/>
+						<form:input type="text" path="price" value="300000" />
 						<form:errors path="price" element="div" class="isa_error" />
 					</div>
 					<div class="container-content-item">
@@ -171,8 +176,10 @@
 								<c:forEach items="${lstServices}" var="item">
 									<div class="convenient-select-column grid-column-2">
 										<form:checkbox id="${item.serviceId}" name="${item.serviceId}"
-											value="${item.serviceId}" path="lstServices" class="123"/>
-										<label for="${item.serviceId}" class="temp"></label>
+											value="${item.serviceId}" path="lstServices" class="123" />
+										<label for="${item.serviceId}" class="temp">
+											<div class=""></div>
+										</label>
 										<p>${item.serviceName}</p>
 									</div>
 								</c:forEach>
@@ -183,9 +190,8 @@
 						<p>Tải lên 5 ảnh</p>
 						<div class="content-img-block-main">
 							<div class="content-img-block-label">
-								<input type="file" id="content-img-block-1" name="img1"/>
-								
-								<label for="content-img-block-1">
+								<input type="file" id="content-img-block-1" name="img1" /> <label
+									for="content-img-block-1">
 									<div class="img-wait-load">
 										<i class="fas fa-arrow-circle-up"></i>
 									</div>
@@ -195,9 +201,8 @@
 								</label>
 							</div>
 							<div class="content-img-block-label">
-								<input type="file" id="content-img-block-2" name="img2"/>
-								
-								<label for="content-img-block-2">
+								<input type="file" id="content-img-block-2" name="img2" /> <label
+									for="content-img-block-2">
 									<div class="img-wait-load">
 										<i class="fas fa-arrow-circle-up"></i>
 									</div>
@@ -207,8 +212,8 @@
 								</label>
 							</div>
 							<div class="content-img-block-label">
-								<input type="file" id="content-img-block-3" name="img3"/>
-								<label for="content-img-block-3">
+								<input type="file" id="content-img-block-3" name="img3" /> <label
+									for="content-img-block-3">
 									<div class="img-wait-load">
 										<i class="fas fa-arrow-circle-up"></i>
 									</div>
@@ -218,8 +223,8 @@
 								</label>
 							</div>
 							<div class="content-img-block-label">
-								<input type="file" id="content-img-block-4" name="img4"/>
-								<label for="content-img-block-4">
+								<input type="file" id="content-img-block-4" name="img4" /> <label
+									for="content-img-block-4">
 									<div class="img-wait-load">
 										<i class="fas fa-arrow-circle-up"></i>
 									</div>
@@ -229,8 +234,8 @@
 								</label>
 							</div>
 							<div class="content-img-block-label">
-								<input type="file" id="content-img-block-5" name="img5"/>
-								<label for="content-img-block-5">
+								<input type="file" id="content-img-block-5" name="img5" /> <label
+									for="content-img-block-5">
 									<div class="img-wait-load">
 										<i class="fas fa-arrow-circle-up"></i>
 									</div>
@@ -320,22 +325,29 @@
 		src="${pageContext.request.contextPath}/js/main.js"></script>
 
 	<script>
-	 var labelChecked;
-	   const inputConvenient = document.querySelectorAll(".convenient-select-column input");
-	   for(let i=0; i<inputConvenient.length; i++)
-	    {
-	      inputConvenient[i].onclick = function() {
-	        if(inputConvenient[i].checked === true) {
-	         labelChecked = inputConvenient[i].parentElement.querySelector("label div");
-	         labelChecked.classList.add("label-checked");
-	        }
-	        if(inputConvenient[i].checked === false) {
-	         labelChecked = inputConvenient[i].parentElement.querySelector("label div");
-	         labelChecked.classList.remove("label-checked");
-	        }
-	      }
-	      
-	    }
+		var labelChecked;
+		const inputConvenient = document
+				.querySelectorAll(".convenient-select-column input");
+		for (let i = 0; i < inputConvenient.length; i++) {
+			inputConvenient[i].onclick = function() {
+				if (inputConvenient[i].checked === true) {
+					inputConvenient[i].parentElement.querySelector("label").classList
+							.add("label-checked-active");
+					labelChecked = inputConvenient[i].parentElement
+							.querySelector("label div");
+					labelChecked.classList.add("label-checked");
+				}
+				if (inputConvenient[i].checked === false) {
+					labelChecked = inputConvenient[i].parentElement
+							.querySelector("label div");
+					labelChecked.classList.remove("label-checked");
+					inputConvenient[i].parentElement.querySelector("label").classList
+							.remove("label-checked-active");
+				}
+			}
+
+		}
+
 		const imgLoadList = document
 				.querySelectorAll(".content-img-block-label label");
 		for (let i = 0; i < imgLoadList.length; i++) {
@@ -352,6 +364,8 @@
 			}
 		}
 	</script>
+
+
 
 </body>
 

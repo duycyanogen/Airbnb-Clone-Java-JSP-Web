@@ -225,7 +225,7 @@
 									<i class="fas fa-heart"></i>
 								</div>
 								<div class="content-info-name">
-									<a href=""> ${item.getHotelName()}</a>
+									<a href="${pageContext.request.contextPath}/danh-sach-tin/${item.getPostId()}"> ${item.getHotelName()}</a>
 								</div>
 								<div class="content-info-detail">
 									<p>.${item.getRoomTypeName()} .${item.getBedTypeName()}
