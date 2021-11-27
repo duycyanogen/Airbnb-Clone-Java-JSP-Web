@@ -1,5 +1,9 @@
 package WebApplication.AirBnb.service.impl;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -47,6 +51,10 @@ public class AccountServiceImpl implements IAccountService {
 			accountRepository.save(accountEntity);
 			//Lưu tài khoản
 			Users userEntity = new Users();
+			Date date = Calendar.getInstance().getTime();
+			DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+			String strDate = dateFormat.format(date);
+			userEntity.setRegisDate(strDate);
 			userEntity.setName(useracc.getName());
 			userEntity.setPhoneNumber(useracc.getPhoneNumber());
 			userEntity.setAddress(useracc.getAddress());

@@ -84,7 +84,7 @@ public class PostServiceImpl implements IPostService {
 			postEntity.setContent(postDto.getContent());// setContent
 			postEntity.setStatus(1);// setStatus
 			Date date = Calendar.getInstance().getTime();
-			DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
+			DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 			String strDate = dateFormat.format(date);
 			postEntity.setPostDate(strDate);// setPostDate = currentDate
 			postRepository.save(postEntity);//
@@ -165,6 +165,39 @@ public class PostServiceImpl implements IPostService {
 	public List<PostDto> getAllPost() {
 		List<PostDto> tempList = new ArrayList<PostDto>();
 		tempList = postRepository.getAllPost();
+		for (PostDto postDto : tempList) {
+			postDto.setLstServiceNames(serviceRepository.getServiceNameByRoomTypeInfoId(postDto.getRomTypeInfoId()));
+			List<String> lstImagePath = new ArrayList<String>();
+			lstImagePath = imageRepository.getImagePathByPostId(postDto.getPostId());
+			if (lstImagePath.size() == 5) {
+				postDto.setImage1(lstImagePath.get(0));
+				postDto.setImage2(lstImagePath.get(1));
+				postDto.setImage3(lstImagePath.get(2));
+				postDto.setImage4(lstImagePath.get(3));
+				postDto.setImage5(lstImagePath.get(4));
+			}
+			List<Ratings> lstRatings = ratingRepository.getAllRatingByPostId(postDto.getPostId());
+			postDto.setLstRatings(lstRatings);
+			int ratingAmount = 0;
+			int totalStarNumber = 0;
+			for (Ratings rating : lstRatings) {
+				ratingAmount++;
+				totalStarNumber += rating.getStarsNumber();
+			}
+
+			postDto.setRatingAmount(ratingAmount);
+			if (ratingAmount != 0)
+				postDto.setAvarageStarNumber(totalStarNumber / ratingAmount);
+			else
+				postDto.setAvarageStarNumber(0);
+		}
+		return tempList;
+	}
+	
+	@Override
+	public List<PostDto> searchPostByKeyword(String keyword) {
+		List<PostDto> tempList = new ArrayList<PostDto>();
+		tempList = postRepository.searchPostByKeyWord(keyword);
 		for (PostDto postDto : tempList) {
 			postDto.setLstServiceNames(serviceRepository.getServiceNameByRoomTypeInfoId(postDto.getRomTypeInfoId()));
 			List<String> lstImagePath = new ArrayList<String>();

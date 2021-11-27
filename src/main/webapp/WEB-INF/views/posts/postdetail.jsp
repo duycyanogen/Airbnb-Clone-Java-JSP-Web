@@ -297,11 +297,11 @@
 				<div class="benefits grid-row">
 					<c:forEach items="${post.getLstServices()}" var="service">
 						<div class="benefit grid-column-2">
-							<span class="benefit-icon"> ${service.getIcon()}
-							</span> <span class="benefit-name">${service.getServiceName()}</span>
+							<span class="benefit-icon"> ${service.getIcon()} </span> <span
+								class="benefit-name">${service.getServiceName()}</span>
 						</div>
 					</c:forEach>
-					
+
 				</div>
 
 			</div>
@@ -309,7 +309,9 @@
 				<!-- form here -->
 				<div class="form">
 					<div class="form__header">
-						<span class="form__price">vnđ ${post.getPrice() }/đêm</span> <span
+						<fmt:setLocale value="vi_VN" />
+						<span class="form__price"><fmt:formatNumber
+								value="${post.getPrice()}" type="currency" />/đêm</span> <span
 							class="form__rating"> <i class="fas fa-star"></i> <span>${post.avarageStarNumber}(${post.ratingAmount}
 								đánh giá)</span>
 						</span>
@@ -333,40 +335,42 @@
 			<div class="comment-rating__heading">
 				<span class="comment-rating__star-icon"><i
 					class="fas fa-star"></i></span> <span
-					class="comment-rating__average-rating">${post.getAvarageStarNumber()}</span> <span
-					class="comment-rating__rating-amount">· ${post.getRatingAmount()} đánh giá</span>
+					class="comment-rating__average-rating">${post.getAvarageStarNumber()}</span>
+				<span class="comment-rating__rating-amount">·
+					${post.getRatingAmount()} đánh giá</span>
 			</div>
 			<div class="comments grid-row">
 				<c:forEach items="${post.getLstRatingDtos()}" var="rating">
-				<div class="comments__item grid-column-2">
-					<div class="comments__item-header">
-						<div class="comments__item-avatar">
-							<img
-							src="${pageContext.request.contextPath}/avatarimage/${rating.getUserAvatar()}"
-							alt="">
+					<div class="comments__item grid-column-2">
+						<div class="comments__item-header">
+							<div class="comments__item-avatar">
+								<img
+									src="${pageContext.request.contextPath}/avatarimage/${rating.getUserAvatar()}"
+									alt="">
+							</div>
+							<div class="comment__item-author">
+								<div class="comments__item-name">${rating.getUserName()}</div>
+								<div class="comments__item-date">tháng
+									${rating.getRatingDate().split("-")[1]} năm
+									${rating.getRatingDate().split("-")[0]}</div>
+							</div>
 						</div>
-						<div class="comment__item-author">
-							<div class="comments__item-name">${rating.getUserName()}</div>
-							<div class="comments__item-date">tháng ${rating.getRatingDate().split("-")[1]} năm ${rating.getRatingDate().split("-")[0]}</div>
+						<div class="comments__item-content">
+							<span>${rating.getComment()}</span>
 						</div>
 					</div>
-					<div class="comments__item-content">
-						<span>${rating.getComment()}</span>
-					</div>
-				</div>
 				</c:forEach>
-				
 		</section>
 		<section class="about-owner">
 			<div class="owner">
 				<div class="owner__avatar">
 					<img
-							src="${pageContext.request.contextPath}/avatarimage/${post.getAuthorImage()}"
-							alt="">
+						src="${pageContext.request.contextPath}/avatarimage/${post.getAuthorImage()}"
+						alt="">
 				</div>
 				<div class="owner__info">
 					<div class="owner__name">Chủ nhà ${post.getUserName()}</div>
-					<div class="owner__date">Đã tham gia vào tháng 9 năm 2016</div>
+					<div class="owner__date">Đã tham gia vào tháng ${post.getRegisDate().split("-")[1]} năm ${post.getRegisDate().split("-")[0]}</div>
 				</div>
 			</div>
 			<div class="authen">
