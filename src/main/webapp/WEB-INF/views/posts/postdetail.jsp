@@ -274,20 +274,21 @@
 					</div>
 					<div class="avatar">
 						<img
-							src="https://images.unsplash.com/photo-1632968583371-bc69555e92ca?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1170&q=80"
+							src="${pageContext.request.contextPath}/avatarimage/${post.getAuthorImage()}"
 							alt="">
 					</div>
 				</div>
 				<div class="description">
 					<h2>Giới thiệu về chỗ ở này</h2>
-					<p>• Khử trùng được thực hiện sau mỗi lượt khách #anticovid19</p>
+					<!-- <p>• Khử trùng được thực hiện sau mỗi lượt khách #anticovid19</p>
 					<p>• An toàn hơn khi ở tại khách sạn. Hoàn hảo cho việc giữ
 						khoảng cách xã hội.</p>
 					<p>• Tự nhận phòng: nhận mã và nhận phòng, không cần gặp bất kỳ
 						ai!
 					<p>• Tại ❤️ thành phố - Chợ BenThanh và Bảo tàng cách đó vài
 						phút đi bộ.</p>
-					<p>• Wi-fi tốc độ cao • Máy sấy tóc, máy ủi có</p>
+					<p>• Wi-fi tốc độ cao • Máy sấy tóc, máy ủi có</p> -->
+					<p>${post.getContent() }</p>
 				</div>
 
 				<div class="benefits-title">
@@ -308,8 +309,8 @@
 				<!-- form here -->
 				<div class="form">
 					<div class="form__header">
-						<span class="form__price">$14/đêm</span> <span
-							class="form__rating"> <i class="fas fa-star"></i> <span>4,51(216
+						<span class="form__price">vnđ ${post.getPrice() }/đêm</span> <span
+							class="form__rating"> <i class="fas fa-star"></i> <span>${post.avarageStarNumber}(${post.ratingAmount}
 								đánh giá)</span>
 						</span>
 					</div>
@@ -323,7 +324,7 @@
 						</div>
 					</div>
 					<div class="form__button">
-						<button>Kiểm tra tình trạng còn phòng</button>
+						<button>Hiện đang còn ${post.getRoomAmount()} phòng</button>
 					</div>
 				</div>
 			</div>
@@ -332,160 +333,39 @@
 			<div class="comment-rating__heading">
 				<span class="comment-rating__star-icon"><i
 					class="fas fa-star"></i></span> <span
-					class="comment-rating__average-rating">4,51</span> <span
-					class="comment-rating__rating-amount">· 216 đánh giá</span>
+					class="comment-rating__average-rating">${post.getAvarageStarNumber()}</span> <span
+					class="comment-rating__rating-amount">· ${post.getRatingAmount()} đánh giá</span>
 			</div>
 			<div class="comments grid-row">
+				<c:forEach items="${post.getLstRatingDtos()}" var="rating">
 				<div class="comments__item grid-column-2">
 					<div class="comments__item-header">
 						<div class="comments__item-avatar">
 							<img
-								src="https://images.unsplash.com/photo-1633092468175-2f68b173e4e4?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=764&q=80"
-								alt="">
+							src="${pageContext.request.contextPath}/avatarimage/${rating.getUserAvatar()}"
+							alt="">
 						</div>
 						<div class="comment__item-author">
-							<div class="comments__item-name">Văn Minh</div>
-							<div class="comments__item-date">tháng 6 năm 2021</div>
+							<div class="comments__item-name">${rating.getUserName()}</div>
+							<div class="comments__item-date">tháng ${rating.getRatingDate().split("-")[1]} năm ${rating.getRatingDate().split("-")[0]}</div>
 						</div>
 					</div>
 					<div class="comments__item-content">
-						<span>Vị trí phòng thuận lợi, tuy nhiên phòng chỉ được
-							50%-60% trong ảnh. Cần cải thiện thêm về độ sạch sẽ, máy lạnh
-							yếu.</span>
+						<span>${rating.getComment()}</span>
 					</div>
 				</div>
-				<div class="comments__item grid-column-2">
-					<div class="comments__item-header">
-						<div class="comments__item-avatar">
-							<img
-								src="https://images.unsplash.com/photo-1471897488648-5eae4ac6686b?ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=687&q=80"
-								alt="">
-						</div>
-						<div class="comment__item-author">
-							<div class="comments__item-name">Ngọc Đại</div>
-							<div class="comments__item-date">tháng 6 năm 2021</div>
-						</div>
-					</div>
-					<div class="comments__item-content">
-						<span>Mọi thứ khá là ok. Chỉ tiếc là điều hoà chạy quá yếu
-							như hết gas. Chủ nhà nên thay gas hoặc bảo dưỡng lại điều hoà.
-							Mình thì ko chịu đc nóng nên thường về phòng bật điều hoà mức nhỏ
-							nhất nhưng mãi chả thấy mát</span>
-					</div>
-				</div>
-				<div class="comments__item grid-column-2">
-					<div class="comments__item-header">
-						<div class="comments__item-avatar">
-							<img
-								src="https://images.unsplash.com/photo-1633085272509-43df38a78aed?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=687&q=80"
-								alt="">
-						</div>
-						<div class="comment__item-author">
-							<div class="comments__item-name">Minh Đoan</div>
-							<div class="comments__item-date">tháng 5 năm 2021</div>
-						</div>
-					</div>
-					<div class="comments__item-content">
-						<span>Phòng sạch sẽ, dụng cụ làm bếp có nhưng chưa đủ,
-							thiếu thớt và dao hơi cùn. Máy lạnh có cũng như không, mình để 17
-							độ nhưng vẫn nóng.</span>
-					</div>
-				</div>
-				<div class="comments__item grid-column-2">
-					<div class="comments__item-header">
-						<div class="comments__item-avatar">
-							<img
-								src="https://images.unsplash.com/photo-1593642531955-b62e17bdaa9c?ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1169&q=80"
-								alt="">
-						</div>
-						<div class="comment__item-author">
-							<div class="comments__item-name">Hưng</div>
-							<div class="comments__item-date">tháng 6 năm 2021</div>
-						</div>
-					</div>
-					<div class="comments__item-content">
-						<span>Chỗ ở tốt để chill cùng bạn bè người yêu</span>
-					</div>
-				</div>
-				<div class="comments__item grid-column-2">
-					<div class="comments__item-header">
-						<div class="comments__item-avatar">
-							<img
-								src="https://images.unsplash.com/photo-1567000833363-b25413f86c35?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=764&q=80"
-								alt="">
-						</div>
-						<div class="comment__item-author">
-							<div class="comments__item-name">Mai</div>
-							<div class="comments__item-date">tháng 5 năm 2021</div>
-						</div>
-					</div>
-					<div class="comments__item-content">
-						<span>Vị trí thuận tiện. Anh chủ rất dth và nhiệt tình. Mọi
-							thứ đều khá tốt như mong đợi của mình. ❤️</span>
-					</div>
-				</div>
-				<div class="comments__item grid-column-2">
-					<div class="comments__item-header">
-						<div class="comments__item-avatar">
-							<img
-								src="https://images.unsplash.com/photo-1632950154909-b52702d4b994?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=764&q=80"
-								alt="">
-						</div>
-						<div class="comment__item-author">
-							<div class="comments__item-name">Khách</div>
-							<div class="comments__item-date">tháng 5 năm 2021</div>
-						</div>
-					</div>
-					<div class="comments__item-content">
-						<span>Chỗ ở thuận lợi cho việc đi lại, phòng sạch sẽ, mát,
-							sẽ quay lại nếu có dịp</span>
-					</div>
-				</div>
-				<div class="comments__item grid-column-2">
-					<div class="comments__item-header">
-						<div class="comments__item-avatar">
-							<img
-								src="https://images.unsplash.com/photo-1632952745637-a104d96d8405?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=735&q=80"
-								alt="">
-						</div>
-						<div class="comment__item-author">
-							<div class="comments__item-name">Trấn Thành</div>
-							<div class="comments__item-date">tháng 5 năm 2021</div>
-						</div>
-					</div>
-					<div class="comments__item-content">
-						<span>Hạ tầng dịch vụ cần cải thiện</span>
-					</div>
-				</div>
-				<div class="comments__item grid-column-2">
-					<div class="comments__item-header">
-						<div class="comments__item-avatar">
-							<img
-								src="https://images.unsplash.com/photo-1632945273090-daa594d65885?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=687&q=80"
-								alt="">
-						</div>
-						<div class="comment__item-author">
-							<div class="comments__item-name">Alex</div>
-							<div class="comments__item-date">tháng 6 năm 2021</div>
-						</div>
-					</div>
-					<div class="comments__item-content">
-						<span>Good place</span>
-					</div>
-				</div>
-				<button class="show-more-comments">Hiển thị tất cả 216 đánh
-					giá</button>
-			</div>
+				</c:forEach>
+				
 		</section>
 		<section class="about-owner">
 			<div class="owner">
 				<div class="owner__avatar">
 					<img
-						src="https://images.unsplash.com/photo-1632968583371-bc69555e92ca?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1170&q=80"
-						alt="">
+							src="${pageContext.request.contextPath}/avatarimage/${post.getAuthorImage()}"
+							alt="">
 				</div>
 				<div class="owner__info">
-					<div class="owner__name">Chủ nhà Danny</div>
+					<div class="owner__name">Chủ nhà ${post.getUserName()}</div>
 					<div class="owner__date">Đã tham gia vào tháng 9 năm 2016</div>
 				</div>
 			</div>

@@ -12,5 +12,5 @@ public class RatingDto{
 	private String comment;
 	private String userName;
 	private String userAvatar;
-	private String raingDate;
+	private String ratingDate;
 }

@@ -21,7 +21,7 @@ public interface RatingRepository extends JpaRepository<Ratings, Long>{
 //			+ "a.account_id and a.account_id = u.account_id and r.post_id = ?1", nativeQuery = true)
 //	List<RatingDto> getAllRatingDtoByPostId(long postId);
 	
-	@Query("Select new WebApplication.AirBnb.model.RatingDto(rating.starsNumber,rating.comment, user.name, user.avatar,"
-			+ "rating.ratingDate) from Ratings rating join rating.post post join post.account account join account.user user where post.postId =?1")
-	List<RatingDto> getAllRatingDtoByPostId(long postId);
+//	@Query("Select new WebApplication.AirBnb.model.RatingDto(rating.starsNumber,rating.comment, user.name, user.avatar,"
+//			+ "rating.ratingDate) from Ratings rating join rating.post post join post.account account join account.user user where post.postId =?1")
+//	List<RatingDto> getAllRatingDtoByPostId(long postId);
 }

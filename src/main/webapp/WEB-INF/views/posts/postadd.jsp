@@ -176,7 +176,7 @@
 								<c:forEach items="${lstServices}" var="item">
 									<div class="convenient-select-column grid-column-2">
 										<form:checkbox id="${item.serviceId}" name="${item.serviceId}"
-											value="${item.serviceId}" path="lstServices" class="123" />
+											value="${item.serviceId}" path="lstServiceIds" class="123" />
 										<label for="${item.serviceId}" class="temp">
 											<div class=""></div>
 										</label>
