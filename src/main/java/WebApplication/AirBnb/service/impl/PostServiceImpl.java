@@ -191,6 +191,7 @@ public class PostServiceImpl implements IPostService {
 			else
 				postDto.setAvarageStarNumber(0);
 		}
+		
 		return tempList;
 	}
 	
@@ -226,6 +227,43 @@ public class PostServiceImpl implements IPostService {
 		}
 		return tempList;
 	}
+	
+	@Override
+	public List<PostDto> listPostByHostId(long hostId) {
+		List<PostDto> tempList = new ArrayList<PostDto>();
+		tempList = postRepository.listPostByHostId(hostId);
+		for (PostDto postDto : tempList) {
+			postDto.setLstServiceNames(serviceRepository.getServiceNameByRoomTypeInfoId(postDto.getRomTypeInfoId()));
+			List<String> lstImagePath = new ArrayList<String>();
+			lstImagePath = imageRepository.getImagePathByPostId(postDto.getPostId());
+			if (lstImagePath.size() == 5) {
+				postDto.setImage1(lstImagePath.get(0));
+				postDto.setImage2(lstImagePath.get(1));
+				postDto.setImage3(lstImagePath.get(2));
+				postDto.setImage4(lstImagePath.get(3));
+				postDto.setImage5(lstImagePath.get(4));
+			}
+			List<Ratings> lstRatings = ratingRepository.getAllRatingByPostId(postDto.getPostId());
+			postDto.setLstRatings(lstRatings);
+			int ratingAmount = 0;
+			int totalStarNumber = 0;
+			for (Ratings rating : lstRatings) {
+				ratingAmount++;
+				totalStarNumber += rating.getStarsNumber();
+			}
+
+			postDto.setRatingAmount(ratingAmount);
+			if (ratingAmount != 0)
+				postDto.setAvarageStarNumber(totalStarNumber / ratingAmount);
+			else
+				postDto.setAvarageStarNumber(0);
+		}
+		tempList.forEach(e->{
+			System.out.println(e);
+		});
+		return tempList;
+	}
+
 
 	@Override
 	public PostDto getPostById(long postId) {

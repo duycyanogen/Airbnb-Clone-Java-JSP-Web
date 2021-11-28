@@ -98,6 +98,11 @@ public class AccountServiceImpl implements IAccountService {
 	public UserAccDto getUserAccountByMail(String email) {
 		return accountRepository.getUserAccountByMail(email);
 	}
+	
+	@Override
+	public UserAccDto getUserAccountByAccountId(long accountId) {
+		return accountRepository.getUserAccountByAccountId(accountId);
+	}
 
 	public Accounts getAccountByMail(String email) {
 		return accountRepository.getAccountByMail(email);

@@ -390,7 +390,7 @@
 					inventore distinctio ad beatae.</div>
 				<div class="response">Tỉ lệ phản hồi: 96%</div>
 			</div>
-			<button class="contact-button">Liên hệ với chủ nhà</button>
+			<button class="contact-button"><a href="${pageContext.request.contextPath}/thong-tin-chu-nha/${post.getAccountId()}">Liên hệ với chủ nhà</a>></button>
 		</section>
 	</div>
 	<div class="footer">

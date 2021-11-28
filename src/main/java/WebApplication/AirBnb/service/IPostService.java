@@ -79,6 +79,8 @@ public interface IPostService {
 
 	List<PostDto> searchPostByKeyword(String keyword);
 
+	List<PostDto> listPostByHostId(long hostId);
+
 	
 
 	

@@ -1,6 +1,7 @@
 package WebApplication.AirBnb.controller;
 
 import java.io.File;
+import java.util.List;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -16,6 +17,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -28,8 +30,10 @@ import WebApplication.AirBnb.domain.Roles;
 import WebApplication.AirBnb.domain.Accounts;
 import WebApplication.AirBnb.model.UserDto;
 import WebApplication.AirBnb.model.AccountDto;
+import WebApplication.AirBnb.model.PostDto;
 import WebApplication.AirBnb.model.UserAccDto;
 import WebApplication.AirBnb.service.IAccountService;
+import WebApplication.AirBnb.service.IPostService;
 import WebApplication.AirBnb.service.impl.UserServiceImpl;
 import WebApplication.AirBnb.service.impl.AccountServiceImpl;
 
@@ -41,7 +45,8 @@ public class HomeController {
 	UserServiceImpl userService;
 	@Autowired
 	private HttpSession session;
-
+	@Autowired
+	IPostService postService;
 	@GetMapping(value = "")
 	private String Index(Model model) {
 		model.addAttribute("useracc", new UserAccDto());
@@ -49,10 +54,14 @@ public class HomeController {
 		return "index";
 	}
 	
-	@GetMapping(value = "thong-tin-chu-nha")
-	private String HotInfo(Model model) {
+	@GetMapping(value = "thong-tin-chu-nha/{hostId}")
+	private String HotInfo(Model model, @PathVariable("hostId") Long hostId) {
+		UserAccDto hostInfo = accountService.getUserAccountByAccountId(hostId);
+		List<PostDto> lstPosts = postService.listPostByHostId(hostId);
 		model.addAttribute("useracc", new UserAccDto());
 		model.addAttribute("account", new AccountDto());
+		model.addAttribute("hostInfo",hostInfo);
+		model.addAttribute("posts",lstPosts);
 		return "host/hostinfo";
 	}
 

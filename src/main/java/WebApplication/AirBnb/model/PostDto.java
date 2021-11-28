@@ -57,7 +57,7 @@ public class PostDto {
 	private int ratingAmount;
 	private double avarageStarNumber;
 	private String regisDate;
-	public PostDto(long postId, long romTypeInfoId, String userName, String regisDate, String postDate,
+	public PostDto(long accountId, long postId, long romTypeInfoId, String userName, String regisDate, String postDate,
 			@NotBlank(message = "Bạn chưa nhập tiêu đề") String title,
 			@NotBlank(message = "Bạn chưa nhập nội dung tin") String content,
 			@NotBlank(message = "Bạn chưa nhập tên khách sạn!") String hotelName, int status,
@@ -65,6 +65,7 @@ public class PostDto {
 			@NotEmpty(message = "Bạn chưa nhập địa chỉ!") String address, double area,
 			@NotNull(message = "Bạn chưa nhập số phòng!") int roomAmount, String roomTypeName, String bedTypeName, String authorImage, String authorPhoneNumber) {
 		super();
+		this.accountId = accountId;
 		this.postId = postId;
 		this.romTypeInfoId = romTypeInfoId;
 		this.userName = userName;

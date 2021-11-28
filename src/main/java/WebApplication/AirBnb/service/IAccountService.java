@@ -81,5 +81,7 @@ public interface IAccountService extends UserDetailsService {
 
 	UserAccDto getUserAccountByMail(String email);
 
+	UserAccDto getUserAccountByAccountId(long accountId);
+
 
 }
