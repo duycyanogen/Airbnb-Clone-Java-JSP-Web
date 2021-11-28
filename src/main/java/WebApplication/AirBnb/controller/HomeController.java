@@ -43,10 +43,17 @@ public class HomeController {
 	private HttpSession session;
 
 	@GetMapping(value = "")
-	private String index(Model model) {
+	private String Index(Model model) {
 		model.addAttribute("useracc", new UserAccDto());
 		model.addAttribute("account", new AccountDto());
 		return "index";
+	}
+	
+	@GetMapping(value = "thong-tin-chu-nha")
+	private String HotInfo(Model model) {
+		model.addAttribute("useracc", new UserAccDto());
+		model.addAttribute("account", new AccountDto());
+		return "host/hostinfo";
 	}
 
 	@GetMapping(value = "thong-tin-ca-nhan")
@@ -57,7 +64,7 @@ public class HomeController {
 	}
 
 	@GetMapping(value = "trang-chu")
-	private String home(Model model) {
+	private String Home(Model model) {
 		model.addAttribute("useracc", new UserAccDto());
 		model.addAttribute("account", new AccountDto());
 		return "index";

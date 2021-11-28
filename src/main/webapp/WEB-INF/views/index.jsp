@@ -11,15 +11,15 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" type="text/css"
-	href="<c:url value='css/common/reset.css'/>" />
+	href="<c:url value='${pageContext.request.contextPath}/css/common/reset.css'/>" />
 <link rel="stylesheet" type="text/css"
-	href="<c:url value='css/common/base.css'/>" />
+	href="<c:url value='${pageContext.request.contextPath}/css/common/base.css'/>" />
 <link rel="stylesheet" type="text/css"
-	href="<c:url value='css/common/total.css'/>" />
+	href="<c:url value='${pageContext.request.contextPath}/css/common/total.css'/>" />
 <link rel="stylesheet" type="text/css"
-	href="<c:url value='css/home/main.css'/>" />
+	href="<c:url value='${pageContext.request.contextPath}/css/home/main.css'/>" />
 <link rel="stylesheet" type="text/css"
-	href="Fonts/fontawesome-free-5.15.3-web/css/all.min.css" />
+	href="${pageContext.request.contextPath}/Fonts/fontawesome-free-5.15.3-web/css/all.min.css" />
 
 <%-- <link rel="stylesheet" href="<c:url value='image'/>" /> --%>
 <base href="${pageContext.servletContext.contextPath}">
@@ -168,7 +168,7 @@
 				</div>
 				<c:if test="${ not empty sessionScope.LoginInfor }">
 					<div class="user-icon">
-						<img src="avatarimage/${sessionScope.LoginInfor.getAvatar() }"
+						<img src="${pageContext.request.contextPath}/avatarimage/${sessionScope.LoginInfor.getAvatar() }"
 							alt=""> <span class="noti"></span>
 					</div>
 				</c:if>
@@ -230,7 +230,7 @@
 						<img src="image/ca3737ef-0faf-46ba-b055-b4a2d99e2cea.webp" alt="">
 					</div>
 					<div class="section-item__content">
-						<h3>Thành phố Hồ Chí Minh</h3>
+						<h3><a href="${pageContext.request.contextPath}/danh-sach-tin/tim-kiem?keyword=h%E1%BB%93+ch%C3%AD+minh">Thành phố Hồ Chí Minh</a></h3>
 						<p>15 phút lái xe</p>
 					</div>
 				</div>
@@ -239,7 +239,7 @@
 						<img src="image/e639b7ab-aee3-48ee-9743-216684a51319.webp" alt="">
 					</div>
 					<div class="section-item__content">
-						<h3>Nha Trang</h3>
+						<h3><a href="${pageContext.request.contextPath}/danh-sach-tin/tim-kiem?keyword=Nha+trang">Nha Trang</a></h3>
 						<p>6,5 giờ lái xe</p>
 					</div>
 				</div>
@@ -248,7 +248,7 @@
 						<img src="image/be4d3ba5-08d7-4afe-95a7-f2da6453886a.webp" alt="">
 					</div>
 					<div class="section-item__content">
-						<h3>Vũng tàu</h3>
+						<h3><a href="${pageContext.request.contextPath}/danh-sach-tin/tim-kiem?keyword=Nha+trang">Vũng tàu</a></h3>
 						<p>2,5 giờ lái xe</p>
 					</div>
 				</div>
@@ -257,7 +257,7 @@
 						<img src="image/7253e011-7c22-48fd-b75d-d0da35372397.webp" alt="">
 					</div>
 					<div class="section-item__content">
-						<h3>Phú Quốc</h3>
+						<h3><a href="${pageContext.request.contextPath}/danh-sach-tin/tim-kiem?keyword=Nha+trang">Phú Quốc</a></h3>
 						<p></p>
 					</div>
 				</div>
@@ -266,7 +266,7 @@
 						<img src="image/6b36a0f9-453f-4d11-974e-0cf164b4d18c.webp" alt="">
 					</div>
 					<div class="section-item__content">
-						<h3>Cần Thơ</h3>
+						<h3><a href="${pageContext.request.contextPath}/danh-sach-tin/tim-kiem?keyword=Nha+trang">Cần thơ</a></h3>
 						<p>3 giờ lái xe</p>
 					</div>
 				</div>
@@ -275,7 +275,7 @@
 						<img src="image/585d1e53-e2e1-4baf-a34e-36301dd1e2da.webp" alt="">
 					</div>
 					<div class="section-item__content">
-						<h3>Thành phố Tuy Hòa</h3>
+						<h3><a href="${pageContext.request.contextPath}/danh-sach-tin/tim-kiem?keyword=Nha+trang">Phú Yên</a></h3>
 						<p>7,5 giờ lái xe</p>
 					</div>
 				</div>
@@ -284,7 +284,7 @@
 						<img src="image/52e8083e-2de2-446d-a860-534eab250541.webp" alt="">
 					</div>
 					<div class="section-item__content">
-						<h3>Thành phố Biên Hòa</h3>
+						<h3><a href="${pageContext.request.contextPath}/danh-sach-tin/tim-kiem?keyword=Nha+trang">Đồng Nai</a></h3>
 						<p>45 phút lái xe</p>
 					</div>
 				</div>
@@ -293,7 +293,7 @@
 						<img src="image/20e74de0-0eb8-4fca-afb8-b111875acdf5.webp" alt="">
 					</div>
 					<div class="section-item__content">
-						<h3>Thuận An</h3>
+						<h3><a href="${pageContext.request.contextPath}/danh-sach-tin/tim-kiem?keyword=Nha+trang">Bình Dương</a></h3>
 						<p>30 phút lái xe</p>
 					</div>
 				</div>

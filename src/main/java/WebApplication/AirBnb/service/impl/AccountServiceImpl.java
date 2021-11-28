@@ -4,6 +4,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 
@@ -12,6 +13,10 @@ import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -24,7 +29,7 @@ import WebApplication.AirBnb.repository.UserRepository;
 import WebApplication.AirBnb.repository.AccountRepository;
 import WebApplication.AirBnb.service.IAccountService;
 
-@Service
+@Service("userDetailService")
 public class AccountServiceImpl implements IAccountService {
 	@Autowired
 	private AccountRepository accountRepository;
@@ -43,13 +48,13 @@ public class AccountServiceImpl implements IAccountService {
 	public boolean register(UserAccDto useracc) {
 		try {
 			Accounts accountEntity = new Accounts();
-			accountEntity.setMail(useracc.getMail());			
+			accountEntity.setMail(useracc.getMail());
 			accountEntity.setPassword(bCryptPasswordEncoder.encode(useracc.getPassword()));
 			Roles role = new Roles();
 			role.setRoleId(2l);
 			accountEntity.setRole(role);
 			accountRepository.save(accountEntity);
-			//Lưu tài khoản
+			// Lưu tài khoản
 			Users userEntity = new Users();
 			Date date = Calendar.getInstance().getTime();
 			DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -61,14 +66,14 @@ public class AccountServiceImpl implements IAccountService {
 			userEntity.setSex(useracc.getSex());
 			userEntity.setDateOfBirth(useracc.getDateOfBirth());
 			userEntity.setCCCD(useracc.getCCCD());
-			userEntity.setAvatar(useracc.getAvatar());		
+			userEntity.setAvatar(useracc.getAvatar());
 			userEntity.setAccount(accountEntity);
 			userRepository.save(userEntity);
 			return true;
 		} catch (Exception e) {
 			// TODO: handle exception
 			return false;
-		}		
+		}
 	}
 
 	@Override
@@ -93,7 +98,11 @@ public class AccountServiceImpl implements IAccountService {
 	public UserAccDto getUserAccountByMail(String email) {
 		return accountRepository.getUserAccountByMail(email);
 	}
-	
+
+	public Accounts getAccountByMail(String email) {
+		return accountRepository.getAccountByMail(email);
+	}
+
 	@Override
 	public <S extends Accounts> Optional<S> findOne(Example<S> example) {
 		return accountRepository.findOne(example);
@@ -236,8 +245,21 @@ public class AccountServiceImpl implements IAccountService {
 
 	@Override
 	public boolean updateUserInfo(UserAccDto useracc) {
-		
+
 		return false;
+	}
+
+	@Override
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+		// TODO Auto-generated method stub
+		Accounts account = this.getAccountByMail(username);
+		if (account == null)
+			throw new UsernameNotFoundException("User này không tồn tại!");
+
+		HashSet<GrantedAuthority> auth = new HashSet<>();
+		auth.add(new SimpleGrantedAuthority(account.getRole().toString()));
+		return new org.springframework.security.core.
+				userdetails.User(account.getMail(), account.getPassword(), auth);
 	}
 
 }

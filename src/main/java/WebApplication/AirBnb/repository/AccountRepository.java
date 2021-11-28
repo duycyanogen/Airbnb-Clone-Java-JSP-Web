@@ -15,4 +15,5 @@ public interface AccountRepository extends JpaRepository<Accounts, Long>{
 			+ "n.CCCD , n.avatar , n.phoneNumber , t.accountId, t.mail, t.password) from Accounts t join t.user n WHERE t.mail = :mail")
 	UserAccDto getUserAccountByMail(@Param("mail") String mail);
 	
+	
 }
