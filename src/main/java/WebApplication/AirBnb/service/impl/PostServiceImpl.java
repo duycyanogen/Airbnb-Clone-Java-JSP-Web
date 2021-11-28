@@ -177,7 +177,7 @@ public class PostServiceImpl implements IPostService {
 				postDto.setImage5(lstImagePath.get(4));
 			}
 			List<Ratings> lstRatings = ratingRepository.getAllRatingByPostId(postDto.getPostId());
-			postDto.setLstRatings(lstRatings);
+			//postDto.setLstRatings(lstRatings);
 			int ratingAmount = 0;
 			int totalStarNumber = 0;
 			for (Ratings rating : lstRatings) {
@@ -190,6 +190,14 @@ public class PostServiceImpl implements IPostService {
 				postDto.setAvarageStarNumber(totalStarNumber / ratingAmount);
 			else
 				postDto.setAvarageStarNumber(0);
+		}
+		try {
+			tempList.forEach(e->{
+				System.out.println(e.getLstRatings());
+			});
+		} catch (Exception e2) {
+			// TODO: handle exception
+			e2.printStackTrace();
 		}
 		
 		return tempList;
@@ -211,7 +219,7 @@ public class PostServiceImpl implements IPostService {
 				postDto.setImage5(lstImagePath.get(4));
 			}
 			List<Ratings> lstRatings = ratingRepository.getAllRatingByPostId(postDto.getPostId());
-			postDto.setLstRatings(lstRatings);
+//			postDto.setLstRatings(lstRatings);
 			int ratingAmount = 0;
 			int totalStarNumber = 0;
 			for (Ratings rating : lstRatings) {
@@ -244,7 +252,7 @@ public class PostServiceImpl implements IPostService {
 				postDto.setImage5(lstImagePath.get(4));
 			}
 			List<Ratings> lstRatings = ratingRepository.getAllRatingByPostId(postDto.getPostId());
-			postDto.setLstRatings(lstRatings);
+//			postDto.setLstRatings(lstRatings);
 			int ratingAmount = 0;
 			int totalStarNumber = 0;
 			for (Ratings rating : lstRatings) {
@@ -258,9 +266,9 @@ public class PostServiceImpl implements IPostService {
 			else
 				postDto.setAvarageStarNumber(0);
 		}
-		tempList.forEach(e->{
-			System.out.println(e);
-		});
+//		tempList.forEach(e->{
+//			System.out.println(e);
+//		});
 		return tempList;
 	}
 
@@ -280,6 +288,7 @@ public class PostServiceImpl implements IPostService {
 		}
 		List<Ratings> lstRatings = ratingRepository.getAllRatingByPostId(postDto.getPostId());
 		postDto.setLstRatings(lstRatings);
+		postDto.setHostRatingAmount(ratingRepository.getTotalRatingAmountByAccountId(postDto.getAccountId()));
 //		List<RatingDto> lstRatingDtos = ratingRepository.getAllRatingDtoByPostId(postDto.getPostId());
 //		postDto.setLstRatingDtos(lstRatingDtos);
 //		for (RatingDto ratingDto : lstRatingDtos) {

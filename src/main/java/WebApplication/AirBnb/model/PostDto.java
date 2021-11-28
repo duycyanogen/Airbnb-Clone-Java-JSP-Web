@@ -57,6 +57,7 @@ public class PostDto {
 	private int ratingAmount;
 	private double avarageStarNumber;
 	private String regisDate;
+	private int hostRatingAmount;
 	public PostDto(long accountId, long postId, long romTypeInfoId, String userName, String regisDate, String postDate,
 			@NotBlank(message = "Bạn chưa nhập tiêu đề") String title,
 			@NotBlank(message = "Bạn chưa nhập nội dung tin") String content,

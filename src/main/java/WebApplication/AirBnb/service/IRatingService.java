@@ -71,6 +71,12 @@ public interface IRatingService {
 
 	<S extends Ratings> S save(S entity);
 
+	int getTotalRatingAmountByAccountId(long accountId);
+
+	int getTotalStarNumberByAccountId(long accountId);
+
+	double getAverageStarNumberByAccountId(long accountId);
+
 	
 
 }

@@ -375,7 +375,7 @@
 			</div>
 			<div class="authen">
 				<span class="star-icon"> <i class="fas fa-star"></i>
-				</span> <span class="rating-amount"> 3.894 đánh giá </span> <span
+				</span> <span class="rating-amount"> ${post.getHostRatingAmount() } đánh giá </span> <span
 					class="validate-icon"> <i class="fas fa-shield-virus"></i>
 				</span> <span class="validate-text"> Đã được xác minh danh tính </span>
 				<div class="description">Lorem ipsum dolor sit amet

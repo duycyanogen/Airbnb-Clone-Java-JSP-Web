@@ -29,6 +29,7 @@ import WebApplication.AirBnb.domain.Users;
 import WebApplication.AirBnb.domain.Roles;
 import WebApplication.AirBnb.domain.Accounts;
 import WebApplication.AirBnb.model.UserDto;
+import WebApplication.AirBnb.repository.RatingRepository;
 import WebApplication.AirBnb.model.AccountDto;
 import WebApplication.AirBnb.model.PostDto;
 import WebApplication.AirBnb.model.UserAccDto;
@@ -36,6 +37,7 @@ import WebApplication.AirBnb.service.IAccountService;
 import WebApplication.AirBnb.service.IPostService;
 import WebApplication.AirBnb.service.impl.UserServiceImpl;
 import WebApplication.AirBnb.service.impl.AccountServiceImpl;
+import WebApplication.AirBnb.service.impl.RatingServiceImpl;
 
 @Controller
 public class HomeController {
@@ -44,6 +46,7 @@ public class HomeController {
 	@Autowired
 	UserServiceImpl userService;
 	@Autowired
+	RatingServiceImpl ratingService;
 	private HttpSession session;
 	@Autowired
 	IPostService postService;
@@ -58,10 +61,14 @@ public class HomeController {
 	private String HotInfo(Model model, @PathVariable("hostId") Long hostId) {
 		UserAccDto hostInfo = accountService.getUserAccountByAccountId(hostId);
 		List<PostDto> lstPosts = postService.listPostByHostId(hostId);
+		int hostRatingAmount = ratingService.getTotalRatingAmountByAccountId(hostId);
+		double hostAverageStarNumber = ratingService.getAverageStarNumberByAccountId(hostId);
 		model.addAttribute("useracc", new UserAccDto());
 		model.addAttribute("account", new AccountDto());
 		model.addAttribute("hostInfo",hostInfo);
 		model.addAttribute("posts",lstPosts);
+		model.addAttribute("hostRatingAmount",hostRatingAmount);
+		model.addAttribute("hostAverageStarNumber",hostAverageStarNumber);
 		return "host/hostinfo";
 	}
 
