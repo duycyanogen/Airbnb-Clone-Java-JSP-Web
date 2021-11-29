@@ -16,3 +16,4 @@ public interface AccountRepository extends JpaRepository<Accounts, Long>{
 	UserAccDto getUserAccountByMail(@Param("mail") String mail);
 	
 }
+
