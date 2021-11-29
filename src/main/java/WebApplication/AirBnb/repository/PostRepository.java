@@ -1,7 +1,9 @@
 package WebApplication.AirBnb.repository;
 
+import java.awt.print.Pageable;
 import java.util.List;
 
+import org.springframework.data.domain.Page;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -24,8 +26,21 @@ public interface PostRepository extends JpaRepository<Posts, Long>{
 			+ "join roomTypeInfos.lstBedTypeDetails bedTypeDetails "
 			+ "join roomTypeInfos.hotel hotel "
 			+ "join roomTypeInfos.roomType roomType "
-			+ "join bedTypeDetails.bedType bedType join hotel.location location")
+			+ "join bedTypeDetails.bedType bedType join hotel.location location order by post.postId DESC")
 	List<PostDto> getAllPost();
+	
+//	@Query("SELECT new WebApplication.AirBnb.model.PostDto(acc.accountId , post.postId, roomTypeInfos.roomTypeInfoId, "
+//			+ "user.name , user.regisDate , post.postDate , post.title , "
+//			+ "post.content , hotel.hotelName , post.status , roomTypeInfos.price, location.locationName , "
+//			+ "hotel.address , roomTypeInfos.area , roomTypeInfos.roomAmount , roomType.roomTypeName , "
+//			+ "bedType.bedTypeName , user.avatar , user.phoneNumber)"
+//			+ "from Posts post join post.account acc join acc.user user "
+//			+ "join post.lstRoomTypeInfos roomTypeInfos "
+//			+ "join roomTypeInfos.lstBedTypeDetails bedTypeDetails "
+//			+ "join roomTypeInfos.hotel hotel "
+//			+ "join roomTypeInfos.roomType roomType "
+//			+ "join bedTypeDetails.bedType bedType join hotel.location location")
+//	Page<PostDto> getAllPost(Pageable pageable);
 	
 	@Query("SELECT new WebApplication.AirBnb.model.PostDto(acc.accountId , post.postId, roomTypeInfos.roomTypeInfoId, "
 			+ "user.name, user.regisDate , post.postDate , post.title , "

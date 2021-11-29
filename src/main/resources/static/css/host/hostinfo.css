@@ -247,6 +247,7 @@ body {
 }
 
 .content-info {
+	margin-left: 42px;
 	width: 60%;
 	padding: 0px 10px;
 	height: 100%;

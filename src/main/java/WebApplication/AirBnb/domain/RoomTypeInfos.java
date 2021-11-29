@@ -11,6 +11,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -35,18 +37,22 @@ public class RoomTypeInfos implements Serializable {
     private List<BedTypeDetails> lstBedTypeDetails;
 	
 	@OneToMany(mappedBy = "service")
+	@JsonManagedReference
     private List<ServiceDetails> lstServiceDetails;
 	
 	@ManyToOne
 	@JoinColumn(name = "hotelId")
+	@JsonBackReference
 	private Hotels hotel;
 	
 	@ManyToOne
 	@JoinColumn(name = "roomTypeId")
+	@JsonBackReference
 	private RoomTypes roomType;
 		
 	@ManyToOne
 	@JoinColumn(name = "post_id")
+	@JsonBackReference
 	private Posts post;
 	
 }

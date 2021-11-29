@@ -9,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -29,6 +30,7 @@ public class Images implements Serializable {
 	private String path;
 	@ManyToOne
 	@JoinColumn(name = "post_id")
+	@JsonBackReference
 	private Posts post;	
 	
 }

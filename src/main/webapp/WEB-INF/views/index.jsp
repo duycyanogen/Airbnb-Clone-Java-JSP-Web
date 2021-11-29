@@ -218,7 +218,7 @@
 			<div class="slider__content">
 				<span class="slider__text">Bạn chưa biết nên đi đâu?</span>
 				<div class="slider__search-frame">
-					<a href="danh-sach-tin">Bắt đầu khám phá</a>
+					<a href="${pageContext.request.contextPath}/danh-sach-tin/?pageId=1">Bắt đầu khám phá</a>
 				</div>
 			</div>
 		</div>

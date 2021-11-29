@@ -10,6 +10,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -32,8 +35,8 @@ public class Ratings implements Serializable {
 	private String comment;
 	private String ratingDate;		
 	@ManyToOne
-	//@MapsId("postId")
 	@JoinColumn(name = "post_id")
+	@JsonBackReference
     private Posts post;
 	
 	

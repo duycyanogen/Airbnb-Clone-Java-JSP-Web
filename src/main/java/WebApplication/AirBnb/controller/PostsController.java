@@ -6,6 +6,7 @@ import java.util.List;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
@@ -20,16 +21,22 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+
+import WebApplication.AirBnb.domain.Accounts;
 import WebApplication.AirBnb.domain.BedTypes;
 import WebApplication.AirBnb.domain.Locations;
+import WebApplication.AirBnb.domain.Posts;
 import WebApplication.AirBnb.domain.RoomTypes;
 import WebApplication.AirBnb.domain.Services;
 import WebApplication.AirBnb.model.AccountDto;
+import WebApplication.AirBnb.model.PaginatesDto;
 import WebApplication.AirBnb.model.PostDto;
 import WebApplication.AirBnb.model.UserAccDto;
 import WebApplication.AirBnb.service.IPostService;
+import WebApplication.AirBnb.service.impl.AccountServiceImpl;
 import WebApplication.AirBnb.service.impl.BedTypeServiceImpl;
 import WebApplication.AirBnb.service.impl.LocationServiceImpl;
+import WebApplication.AirBnb.service.impl.PaginatesServiceImpl;
 import WebApplication.AirBnb.service.impl.RoomTypeServiceImpl;
 import WebApplication.AirBnb.service.impl.ServiceServiceImpl;
 import antlr.StringUtils;
@@ -47,10 +54,15 @@ public class PostsController {
 	ServiceServiceImpl serviceService;
 	@Autowired
 	LocationServiceImpl locationService;
+	@Autowired
+	PaginatesServiceImpl paginatesService;
+	@Autowired
+	AccountServiceImpl accountService;
 
 	@GetMapping("/{postId}")
 	private String postdetails(ModelMap model, @PathVariable("postId") Long postId) {
 		PostDto post = postService.getPostById(postId);
+
 		model.addAttribute("post", post);
 		model.addAttribute("useracc", new UserAccDto());
 		model.addAttribute("account", new AccountDto());
@@ -162,14 +174,29 @@ public class PostsController {
 		return "posts/posts";
 	}
 
+//	@GetMapping("")
+//	public String listPost(ModelMap model) {
+//		// List<Posts> list = service.findAll();
+//		// model.addAttribute("posts",list);
+//		List<PostDto> lstPosts = postService.getAllPost();
+//		model.addAttribute("posts", lstPosts);
+//		model.addAttribute("useracc", new UserAccDto());
+//		model.addAttribute("account", new AccountDto());
+//		return "posts/posts";
+//	}
+
 	@GetMapping("")
-	public String listPost(ModelMap model) {
-		// List<Posts> list = service.findAll();
-		// model.addAttribute("posts",list);
+	public String listPostTest(ModelMap model, @RequestParam(name = "pageId", required = false) int pageId) {
+		
+		int totalPostPerPage = 5;
 		List<PostDto> lstPosts = postService.getAllPost();
-		model.addAttribute("posts", lstPosts);
+		int totalPostAmount = lstPosts.size();
+		PaginatesDto paginateInfo = paginatesService.GetInfoPaginates(totalPostAmount, totalPostPerPage, pageId);
+		List<PostDto> paginatedList = lstPosts.subList(paginateInfo.getStart(), paginateInfo.getEnd());
+		model.addAttribute("posts", paginatedList);
 		model.addAttribute("useracc", new UserAccDto());
 		model.addAttribute("account", new AccountDto());
+		model.addAttribute("paginateInfo",paginateInfo);
 		return "posts/posts";
 	}
 

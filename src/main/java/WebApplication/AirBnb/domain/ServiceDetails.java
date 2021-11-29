@@ -8,6 +8,9 @@ import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -29,9 +32,11 @@ public class ServiceDetails implements Serializable {
 	
 	@ManyToOne
 	@MapsId("roomTypeInfoId")
+	@JsonBackReference
     private RoomTypeInfos roomTypeInfo;
 	
 	@ManyToOne
 	@MapsId("serviceId") 
+	@JsonBackReference
 	private Services service;	
 }

@@ -161,6 +161,7 @@ public class PostServiceImpl implements IPostService {
 		}
 	}
 
+	
 	@Override
 	public List<PostDto> getAllPost() {
 		List<PostDto> tempList = new ArrayList<PostDto>();
@@ -191,14 +192,7 @@ public class PostServiceImpl implements IPostService {
 			else
 				postDto.setAvarageStarNumber(0);
 		}
-		try {
-			tempList.forEach(e->{
-				System.out.println(e.getLstRatings());
-			});
-		} catch (Exception e2) {
-			// TODO: handle exception
-			e2.printStackTrace();
-		}
+		
 		
 		return tempList;
 	}
