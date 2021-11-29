@@ -286,7 +286,7 @@
 								class="fas fa-chevron-circle-left"></i>
 						</a></li>
 						</c:if>
-						<c:forEach var="item" begin="${paginateInfo.start }"
+						<c:forEach var="item" begin="${paginateInfo.totalPage - 3 < 1 ? 1 : paginateInfo.totalPage - 3 }"
 							end="${paginateInfo.totalPage }" varStatus="loop">
 							<c:if test="${(loop.index) == paginateInfo.currentPage }">
 								<li class="page-link-item active-page"><a href="${pageContext.request.contextPath}/danh-sach-tin/?pageId=${loop.index}"

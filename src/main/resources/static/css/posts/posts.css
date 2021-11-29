@@ -228,6 +228,7 @@ p {
 }
 
 .page-link-item a {
+	padding: 5px;
     color: rgb(71, 71, 71);
 }
 
