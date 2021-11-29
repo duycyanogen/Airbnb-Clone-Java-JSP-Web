@@ -33,7 +33,9 @@ import WebApplication.AirBnb.domain.ServiceDetails;
 import WebApplication.AirBnb.domain.Services;
 import WebApplication.AirBnb.domain.Users;
 import WebApplication.AirBnb.model.PostDto;
+import WebApplication.AirBnb.model.RatingDto;
 import WebApplication.AirBnb.model.UserAccDto;
+import WebApplication.AirBnb.repository.AccountRepository;
 import WebApplication.AirBnb.repository.BedTypeDetailRepository;
 import WebApplication.AirBnb.repository.BedTypeRepository;
 import WebApplication.AirBnb.repository.HotelRepository;
@@ -44,6 +46,7 @@ import WebApplication.AirBnb.repository.RoomTypeInfoRepository;
 import WebApplication.AirBnb.repository.RoomTypeRepository;
 import WebApplication.AirBnb.repository.ServiceDetailRepository;
 import WebApplication.AirBnb.repository.ServiceRepository;
+import WebApplication.AirBnb.repository.UserRepository;
 import WebApplication.AirBnb.service.IPostService;
 
 @Service
@@ -64,7 +67,10 @@ public class PostServiceImpl implements IPostService {
 	private ServiceDetailRepository serviceDetailRepository;
 	@Autowired
 	private RatingRepository ratingRepository;
-
+	@Autowired
+	private UserRepository userRepository;
+	@Autowired
+	private AccountRepository accountRepository;
 	@Override
 	@Transactional(rollbackFor = { Exception.class, Throwable.class })
 	public boolean postAdd(PostDto postDto) {
@@ -78,7 +84,7 @@ public class PostServiceImpl implements IPostService {
 			postEntity.setContent(postDto.getContent());// setContent
 			postEntity.setStatus(1);// setStatus
 			Date date = Calendar.getInstance().getTime();
-			DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
+			DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 			String strDate = dateFormat.format(date);
 			postEntity.setPostDate(strDate);// setPostDate = currentDate
 			postRepository.save(postEntity);//
@@ -135,7 +141,7 @@ public class PostServiceImpl implements IPostService {
 			bedTypeDetailEntity.setBedTypeDetailId(bedTypeDetailId);
 			bedTypeDetailRepository.save(bedTypeDetailEntity);
 			// Save serviceDetail
-			for (int i = 0; i < postDto.getLstServices().size(); i++) {
+			for (int i = 0; i < postDto.getLstServiceIds().size(); i++) {
 				ServiceDetailId serviceDetailId = new ServiceDetailId();
 				serviceDetailId.setRoomTypeInfoId(roomTypeInfoEntity.getRoomTypeInfoId());
 				serviceDetailId.setServiceId(postDto.getLstServiceIds().get(i));
@@ -171,7 +177,49 @@ public class PostServiceImpl implements IPostService {
 				postDto.setImage5(lstImagePath.get(4));
 			}
 			List<Ratings> lstRatings = ratingRepository.getAllRatingByPostId(postDto.getPostId());
-			postDto.setLstRatings(lstRatings);
+			//postDto.setLstRatings(lstRatings);
+			int ratingAmount = 0;
+			int totalStarNumber = 0;
+			for (Ratings rating : lstRatings) {
+				ratingAmount++;
+				totalStarNumber += rating.getStarsNumber();
+			}
+
+			postDto.setRatingAmount(ratingAmount);
+			if (ratingAmount != 0)
+				postDto.setAvarageStarNumber(totalStarNumber / ratingAmount);
+			else
+				postDto.setAvarageStarNumber(0);
+		}
+		try {
+			tempList.forEach(e->{
+				System.out.println(e.getLstRatings());
+			});
+		} catch (Exception e2) {
+			// TODO: handle exception
+			e2.printStackTrace();
+		}
+		
+		return tempList;
+	}
+	
+	@Override
+	public List<PostDto> searchPostByKeyword(String keyword) {
+		List<PostDto> tempList = new ArrayList<PostDto>();
+		tempList = postRepository.searchPostByKeyWord(keyword);
+		for (PostDto postDto : tempList) {
+			postDto.setLstServiceNames(serviceRepository.getServiceNameByRoomTypeInfoId(postDto.getRomTypeInfoId()));
+			List<String> lstImagePath = new ArrayList<String>();
+			lstImagePath = imageRepository.getImagePathByPostId(postDto.getPostId());
+			if (lstImagePath.size() == 5) {
+				postDto.setImage1(lstImagePath.get(0));
+				postDto.setImage2(lstImagePath.get(1));
+				postDto.setImage3(lstImagePath.get(2));
+				postDto.setImage4(lstImagePath.get(3));
+				postDto.setImage5(lstImagePath.get(4));
+			}
+			List<Ratings> lstRatings = ratingRepository.getAllRatingByPostId(postDto.getPostId());
+//			postDto.setLstRatings(lstRatings);
 			int ratingAmount = 0;
 			int totalStarNumber = 0;
 			for (Ratings rating : lstRatings) {
@@ -187,6 +235,43 @@ public class PostServiceImpl implements IPostService {
 		}
 		return tempList;
 	}
+	
+	@Override
+	public List<PostDto> listPostByHostId(long hostId) {
+		List<PostDto> tempList = new ArrayList<PostDto>();
+		tempList = postRepository.listPostByHostId(hostId);
+		for (PostDto postDto : tempList) {
+			postDto.setLstServiceNames(serviceRepository.getServiceNameByRoomTypeInfoId(postDto.getRomTypeInfoId()));
+			List<String> lstImagePath = new ArrayList<String>();
+			lstImagePath = imageRepository.getImagePathByPostId(postDto.getPostId());
+			if (lstImagePath.size() == 5) {
+				postDto.setImage1(lstImagePath.get(0));
+				postDto.setImage2(lstImagePath.get(1));
+				postDto.setImage3(lstImagePath.get(2));
+				postDto.setImage4(lstImagePath.get(3));
+				postDto.setImage5(lstImagePath.get(4));
+			}
+			List<Ratings> lstRatings = ratingRepository.getAllRatingByPostId(postDto.getPostId());
+//			postDto.setLstRatings(lstRatings);
+			int ratingAmount = 0;
+			int totalStarNumber = 0;
+			for (Ratings rating : lstRatings) {
+				ratingAmount++;
+				totalStarNumber += rating.getStarsNumber();
+			}
+
+			postDto.setRatingAmount(ratingAmount);
+			if (ratingAmount != 0)
+				postDto.setAvarageStarNumber(totalStarNumber / ratingAmount);
+			else
+				postDto.setAvarageStarNumber(0);
+		}
+//		tempList.forEach(e->{
+//			System.out.println(e);
+//		});
+		return tempList;
+	}
+
 
 	@Override
 	public PostDto getPostById(long postId) {
@@ -203,13 +288,35 @@ public class PostServiceImpl implements IPostService {
 		}
 		List<Ratings> lstRatings = ratingRepository.getAllRatingByPostId(postDto.getPostId());
 		postDto.setLstRatings(lstRatings);
+		postDto.setHostRatingAmount(ratingRepository.getTotalRatingAmountByAccountId(postDto.getAccountId()));
+//		List<RatingDto> lstRatingDtos = ratingRepository.getAllRatingDtoByPostId(postDto.getPostId());
+//		postDto.setLstRatingDtos(lstRatingDtos);
+//		for (RatingDto ratingDto : lstRatingDtos) {
+//			System.out.print(ratingDto.getStarsNumber()+"star");
+//			System.out.print(ratingDto.getComment()+" comment");
+//			System.out.print(ratingDto.getUserAvatar()+" avt");
+//			System.out.print(ratingDto.getUserName()+" Teen");
+//		}
+		List<RatingDto> lstRatingDtos = new ArrayList<RatingDto>();
 		int ratingAmount = 0;
 		int totalStarNumber = 0;
 		for (Ratings rating : lstRatings) {
+			RatingDto ratingDto = new RatingDto();
+			ratingDto.setRatingDate(rating.getRatingDate()); 
+			ratingDto.setStarsNumber(rating.getStarsNumber());
+			ratingDto.setRatingDate(rating.getRatingDate());
+			ratingDto.setComment(rating.getComment());
+			Users userEntity = userRepository.findByAccountId(rating.getAccountId());
+			ratingDto.setUserName(userEntity.getName());
+			ratingDto.setUserAvatar(userEntity.getAvatar());
+			lstRatingDtos.add(ratingDto);
 			ratingAmount++;
 			totalStarNumber += rating.getStarsNumber();
 		}
-
+		postDto.setLstRatingDtos(lstRatingDtos);
+		lstRatingDtos.forEach(e->{
+			System.out.println(e);
+		});
 		postDto.setRatingAmount(ratingAmount);
 		if (ratingAmount != 0)
 			postDto.setAvarageStarNumber(totalStarNumber / ratingAmount);

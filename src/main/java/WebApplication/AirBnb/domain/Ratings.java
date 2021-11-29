@@ -30,7 +30,7 @@ public class Ratings implements Serializable {
 	private int starsNumber;
 	@Column(columnDefinition = "nvarchar", length = 200)	
 	private String comment;
-			
+	private String ratingDate;		
 	@ManyToOne
 	//@MapsId("postId")
 	@JoinColumn(name = "post_id")

@@ -10,15 +10,15 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" type="text/css"
-	href="<c:url value='css/common/reset.css'/>" />
+	href="<c:url value='${pageContext.request.contextPath}/css/common/reset.css'/>" />
 <link rel="stylesheet" type="text/css"
-	href="<c:url value='css/common/base.css'/>" />
+	href="<c:url value='${pageContext.request.contextPath}/css/common/base.css'/>" />
 <link rel="stylesheet" type="text/css"
-	href="<c:url value='css/account/grid.css'/>" />
+	href="<c:url value='${pageContext.request.contextPath}/css/account/grid.css'/>" />
 <link rel="stylesheet" type="text/css"
-	href="<c:url value='css/account/account.css'/>" />
+	href="<c:url value='${pageContext.request.contextPath}/css/account/account.css'/>" />
 <link rel="stylesheet" type="text/css"
-	href="<c:url value='Fonts/fontawesome-free-5.15.3-web/css/all.min.css'/>" />
+	href="<c:url value='${pageContext.request.contextPath}/Fonts/fontawesome-free-5.15.3-web/css/all.min.css'/>" />
 <base href="${pageContext.servletContext.contextPath}">
 <title>Thông tin cá nhân</title>
 </head>

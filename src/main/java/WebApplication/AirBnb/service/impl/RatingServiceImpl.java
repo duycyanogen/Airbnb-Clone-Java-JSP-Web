@@ -15,9 +15,28 @@ import WebApplication.AirBnb.repository.RatingRepository;
 import WebApplication.AirBnb.service.IRatingService;
 
 @Service
-public class RatingServiceImpl implements IRatingService{
+public class RatingServiceImpl implements IRatingService {
 	@Autowired
 	private RatingRepository repository;
+
+	@Override
+	public int getTotalStarNumberByAccountId(long accountId) {
+		return repository.getTotalStarNumberByAccountId(accountId);
+	}
+	
+	@Override
+	public double getAverageStarNumberByAccountId(long accountId) {
+		if (repository.getTotalRatingAmountByAccountId(accountId) == 0)
+			return 0;
+		else
+			return (double) repository.getTotalStarNumberByAccountId(accountId)
+					/ repository.getTotalRatingAmountByAccountId(accountId);
+	}
+
+	@Override
+	public int getTotalRatingAmountByAccountId(long accountId) {
+		return repository.getTotalRatingAmountByAccountId(accountId);
+	}
 
 	@Override
 	public <S extends Ratings> S save(S entity) {
@@ -163,5 +182,5 @@ public class RatingServiceImpl implements IRatingService{
 	public <S extends Ratings> List<S> findAll(Example<S> example, Sort sort) {
 		return repository.findAll(example, sort);
 	}
-	
+
 }

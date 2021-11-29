@@ -35,12 +35,14 @@
 				</a>
 			</div>
 		</div>
+		<form:form action="${pageContext.request.contextPath}/danh-sach-tin/tim-kiem" method = "GET">
 		<div class="search-frame">
-			<input type="text" placeholder="Bắt đầu tìm kiếm">
+			<input type="text" placeholder="Bắt đầu tìm kiếm" name="keyword">
 			<button class="search-btn">
 				<i class="search-btn__icon fas fa-search"></i>
 			</button>
 		</div>
+		</form:form>
 
 		<div class="user-frame">
 			<c:if test="${empty sessionScope.LoginInfor }">
@@ -79,14 +81,14 @@
 								<li class="account-sign-in"">Đăng nhập</li>
 							</c:if>
 							<c:if test="${not empty sessionScope.LoginInfor }">
-								<li class="account-log-out""><a href=" dang-xuat">Đăng
+								<li class="account-log-out""><a href="${pageContext.request.contextPath}/dang-xuat">Đăng
 										xuất</a></li>
 							</c:if>
 						</ul>
 					</div>
 					<div class="header-down-activate">
 						<ul class="header-down-activate-list">
-							<li>Cho thuê nhà</li>
+
 							<li>Tổ chức trải nghiệm</li>
 							<li>Trợ giúp</li>
 						</ul>
@@ -106,19 +108,17 @@
 					<p class="container-content-title">Tạo tin</p>
 					<div class="container-content-item">
 						<p>Tiêu đề</p>
-						<form:input type="text" path="title"
-							value="Cho thuê căn hộ sang trọng" />
+						<form:input type="text" path="title"/>
 						<form:errors path="title" element="div" class="isa_error" />
 					</div>
 					<div class="container-content-item">
 						<p>Nội dung tin</p>
-						<form:input type="text" path="content"
-							value="Cho thuê căn hộ sang trọng" />
+						<form:input type="text" path="content"/>
 						<form:errors path="content" element="div" class="isa_error" />
 					</div>
 					<div class="container-content-item">
 						<p>Tên căn hộ</p>
-						<form:input type="text" path="hotelName" value="Royal City" />
+						<form:input type="text" path="hotelName" />
 						<form:errors path="hotelName" element="div" class="isa_error" />
 					</div>
 					<div class="container-content-item">
@@ -132,23 +132,22 @@
 					</div>
 					<div class="container-content-item">
 						<p>Địa chỉ</p>
-						<form:input type="text" path="address"
-							value="763/68 Nguyễn Kiệm, Phú Nhuận" />
+						<form:input type="text" path="address" />
 						<form:errors path="address" element="div" class="isa_error" />
 					</div>
 					<div class="container-content-item">
 						<p>Diện tích (m2)</p>
-						<form:input type="number" path="area" value="200" />
+						<form:input type="number" path="area" />
 						<form:errors path="area" element="div" class="isa_error" />
 					</div>
 					<div class="container-content-item">
 						<p>Số phòng</p>
-						<form:input type="roomAmount" path="roomAmount" value="10" />
+						<form:input type="roomAmount" path="roomAmount" />
 						<form:errors path="roomAmount" element="div" class="isa_error" />
 					</div>
 					<div class="container-content-item">
 						<p>Giá phòng</p>
-						<form:input type="text" path="price" value="300000" />
+						<form:input type="text" path="price" />
 						<form:errors path="price" element="div" class="isa_error" />
 					</div>
 					<div class="container-content-item">
@@ -176,7 +175,7 @@
 								<c:forEach items="${lstServices}" var="item">
 									<div class="convenient-select-column grid-column-2">
 										<form:checkbox id="${item.serviceId}" name="${item.serviceId}"
-											value="${item.serviceId}" path="lstServices" class="123" />
+											value="${item.serviceId}" path="lstServiceIds" class="123" />
 										<label for="${item.serviceId}" class="temp">
 											<div class=""></div>
 										</label>
@@ -246,6 +245,7 @@
 							</div>
 
 						</div>
+						<form:errors path="image1" element="div" class="isa_error" />
 					</div>
 					<div class="container-content-button">
 						<button type="submit">Tạo tin</button>

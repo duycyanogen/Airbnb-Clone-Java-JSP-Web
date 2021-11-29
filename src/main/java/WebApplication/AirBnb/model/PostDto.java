@@ -46,6 +46,7 @@ public class PostDto {
 	private List<String> lstServiceNames;
 	private List<Services> lstServices;
 	private List<Ratings> lstRatings;
+	private List<RatingDto> lstRatingDtos;
 	private String image1;
 	private String image2;
 	private String image3;
@@ -55,7 +56,9 @@ public class PostDto {
 	private String authorPhoneNumber;
 	private int ratingAmount;
 	private double avarageStarNumber;
-	public PostDto(long postId, long romTypeInfoId, String userName, String postDate,
+	private String regisDate;
+	private int hostRatingAmount;
+	public PostDto(long accountId, long postId, long romTypeInfoId, String userName, String regisDate, String postDate,
 			@NotBlank(message = "Bạn chưa nhập tiêu đề") String title,
 			@NotBlank(message = "Bạn chưa nhập nội dung tin") String content,
 			@NotBlank(message = "Bạn chưa nhập tên khách sạn!") String hotelName, int status,
@@ -63,9 +66,11 @@ public class PostDto {
 			@NotEmpty(message = "Bạn chưa nhập địa chỉ!") String address, double area,
 			@NotNull(message = "Bạn chưa nhập số phòng!") int roomAmount, String roomTypeName, String bedTypeName, String authorImage, String authorPhoneNumber) {
 		super();
+		this.accountId = accountId;
 		this.postId = postId;
 		this.romTypeInfoId = romTypeInfoId;
 		this.userName = userName;
+		this.regisDate = regisDate;
 		this.postDate = postDate;
 		this.title = title;
 		this.content = content;

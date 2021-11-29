@@ -38,6 +38,7 @@ public class Users implements Serializable {
 	private String dateOfBirth;
 	private String CCCD;
 	private String avatar;
+	private String regisDate;
 	@NotNull
 	private String phoneNumber;
 	

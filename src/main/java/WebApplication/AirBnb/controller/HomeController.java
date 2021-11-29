@@ -1,6 +1,7 @@
 package WebApplication.AirBnb.controller;
 
 import java.io.File;
+import java.util.List;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -16,6 +17,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -27,11 +29,15 @@ import WebApplication.AirBnb.domain.Users;
 import WebApplication.AirBnb.domain.Roles;
 import WebApplication.AirBnb.domain.Accounts;
 import WebApplication.AirBnb.model.UserDto;
+import WebApplication.AirBnb.repository.RatingRepository;
 import WebApplication.AirBnb.model.AccountDto;
+import WebApplication.AirBnb.model.PostDto;
 import WebApplication.AirBnb.model.UserAccDto;
 import WebApplication.AirBnb.service.IAccountService;
+import WebApplication.AirBnb.service.IPostService;
 import WebApplication.AirBnb.service.impl.UserServiceImpl;
 import WebApplication.AirBnb.service.impl.AccountServiceImpl;
+import WebApplication.AirBnb.service.impl.RatingServiceImpl;
 
 @Controller
 public class HomeController {
@@ -40,13 +46,30 @@ public class HomeController {
 	@Autowired
 	UserServiceImpl userService;
 	@Autowired
+	RatingServiceImpl ratingService;
 	private HttpSession session;
-
+	@Autowired
+	IPostService postService;
 	@GetMapping(value = "")
-	private String index(Model model) {
+	private String Index(Model model) {
 		model.addAttribute("useracc", new UserAccDto());
 		model.addAttribute("account", new AccountDto());
 		return "index";
+	}
+	
+	@GetMapping(value = "thong-tin-chu-nha/{hostId}")
+	private String HotInfo(Model model, @PathVariable("hostId") Long hostId) {
+		UserAccDto hostInfo = accountService.getUserAccountByAccountId(hostId);
+		List<PostDto> lstPosts = postService.listPostByHostId(hostId);
+		int hostRatingAmount = ratingService.getTotalRatingAmountByAccountId(hostId);
+		double hostAverageStarNumber = ratingService.getAverageStarNumberByAccountId(hostId);
+		model.addAttribute("useracc", new UserAccDto());
+		model.addAttribute("account", new AccountDto());
+		model.addAttribute("hostInfo",hostInfo);
+		model.addAttribute("posts",lstPosts);
+		model.addAttribute("hostRatingAmount",hostRatingAmount);
+		model.addAttribute("hostAverageStarNumber",hostAverageStarNumber);
+		return "host/hostinfo";
 	}
 
 	@GetMapping(value = "thong-tin-ca-nhan")
@@ -57,7 +80,7 @@ public class HomeController {
 	}
 
 	@GetMapping(value = "trang-chu")
-	private String home(Model model) {
+	private String Home(Model model) {
 		model.addAttribute("useracc", new UserAccDto());
 		model.addAttribute("account", new AccountDto());
 		return "index";
