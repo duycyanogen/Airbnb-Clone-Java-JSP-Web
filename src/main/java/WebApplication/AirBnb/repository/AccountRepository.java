@@ -19,6 +19,7 @@ public interface AccountRepository extends JpaRepository<Accounts, Long>{
 			+ "n.CCCD , n.avatar , n.phoneNumber , t.accountId, t.mail, t.password, n.regisDate) from Accounts t join t.user n WHERE t.accountId = :accountId")
 	UserAccDto getUserAccountByAccountId(@Param("accountId") long accountId);
 	
-	public Accounts findbyResetPasswordToken(String token);
+	@Query(value="SELECT r FROM reset_password_token r WHERE r.reset_password_token = :reset_password_token",nativeQuery = true)
+	Accounts findbyResetPasswordToken(@Param("reset_password_token") String token);
 }
 

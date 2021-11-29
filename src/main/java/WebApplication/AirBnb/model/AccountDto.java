@@ -24,6 +24,6 @@ public class AccountDto {
 //	
 //	@OneToMany(mappedBy = "TaiKhoan")
 //	private List<Tin> lstTin;
-
+	private String resetPasswordToken;
 	
 }

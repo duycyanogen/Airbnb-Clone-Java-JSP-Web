@@ -279,4 +279,22 @@ public class AccountServiceImpl implements IAccountService {
 		}
 		
 	}
+	
+	public Accounts get(String resetPasswordToken) {
+		return accountRepository.findbyResetPasswordToken(resetPasswordToken);
+	}
+	
+	public void updatePassword(Accounts account, String newPassword) {
+		String encodedPassword = bCryptPasswordEncoder.encode(newPassword);
+		account.setPassword(encodedPassword);
+		account.setResetPasswordToken(null);
+		
+		accountRepository.save(account);
+	}
+	
+	
+	
+	
+	
+	
 }
