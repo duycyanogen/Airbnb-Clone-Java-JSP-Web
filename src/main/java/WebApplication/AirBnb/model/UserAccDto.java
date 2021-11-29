@@ -34,4 +34,5 @@ public class UserAccDto {
 	@Length(min = 6, message = "Password phải từ 6 kí tự trở lên")
 	private String password;
 	private String RegisDate;
+	private String resetPasswordToken;
 }

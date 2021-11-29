@@ -8,6 +8,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 
+import javax.security.auth.login.AccountNotFoundException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
@@ -267,4 +269,14 @@ public class AccountServiceImpl implements IAccountService {
 				userdetails.User(account.getMail(), account.getPassword(), auth);
 	}
 
+	public void updateResetPassword(String token, String email) throws AccountNotFoundException{
+		Accounts account = accountRepository.getAccountByMail(email);
+		if(account != null) {
+			account.setResetPasswordToken(token);
+			accountRepository.save(account);
+		} else {
+			throw new AccountNotFoundException("Không tìm được tài khoản này với email này " + email);
+		}
+		
+	}
 }
