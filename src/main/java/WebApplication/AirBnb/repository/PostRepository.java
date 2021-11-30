@@ -23,7 +23,7 @@ public interface PostRepository extends JpaRepository<Posts, Long>{
 			+ "join roomTypeInfos.lstBedTypeDetails bedTypeDetails "
 			+ "join roomTypeInfos.hotel hotel "
 			+ "join roomTypeInfos.roomType roomType "
-			+ "join bedTypeDetails.bedType bedType join hotel.location location order by post.postId DESC")
+			+ "join bedTypeDetails.bedType bedType join hotel.location location where post.status = 1 order by post.postId DESC")
 	List<PostDto> getAllPost();
 	
 //	@Query("SELECT new WebApplication.AirBnb.model.PostDto(acc.accountId , post.postId, roomTypeInfos.roomTypeInfoId, "
@@ -50,11 +50,12 @@ public interface PostRepository extends JpaRepository<Posts, Long>{
 			+ "join roomTypeInfos.hotel hotel "
 			+ "join roomTypeInfos.roomType roomType "
 			+ "join bedTypeDetails.bedType bedType join hotel.location location "
-			+ "where LOWER(location.locationName) LIKE %:keyword% "
+			+ "where post.status = 1 "
+			+ "AND (LOWER(location.locationName) LIKE %:keyword% "
 			+ "or LOWER(hotel.hotelName) LIKE %:keyword% "
 			+ "or LOWER(roomType.roomTypeName) LIKE %:keyword% "
 			+ "or LOWER(bedType.bedTypeName) LIKE %:keyword% "
-			+ "or LOWER(post.title) LIKE %:keyword% ")
+			+ "or LOWER(post.title) LIKE %:keyword%)")
 	List<PostDto> searchPostByKeyWord(@Param("keyword") String keyword);
 	
 	@Query("SELECT new WebApplication.AirBnb.model.PostDto(acc.accountId , post.postId, roomTypeInfos.roomTypeInfoId, "
@@ -68,7 +69,7 @@ public interface PostRepository extends JpaRepository<Posts, Long>{
 			+ "join roomTypeInfos.hotel hotel "
 			+ "join roomTypeInfos.roomType roomType "
 			+ "join bedTypeDetails.bedType bedType join hotel.location location "
-			+ "where acc.accountId =:hostId")
+			+ "where acc.accountId =:hostId and post.status = 1")
 	List<PostDto> listPostByHostId(@Param("hostId") long hostId);
 	
 	@Query("SELECT new WebApplication.AirBnb.model.PostDto(acc.accountId , post.postId, roomTypeInfos.roomTypeInfoId, "
@@ -81,7 +82,7 @@ public interface PostRepository extends JpaRepository<Posts, Long>{
 			+ "join roomTypeInfos.lstBedTypeDetails bedTypeDetails "
 			+ "join roomTypeInfos.hotel hotel "
 			+ "join roomTypeInfos.roomType roomType "
-			+ "join bedTypeDetails.bedType bedType join hotel.location location where post.postId = ?1")
+			+ "join bedTypeDetails.bedType bedType join hotel.location location where post.status =1 and post.postId = ?1")
 	PostDto getPostById(long postId);
 	
 	

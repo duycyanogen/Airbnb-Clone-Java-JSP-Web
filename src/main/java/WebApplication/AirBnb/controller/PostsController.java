@@ -67,7 +67,7 @@ public class PostsController {
 	@GetMapping("/{postId}")
 	private String postdetails(ModelMap model, @PathVariable("postId") Long postId) {
 		PostDto post = postService.getPostById(postId);
-		model.addAttribute("post", post);		
+		model.addAttribute("post", post);
 		model.addAttribute("rating", new RatingDto());
 		model.addAttribute("useracc", new UserAccDto());
 		model.addAttribute("account", new AccountDto());
@@ -75,7 +75,10 @@ public class PostsController {
 	}
 
 	@GetMapping("/dang-tin")
-	private String add(Model model) {
+	private String add(Model model, HttpSession session) {
+		UserAccDto objUserAccDto = (UserAccDto) session.getAttribute("LoginInfor");
+		if (objUserAccDto == null)
+			return "redirect:/";
 		model.addAttribute("post", new PostDto());
 		List<BedTypes> lstBedTypes = new ArrayList<BedTypes>();
 		lstBedTypes = bedTypeService.findAll();
@@ -148,7 +151,9 @@ public class PostsController {
 			boolean isSuccess = postService.postAdd(post);
 			if (isSuccess == true) {
 				model.addAttribute("statusReg", "Đăng tin thành công!");
-				return new ModelAndView("redirect:/danh-sach-tin", model);
+				// ${pageContext.request.contextPath}/thong-tin-chu-nha/${sessionScope.LoginInfor.accountId
+				// }"
+				return new ModelAndView("redirect:/thong-tin-chu-nha/" + objUserAccDto.getAccountId() + "", model);
 			} else {
 				// model.addAttribute("post",new PostDto());
 
@@ -169,17 +174,16 @@ public class PostsController {
 	public ModelAndView Rate(HttpSession session, @ModelAttribute("rating") RatingDto rating, ModelMap model) {
 		model.addAttribute("useracc", new UserAccDto());
 		model.addAttribute("account", new AccountDto());
-		
+
 		if (ratingService.insertRating(rating)) {
 			return new ModelAndView("redirect:/danh-sach-tin/" + rating.getPostId() + "", model);
-		}
-		else {
+		} else {
 			PostDto post = postService.getPostById(rating.getPostId());
-			model.addAttribute("post", post);		
+			model.addAttribute("post", post);
 			model.addAttribute("rating", new RatingDto());
 			model.addAttribute("useracc", new UserAccDto());
 			model.addAttribute("account", new AccountDto());
-			model.addAttribute("ratingInsertError",true);
+			model.addAttribute("ratingInsertError", true);
 		}
 		return new ModelAndView("posts/postdetail", model);
 	}

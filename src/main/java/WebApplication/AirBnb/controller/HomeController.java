@@ -76,6 +76,9 @@ public class HomeController {
 	private String UserInfo(Model model, HttpSession session) {
 		System.out.print(session);
 		UserAccDto objUserAccDto = (UserAccDto) session.getAttribute("LoginInfor");
+		if (objUserAccDto == null)
+			return "redirect:/";
+		model.addAttribute("post", new PostDto());
 		model.addAttribute("objUserAccDto", objUserAccDto);
 		return "account/accountinfo";
 	}
