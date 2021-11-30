@@ -200,6 +200,7 @@
   border-bottom-left-radius: 6px;
 }
 
+.header-down-activate-list li > a,
 .header-down-account-list li > a {
   height: 100%;
   width: 100%;

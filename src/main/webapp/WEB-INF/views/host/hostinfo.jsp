@@ -138,7 +138,7 @@
 					<div class="container-main-content-info">
 						<p>Địa chỉ: ${hostInfo.getAddress()}</p>
 						<p>Email: ${hostInfo.getMail()}</p>
-						<p>Sđt: ${hostInfo.getPhoneNumber()}()</p>
+						<p>Sđt: ${hostInfo.getPhoneNumber()}</p>
 					</div>
 				</div>
 			</div>
@@ -188,10 +188,12 @@
 											<p class="info-price-time">/ đêm</p>
 										</div>
 									</div>
+									<c:if test="${sessionScope.LoginInfor.accountId == hostInfo.getAccountId() }">
 									<div class="content-info-detail-end-btn">
 										<button>Chỉnh sửa</button>
 										<button>Xóa</button>
 									</div>
+									</c:if>
 								</div>
 							</div>
 						</div>

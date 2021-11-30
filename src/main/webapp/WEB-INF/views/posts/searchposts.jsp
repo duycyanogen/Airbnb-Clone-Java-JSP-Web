@@ -206,7 +206,9 @@
 									href="${pageContext.request.contextPath}/danh-sach-tin/dang-tin">Cho
 										thuê nhà</a></li>
 							</c:if>
-							<li>Tổ chức trải nghiệm</li>
+							<c:if test="${not empty sessionScope.LoginInfor }">
+								<li class="account-log-out""><a href="${pageContext.request.contextPath}/thong-tin-chu-nha/${sessionScope.LoginInfor.accountId }">Quản lý tin đã đăng</a></li>
+							</c:if>
 							<li>Trợ giúp</li>
 						</ul>
 					</div>

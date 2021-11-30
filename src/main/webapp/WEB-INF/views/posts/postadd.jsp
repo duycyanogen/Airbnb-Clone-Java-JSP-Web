@@ -35,13 +35,15 @@
 				</a>
 			</div>
 		</div>
-		<form:form action="${pageContext.request.contextPath}/danh-sach-tin/tim-kiem" method = "GET">
-		<div class="search-frame">
-			<input type="text" placeholder="Bắt đầu tìm kiếm" name="keyword">
-			<button class="search-btn">
-				<i class="search-btn__icon fas fa-search"></i>
-			</button>
-		</div>
+		<form:form
+			action="${pageContext.request.contextPath}/danh-sach-tin/tim-kiem"
+			method="GET">
+			<div class="search-frame">
+				<input type="text" placeholder="Bắt đầu tìm kiếm" name="keyword">
+				<button class="search-btn">
+					<i class="search-btn__icon fas fa-search"></i>
+				</button>
+			</div>
 		</form:form>
 
 		<div class="user-frame">
@@ -81,15 +83,19 @@
 								<li class="account-sign-in"">Đăng nhập</li>
 							</c:if>
 							<c:if test="${not empty sessionScope.LoginInfor }">
-								<li class="account-log-out""><a href="${pageContext.request.contextPath}/dang-xuat">Đăng
+								<li class="account-log-out""><a
+									href="${pageContext.request.contextPath}/dang-xuat">Đăng
 										xuất</a></li>
 							</c:if>
 						</ul>
 					</div>
 					<div class="header-down-activate">
 						<ul class="header-down-activate-list">
-
-							<li>Tổ chức trải nghiệm</li>
+							<c:if test="${not empty sessionScope.LoginInfor }">
+								<li class="account-log-out""><a
+									href="${pageContext.request.contextPath}/thong-tin-chu-nha/${sessionScope.LoginInfor.accountId }">Quản
+										lý tin đã đăng</a></li>
+							</c:if>
 							<li>Trợ giúp</li>
 						</ul>
 					</div>
@@ -108,12 +114,12 @@
 					<p class="container-content-title">Tạo tin</p>
 					<div class="container-content-item">
 						<p>Tiêu đề</p>
-						<form:input type="text" path="title"/>
+						<form:input type="text" path="title" />
 						<form:errors path="title" element="div" class="isa_error" />
 					</div>
 					<div class="container-content-item">
 						<p>Nội dung tin</p>
-						<form:input type="text" path="content"/>
+						<form:input type="text" path="content" />
 						<form:errors path="content" element="div" class="isa_error" />
 					</div>
 					<div class="container-content-item">
