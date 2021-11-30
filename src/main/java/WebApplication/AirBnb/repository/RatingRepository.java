@@ -20,4 +20,5 @@ public interface RatingRepository extends JpaRepository<Ratings, Long>{
 	
 	@Query(value="select count(*) from ratings as r, posts as p, accounts as a where r.post_id = p.post_id and p.account_id = a.account_id and a.account_id = ?1", nativeQuery = true)
 	int getTotalRatingAmountByAccountId(long accountId);
+	
 }

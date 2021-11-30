@@ -26,17 +26,20 @@ import WebApplication.AirBnb.domain.Accounts;
 import WebApplication.AirBnb.domain.BedTypes;
 import WebApplication.AirBnb.domain.Locations;
 import WebApplication.AirBnb.domain.Posts;
+import WebApplication.AirBnb.domain.Ratings;
 import WebApplication.AirBnb.domain.RoomTypes;
 import WebApplication.AirBnb.domain.Services;
 import WebApplication.AirBnb.model.AccountDto;
 import WebApplication.AirBnb.model.PaginatesDto;
 import WebApplication.AirBnb.model.PostDto;
+import WebApplication.AirBnb.model.RatingDto;
 import WebApplication.AirBnb.model.UserAccDto;
 import WebApplication.AirBnb.service.IPostService;
 import WebApplication.AirBnb.service.impl.AccountServiceImpl;
 import WebApplication.AirBnb.service.impl.BedTypeServiceImpl;
 import WebApplication.AirBnb.service.impl.LocationServiceImpl;
 import WebApplication.AirBnb.service.impl.PaginatesServiceImpl;
+import WebApplication.AirBnb.service.impl.RatingServiceImpl;
 import WebApplication.AirBnb.service.impl.RoomTypeServiceImpl;
 import WebApplication.AirBnb.service.impl.ServiceServiceImpl;
 import antlr.StringUtils;
@@ -58,12 +61,14 @@ public class PostsController {
 	PaginatesServiceImpl paginatesService;
 	@Autowired
 	AccountServiceImpl accountService;
+	@Autowired
+	RatingServiceImpl ratingService;
 
 	@GetMapping("/{postId}")
 	private String postdetails(ModelMap model, @PathVariable("postId") Long postId) {
 		PostDto post = postService.getPostById(postId);
-
-		model.addAttribute("post", post);
+		model.addAttribute("post", post);		
+		model.addAttribute("rating", new RatingDto());
 		model.addAttribute("useracc", new UserAccDto());
 		model.addAttribute("account", new AccountDto());
 		return "posts/postdetail";
@@ -158,6 +163,25 @@ public class PostsController {
 
 		return new ModelAndView("posts/postadd", errors.getModel());
 
+	}
+
+	@RequestMapping(value = "/danh-gia", method = RequestMethod.POST)
+	public ModelAndView Rate(HttpSession session, @ModelAttribute("rating") RatingDto rating, ModelMap model) {
+		model.addAttribute("useracc", new UserAccDto());
+		model.addAttribute("account", new AccountDto());
+		
+		if (ratingService.insertRating(rating)) {
+			return new ModelAndView("redirect:/danh-sach-tin/" + rating.getPostId() + "", model);
+		}
+		else {
+			PostDto post = postService.getPostById(rating.getPostId());
+			model.addAttribute("post", post);		
+			model.addAttribute("rating", new RatingDto());
+			model.addAttribute("useracc", new UserAccDto());
+			model.addAttribute("account", new AccountDto());
+			model.addAttribute("ratingInsertError",true);
+		}
+		return new ModelAndView("posts/postdetail", model);
 	}
 
 	@GetMapping("/tim-kiem")

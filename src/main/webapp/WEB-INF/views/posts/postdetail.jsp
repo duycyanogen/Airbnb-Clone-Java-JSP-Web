@@ -24,7 +24,8 @@
 
 <body>
 	<div class="overlay ${empty showOverlay ? "none-block" : "" }">
-		<form:form action="${pageContext.request.contextPath}/dang-nhap" modelAttribute="account">
+		<form:form action="${pageContext.request.contextPath}/dang-nhap"
+			modelAttribute="account">
 			<div class="overlay-form ${empty showFormLogin ? "none-block" : "" }">
 				<div class="overlay-form-header">
 					<p class="">Đăng nhập</p>
@@ -53,8 +54,8 @@
 				</div>
 			</div>
 		</form:form>
-		<form:form action="${pageContext.request.contextPath}/dang-ki" modelAttribute="useracc"
-			enctype="multipart/form-data">
+		<form:form action="${pageContext.request.contextPath}/dang-ki"
+			modelAttribute="useracc" enctype="multipart/form-data">
 			<div class="sign-up-form ${empty showFormRegis ? "none-block" : "" }">
 				<div class="sign-up-form-content">
 					<div class="sign-up-form-header">
@@ -190,7 +191,9 @@
 					</div>
 					<div class="header-down-activate">
 						<ul class="header-down-activate-list">
-							<li><a href="danh-sach-tin/dang-tin">Cho thuê nhà</a></li>
+							<li><a
+								href="${pageContext.request.contextPath}/danh-sach-tin/dang-tin">Cho
+									thuê nhà</a></li>
 							<li>Tổ chức trải nghiệm</li>
 							<li>Trợ giúp</li>
 						</ul>
@@ -360,6 +363,44 @@
 						</div>
 					</div>
 				</c:forEach>
+			</div>
+			<c:if test="${ not empty sessionScope.LoginInfor }">
+				<form:form
+					action="${pageContext.request.contextPath}/danh-sach-tin/danh-gia"
+					modelAttribute="rating">
+					<div class="comments-vote">
+						<p>Đánh giá</p>
+						<div class="comments-vote-star">
+							<label for="star-1" class=""> <i class="fas fa-star"></i>
+							</label> <label for="star-2" class=""> <i class="fas fa-star"></i>
+							</label> <label for="star-3" class=""> <i class="fas fa-star"></i>
+							</label> <label for="star-4" class=""> <i class="fas fa-star"></i>
+							</label> <label for="star-5" class=""> <i class="fas fa-star "></i>
+							</label>
+							<form:input type="rating" class="rating-input" min="1" max="5"
+								path="starsNumber" />
+						</div>
+					</div>
+					<div class="comments-input">
+						<img
+							src="${pageContext.request.contextPath}/avatarimage/${sessionScope.LoginInfor.getAvatar() }">
+						<form:input type="text" placeholder="Viết bình luận của bạn"
+							path="comment" />
+						<form:input type="text" style="display: none;"
+							value="${post.getPostId() }" path="postId" />
+						<form:input type="text" style="display: none;"
+							value="${sessionScope.LoginInfor.getAccountId() }"
+							path="accountId" />
+						<button type="submit">Gửi</button>
+					</div>
+
+				</form:form>
+				<c:if test="${ratingInsertError == true}">
+					<h2 class="isa_error">Bạn chỉ được đánh giá 1 lần cho mỗi bài đăng!</h2>
+				</c:if>
+				
+			</c:if>
+
 		</section>
 		<section class="about-owner">
 			<div class="owner">
@@ -370,13 +411,16 @@
 				</div>
 				<div class="owner__info">
 					<div class="owner__name">Chủ nhà ${post.getUserName()}</div>
-					<div class="owner__date">Đã tham gia vào tháng ${post.getRegisDate().split("-")[1]} năm ${post.getRegisDate().split("-")[0]}</div>
+					<div class="owner__date">Đã tham gia vào tháng
+						${post.getRegisDate().split("-")[1]} năm
+						${post.getRegisDate().split("-")[0]}</div>
 				</div>
 			</div>
 			<div class="authen">
 				<span class="star-icon"> <i class="fas fa-star"></i>
-				</span> <span class="rating-amount"> ${post.getHostRatingAmount() } đánh giá </span> <span
-					class="validate-icon"> <i class="fas fa-shield-virus"></i>
+				</span> <span class="rating-amount"> ${post.getHostRatingAmount() }
+					đánh giá </span> <span class="validate-icon"> <i
+					class="fas fa-shield-virus"></i>
 				</span> <span class="validate-text"> Đã được xác minh danh tính </span>
 				<div class="description">Lorem ipsum dolor sit amet
 					consectetur adipisicing elit. Dolores qui pariatur, animi quis
@@ -390,7 +434,11 @@
 					inventore distinctio ad beatae.</div>
 				<div class="response">Tỉ lệ phản hồi: 96%</div>
 			</div>
-			<button class="contact-button"><a href="${pageContext.request.contextPath}/thong-tin-chu-nha/${post.getAccountId()}">Liên hệ với chủ nhà</a>></button>
+			<button class="contact-button">
+				<a
+					href="${pageContext.request.contextPath}/thong-tin-chu-nha/${post.getAccountId()}">Liên
+					hệ với chủ nhà</a>>
+			</button>
 		</section>
 	</div>
 	<div class="footer">
@@ -460,6 +508,25 @@
 		src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 	<script type="text/javascript"
 		src="${pageContext.request.contextPath}/js/main.js"></script>
+	<script>
+		const listStar = document.querySelectorAll('.comments-vote-star label');
+		// const listInputStar = document.querySelectorAll(".comments-vote-star input");
+		const ratingInput = document.querySelector(".rating-input");
+		for (let i = 0; i < listStar.length; i++) {
+			listStar[i].onclick = function() {
+				ratingInput.value = i + 1;
+				for (var j = 0; j < listStar.length; j++) {
+					listStar[j].classList.remove("active-star");
+					// listInputStar[j].checked = false;
+				}
+				for (var j = 0; j < (i + 1); j++) {
+					listStar[j].classList.add("active-star");
+					//  listInputStar[j].checked = true;
+				}
+				console.log(ratingInput.value);
+			}
+		}
+	</script>
 </body>
 
 </html>

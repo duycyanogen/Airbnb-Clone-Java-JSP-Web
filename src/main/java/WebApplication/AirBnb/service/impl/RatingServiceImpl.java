@@ -1,5 +1,9 @@
 package WebApplication.AirBnb.service.impl;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -10,7 +14,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import WebApplication.AirBnb.domain.Posts;
 import WebApplication.AirBnb.domain.Ratings;
+import WebApplication.AirBnb.model.RatingDto;
 import WebApplication.AirBnb.repository.RatingRepository;
 import WebApplication.AirBnb.service.IRatingService;
 
@@ -19,11 +25,34 @@ public class RatingServiceImpl implements IRatingService {
 	@Autowired
 	private RatingRepository repository;
 
+	public boolean insertRating(RatingDto rating) {
+		Ratings ratingEntity = new Ratings();
+		ratingEntity.setAccountId(rating.getAccountId());
+		ratingEntity.setComment(rating.getComment());
+		Posts postEntity = new Posts();
+		postEntity.setPostId(rating.getPostId());
+		ratingEntity.setPost(postEntity);
+		Date date = Calendar.getInstance().getTime();
+		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		String strDate = dateFormat.format(date);
+		ratingEntity.setRatingDate(strDate);
+		ratingEntity.setStarsNumber(rating.getStarsNumber());
+		try {
+			repository.save(ratingEntity);
+			return true;
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			return false;
+		}
+
+	}
+
 	@Override
 	public int getTotalStarNumberByAccountId(long accountId) {
 		return repository.getTotalStarNumberByAccountId(accountId);
 	}
-	
+
 	@Override
 	public double getAverageStarNumberByAccountId(long accountId) {
 		if (repository.getTotalRatingAmountByAccountId(accountId) == 0)

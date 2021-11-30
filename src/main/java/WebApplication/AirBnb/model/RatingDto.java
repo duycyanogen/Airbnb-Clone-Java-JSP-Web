@@ -13,4 +13,15 @@ public class RatingDto{
 	private String userName;
 	private String userAvatar;
 	private String ratingDate;
+	private long postId;
+	private long accountId;
+	
+	public RatingDto(int starsNumber, String comment, String userName, String userAvatar, String ratingDate) {
+		super();
+		this.starsNumber = starsNumber;
+		this.comment = comment;
+		this.userName = userName;
+		this.userAvatar = userAvatar;
+		this.ratingDate = ratingDate;
+	}
 }
