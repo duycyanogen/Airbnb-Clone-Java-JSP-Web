@@ -10,8 +10,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -31,6 +29,5 @@ public class RoomTypes implements Serializable {
 	@Column(nullable = false, columnDefinition = "nvarchar", length = 200)	
 	private String roomTypeName;
 	@OneToMany(mappedBy = "roomType")
-	@JsonManagedReference
     private List<RoomTypeInfos> lstRoomTypeInfos;
 }

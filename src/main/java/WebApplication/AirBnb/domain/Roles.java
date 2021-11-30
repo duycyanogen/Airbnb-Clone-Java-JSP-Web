@@ -10,7 +10,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -32,7 +31,6 @@ public class Roles implements Serializable {
 	private String roleName;
 	
 	@OneToMany(mappedBy = "role")
-	@JsonManagedReference
 	private List<Accounts> lstAccounts;
 	
 }

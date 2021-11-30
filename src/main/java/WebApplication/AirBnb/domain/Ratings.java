@@ -11,7 +11,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -36,7 +35,6 @@ public class Ratings implements Serializable {
 	private String ratingDate;		
 	@ManyToOne
 	@JoinColumn(name = "post_id")
-	@JsonBackReference
     private Posts post;
 	
 	

@@ -47,7 +47,7 @@ public class HomeController {
 	UserServiceImpl userService;
 	@Autowired
 	RatingServiceImpl ratingService;
-	private HttpSession session;
+	//private HttpSession session;
 	@Autowired
 	IPostService postService;
 	@GetMapping(value = "")
@@ -73,7 +73,8 @@ public class HomeController {
 	}
 
 	@GetMapping(value = "thong-tin-ca-nhan")
-	private String UserInfo(Model model) {
+	private String UserInfo(Model model, HttpSession session) {
+		System.out.print(session);
 		UserAccDto objUserAccDto = (UserAccDto) session.getAttribute("LoginInfor");
 		model.addAttribute("objUserAccDto", objUserAccDto);
 		return "account/accountinfo";
@@ -81,6 +82,7 @@ public class HomeController {
 
 	@GetMapping(value = "trang-chu")
 	private String Home(Model model) {
+		//System.out.println("Session Home: " + session);
 		model.addAttribute("useracc", new UserAccDto());
 		model.addAttribute("account", new AccountDto());
 		return "index";
@@ -94,6 +96,7 @@ public class HomeController {
 		useracc = accountService.login(account);
 		if (useracc != null) {
 			session.setAttribute("LoginInfor", useracc);
+			System.out.println("After login: " + session);
 			return new ModelAndView("redirect:/", model);
 		} else {
 			model.remove("showFormRegis");
@@ -121,6 +124,11 @@ public class HomeController {
 			} catch (Exception e) {
 				// TODO: handle exception
 			}
+		}
+		else {
+			//String photoPath = context.getRealPath("/avatarimage/default.jpg");
+			useracc.setAvatar("default.jpg");
+			System.out.println(useracc.getAvatar());
 		}
 		model.addAttribute("useracc", new UserAccDto());
 		model.addAttribute("account", new AccountDto());
@@ -159,7 +167,7 @@ public class HomeController {
 	}
 	
 	@PostMapping(value = "updateInfo")
-	private String home(@ModelAttribute("objUserAccDto") UserAccDto objUserAccDto) {
+	private String home(@ModelAttribute("objUserAccDto") UserAccDto objUserAccDto, HttpSession session) {
 		UserAccDto objUserAccDtoSession = (UserAccDto) session.getAttribute("LoginInfor");
 		String email = objUserAccDtoSession.getMail();
 		Users objUsers = userService.findByEmail(email);

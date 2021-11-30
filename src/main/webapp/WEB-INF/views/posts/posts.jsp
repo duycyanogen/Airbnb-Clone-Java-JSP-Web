@@ -27,7 +27,7 @@
 
 <body>
 	<div class="overlay ${empty showOverlay ? "none-block" : "" }">
-		<form:form action="dang-nhap" modelAttribute="account">
+		<form:form action="${pageContext.request.contextPath}/dang-nhap" modelAttribute="account">
 			<div class="overlay-form ${empty showFormLogin ? "none-block" : "" }">
 				<div class="overlay-form-header">
 					<p class="">Đăng nhập</p>
@@ -56,7 +56,7 @@
 				</div>
 			</div>
 		</form:form>
-		<form:form action="dang-ki" modelAttribute="useracc"
+		<form:form action="${pageContext.request.contextPath}/dang-ki" modelAttribute="useracc"
 			enctype="multipart/form-data">
 			<div class="sign-up-form ${empty showFormRegis ? "none-block" : "" }">
 				<div class="sign-up-form-content">

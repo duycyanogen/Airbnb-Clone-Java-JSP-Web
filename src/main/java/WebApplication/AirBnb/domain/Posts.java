@@ -12,9 +12,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -39,18 +36,14 @@ public class Posts implements Serializable {
 		
 	@ManyToOne
 	@JoinColumn(name = "account_id")
-	@JsonBackReference
 	private Accounts account;
 	
 	@OneToMany(mappedBy = "post")
-	@JsonManagedReference
 	private List<Ratings> lstRatings;
 	
 	@OneToMany(mappedBy = "post")
-	@JsonManagedReference
 	private List<Images> lstImages;
 	
 	@OneToMany(mappedBy = "post")
-	@JsonManagedReference
 	private List<RoomTypeInfos> lstRoomTypeInfos;
 }

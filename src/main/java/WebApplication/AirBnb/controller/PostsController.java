@@ -161,17 +161,45 @@ public class PostsController {
 	}
 
 	@GetMapping("/tim-kiem")
-	public String search(ModelMap model, @RequestParam(name = "keyword", required = false) String keyword) {
+	public String search(ModelMap model,
+			@RequestParam(name = "keyword", required = false, defaultValue = "") String keyword,
+			@RequestParam(name = "pageId", required = false, defaultValue = "1") int pageId) {
+		int totalPostPerPage = 5;
+
 		List<PostDto> lstPosts = null;
 		if (!keyword.isBlank()) {
 			lstPosts = postService.searchPostByKeyword(keyword);
+			int totalPostAmount = lstPosts.size();
+			if (totalPostAmount > 0) {
+				PaginatesDto paginateInfo = paginatesService.GetInfoPaginates(totalPostAmount, totalPostPerPage,
+						pageId);
+				System.out.print(paginateInfo);
+				System.out.println(totalPostAmount);
+				List<PostDto> paginatedList = lstPosts.subList(paginateInfo.getStart() - 1, paginateInfo.getEnd());
+				model.addAttribute("posts", paginatedList);
+				model.addAttribute("paginateInfo", paginateInfo);
+			} else {
+				PaginatesDto paginateInfo = new PaginatesDto();
+				paginateInfo.setCurrentPage(1);
+				paginateInfo.setStart(1);
+				paginateInfo.setEnd(1);
+				paginateInfo.setLimit(totalPostPerPage);
+				paginateInfo.setTotalPage(1);
+				model.addAttribute("posts", lstPosts);
+			}
 		} else {
 			lstPosts = postService.getAllPost();
+			int totalPostAmount = lstPosts.size();
+			PaginatesDto paginateInfo = paginatesService.GetInfoPaginates(totalPostAmount, totalPostPerPage, pageId);
+			List<PostDto> paginatedList = lstPosts.subList(paginateInfo.getStart() - 1, paginateInfo.getEnd());
+			model.addAttribute("posts", paginatedList);
+			model.addAttribute("paginateInfo", paginateInfo);
 		}
-		model.addAttribute("posts", lstPosts);
+
 		model.addAttribute("useracc", new UserAccDto());
 		model.addAttribute("account", new AccountDto());
-		return "posts/posts";
+		model.addAttribute("keyword", keyword);
+		return "posts/searchposts";
 	}
 
 //	@GetMapping("")
@@ -187,16 +215,16 @@ public class PostsController {
 
 	@GetMapping("")
 	public String listPostTest(ModelMap model, @RequestParam(name = "pageId", required = false) int pageId) {
-		
+
 		int totalPostPerPage = 5;
 		List<PostDto> lstPosts = postService.getAllPost();
 		int totalPostAmount = lstPosts.size();
 		PaginatesDto paginateInfo = paginatesService.GetInfoPaginates(totalPostAmount, totalPostPerPage, pageId);
-		List<PostDto> paginatedList = lstPosts.subList(paginateInfo.getStart(), paginateInfo.getEnd());
+		List<PostDto> paginatedList = lstPosts.subList(paginateInfo.getStart() - 1, paginateInfo.getEnd());
 		model.addAttribute("posts", paginatedList);
 		model.addAttribute("useracc", new UserAccDto());
 		model.addAttribute("account", new AccountDto());
-		model.addAttribute("paginateInfo",paginateInfo);
+		model.addAttribute("paginateInfo", paginateInfo);
 		return "posts/posts";
 	}
 

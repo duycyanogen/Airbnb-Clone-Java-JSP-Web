@@ -13,9 +13,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -39,7 +36,6 @@ public class Accounts implements Serializable {
 	private String password;
 
 	@ManyToOne
-	@JsonBackReference
 	@JoinColumn(name = "role_id")
 	private Roles role;
 
@@ -47,7 +43,6 @@ public class Accounts implements Serializable {
 	private Users user;
 	
 	@OneToMany(mappedBy = "account")
-	@JsonManagedReference
 	private List<Posts> lstPosts;
 
 	
