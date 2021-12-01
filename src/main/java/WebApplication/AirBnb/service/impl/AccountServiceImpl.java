@@ -2,6 +2,7 @@ package WebApplication.AirBnb.service.impl;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashSet;
@@ -25,7 +26,9 @@ import org.springframework.stereotype.Service;
 import WebApplication.AirBnb.domain.Users;
 import WebApplication.AirBnb.domain.Roles;
 import WebApplication.AirBnb.domain.Accounts;
+import WebApplication.AirBnb.domain.Ratings;
 import WebApplication.AirBnb.model.AccountDto;
+//import WebApplication.AirBnb.model.PostDto;
 import WebApplication.AirBnb.model.UserAccDto;
 import WebApplication.AirBnb.repository.UserRepository;
 import WebApplication.AirBnb.repository.AccountRepository;
@@ -106,10 +109,11 @@ public class AccountServiceImpl implements IAccountService {
 		return accountRepository.getUserAccountByAccountId(accountId);
 	}
 
+	@Override
 	public Accounts getAccountByMail(String email) {
 		return accountRepository.getAccountByMail(email);
 	}
-
+	
 	@Override
 	public <S extends Accounts> Optional<S> findOne(Example<S> example) {
 		return accountRepository.findOne(example);
@@ -268,34 +272,4 @@ public class AccountServiceImpl implements IAccountService {
 		return new org.springframework.security.core.
 				userdetails.User(account.getMail(), account.getPassword(), auth);
 	}
-
-	public void updateResetPassword(String token, String email) throws AccountNotFoundException{
-		Accounts account = accountRepository.getAccountByMail(email);
-		if(account != null) {
-			account.setResetPasswordToken(token);
-			accountRepository.save(account);
-		} else {
-			throw new AccountNotFoundException("Không tìm được tài khoản này với email này " + email);
-		}
-		
-	}
-	
-	public Accounts get(String resetPasswordToken) {
-		return accountRepository.findbyResetPasswordToken(resetPasswordToken);
-	}
-	
-	public void updatePassword(Accounts account, String newPassword) {
-		String encodedPassword = bCryptPasswordEncoder.encode(newPassword);
-		
-		account.setPassword(encodedPassword);
-		account.setResetPasswordToken(null);
-		
-		accountRepository.save(account);
-	}
-	
-	
-	
-	
-	
-	
 }

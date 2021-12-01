@@ -14,6 +14,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 
 import WebApplication.AirBnb.domain.Accounts;
 import WebApplication.AirBnb.model.AccountDto;
+import WebApplication.AirBnb.model.PostDto;
 import WebApplication.AirBnb.model.UserAccDto;
 import WebApplication.AirBnb.repository.AccountRepository;
 
@@ -87,5 +88,7 @@ public interface IAccountService extends UserDetailsService {
 	UserAccDto getUserAccountByMail(String email);
 
 	UserAccDto getUserAccountByAccountId(long accountId);
+
+	Accounts getAccountByMail(String email);
 
 }

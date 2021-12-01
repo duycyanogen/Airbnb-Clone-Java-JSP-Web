@@ -45,8 +45,4 @@ public class Accounts implements Serializable {
 	@OneToMany(mappedBy = "account")
 	private List<Posts> lstPosts;
 	
-	@Column(name="reset_password_token")
-	private String resetPasswordToken;
-	
-	
 }

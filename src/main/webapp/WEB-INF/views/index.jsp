@@ -51,7 +51,7 @@
 								path="password" />
 						</div>
 						<div>
-							<a href="forgot_password">Quên mật khẩu ?</a>
+							<a href="${pageContext.request.contextPath}/forgot-pass"">Quên mật khẩu?</a></span>
 						</div>
 
 					</div>
