@@ -286,6 +286,7 @@ public class AccountServiceImpl implements IAccountService {
 	
 	public void updatePassword(Accounts account, String newPassword) {
 		String encodedPassword = bCryptPasswordEncoder.encode(newPassword);
+		
 		account.setPassword(encodedPassword);
 		account.setResetPasswordToken(null);
 		
