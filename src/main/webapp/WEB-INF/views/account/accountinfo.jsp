@@ -26,7 +26,7 @@
 <body>
 
 	<div class="header">
-		<a href="trang-chu" class="header-logo">
+		<a href="${pageContext.request.contextPath}/trang-chu" class="header-logo">
 			<div class="logo-frame">
 				<div class="_1grlqto">
 					<svg width="102" height="32" fill="currentcolor"
@@ -64,7 +64,7 @@
 				<div class="header-down">
 					<div class="header-down-account">
 						<ul class="header-down-account-list">
-							<li class="account-sign-up"><a href="dang-xuat"">Đăng
+							<li class="account-sign-up"><a href="${pageContext.request.contextPath}/dang-xuat"">Đăng
 									xuất</a></li>
 						</ul>
 					</div>

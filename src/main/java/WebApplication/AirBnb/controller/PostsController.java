@@ -73,17 +73,17 @@ public class PostsController {
 		model.addAttribute("account", new AccountDto());
 		return "posts/postdetail";
 	}
-	
+
 	@GetMapping("xoa-tin/{postId}")
 	private String deletePost(HttpSession session, ModelMap model, @PathVariable("postId") Long postId) {
 		PostDto post = postService.getPostById(postId);
 		UserAccDto objUserAccDto = (UserAccDto) session.getAttribute("LoginInfor");
 		if (objUserAccDto == null)
 			return "redirect:/";
-		if(post.getAccountId() != objUserAccDto.getAccountId())
+		if (post.getAccountId() != objUserAccDto.getAccountId())
 			return "redirect:/";
 		int counter = postService.postDelete(postId);
-		System.out.println(counter+" rows was update!");
+		System.out.println(counter + " rows was update!");
 		return ("redirect:/thong-tin-chu-nha/" + objUserAccDto.getAccountId() + "");
 	}
 
@@ -214,8 +214,6 @@ public class PostsController {
 			if (totalPostAmount > 0) {
 				PaginatesDto paginateInfo = paginatesService.GetInfoPaginates(totalPostAmount, totalPostPerPage,
 						pageId);
-				System.out.print(paginateInfo);
-				System.out.println(totalPostAmount);
 				List<PostDto> paginatedList = lstPosts.subList(paginateInfo.getStart() - 1, paginateInfo.getEnd());
 				model.addAttribute("posts", paginatedList);
 				model.addAttribute("paginateInfo", paginateInfo);
@@ -231,10 +229,21 @@ public class PostsController {
 		} else {
 			lstPosts = postService.getAllPost();
 			int totalPostAmount = lstPosts.size();
-			PaginatesDto paginateInfo = paginatesService.GetInfoPaginates(totalPostAmount, totalPostPerPage, pageId);
-			List<PostDto> paginatedList = lstPosts.subList(paginateInfo.getStart() - 1, paginateInfo.getEnd());
-			model.addAttribute("posts", paginatedList);
-			model.addAttribute("paginateInfo", paginateInfo);
+			if (totalPostAmount > 0) {
+				PaginatesDto paginateInfo = paginatesService.GetInfoPaginates(totalPostAmount, totalPostPerPage,
+						pageId);
+				List<PostDto> paginatedList = lstPosts.subList(paginateInfo.getStart() - 1, paginateInfo.getEnd());
+				model.addAttribute("posts", paginatedList);
+				model.addAttribute("paginateInfo", paginateInfo);
+			} else {
+				PaginatesDto paginateInfo = new PaginatesDto();
+				paginateInfo.setCurrentPage(1);
+				paginateInfo.setStart(1);
+				paginateInfo.setEnd(1);
+				paginateInfo.setLimit(totalPostPerPage);
+				paginateInfo.setTotalPage(1);
+				model.addAttribute("posts", lstPosts);
+			}
 		}
 
 		model.addAttribute("useracc", new UserAccDto());
@@ -260,12 +269,23 @@ public class PostsController {
 		int totalPostPerPage = 5;
 		List<PostDto> lstPosts = postService.getAllPost();
 		int totalPostAmount = lstPosts.size();
-		PaginatesDto paginateInfo = paginatesService.GetInfoPaginates(totalPostAmount, totalPostPerPage, pageId);
-		List<PostDto> paginatedList = lstPosts.subList(paginateInfo.getStart() - 1, paginateInfo.getEnd());
-		model.addAttribute("posts", paginatedList);
-		model.addAttribute("useracc", new UserAccDto());
-		model.addAttribute("account", new AccountDto());
-		model.addAttribute("paginateInfo", paginateInfo);
+		if (totalPostAmount > 0) {
+			PaginatesDto paginateInfo = paginatesService.GetInfoPaginates(totalPostAmount, totalPostPerPage, pageId);
+			List<PostDto> paginatedList = lstPosts.subList(paginateInfo.getStart() - 1, paginateInfo.getEnd());
+			model.addAttribute("posts", paginatedList);
+			model.addAttribute("useracc", new UserAccDto());
+			model.addAttribute("account", new AccountDto());
+			model.addAttribute("paginateInfo", paginateInfo);
+			return "posts/posts";
+		} else {
+			PaginatesDto paginateInfo = new PaginatesDto();
+			paginateInfo.setCurrentPage(1);
+			paginateInfo.setStart(1);
+			paginateInfo.setEnd(1);
+			paginateInfo.setLimit(totalPostPerPage);
+			paginateInfo.setTotalPage(1);
+			model.addAttribute("posts", lstPosts);
+		}
 		return "posts/posts";
 	}
 

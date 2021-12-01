@@ -310,8 +310,8 @@ option {
 /* CONTAINER_BACKGROUND */
 .contairer-background {
     position: absolute;
-    background-image: url(/assets/Image/bgContainer1.jpg);
-    width: 31%;
+    background-image: url(https://images.unsplash.com/photo-1638292596909-5174a9f6ec11?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80);
+    width: 50%;
     top: 80px;
     bottom: 0px;
     right: 0px;

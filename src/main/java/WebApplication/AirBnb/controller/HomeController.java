@@ -92,7 +92,7 @@ public class HomeController {
 	}
 
 	@RequestMapping(value = "/dang-nhap", method = RequestMethod.POST)
-	public ModelAndView Login(HttpSession session, @ModelAttribute("account") AccountDto account, ModelMap model) {
+	public ModelAndView Login(HttpServletRequest request, HttpSession session, @ModelAttribute("account") AccountDto account, ModelMap model) {
 		model.addAttribute("useracc", new UserAccDto());
 		model.addAttribute("account", new AccountDto());
 		UserAccDto useracc = new UserAccDto();
@@ -100,7 +100,7 @@ public class HomeController {
 		if (useracc != null) {
 			session.setAttribute("LoginInfor", useracc);
 			System.out.println("After login: " + session);
-			return new ModelAndView("redirect:/", model);
+			return new ModelAndView("redirect:" + request.getHeader("Referer"), model);
 		} else {
 			model.remove("showFormRegis");
 			model.addAttribute("showOverlay", "true");

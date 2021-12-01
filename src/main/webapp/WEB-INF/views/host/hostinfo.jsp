@@ -27,23 +27,125 @@
 	<%-- 	<div class="overlay ${empty showOverlay ? "none-block" : "" }"> --%>
 	<div class="overlay none-block">
 		<%-- 			<div class="overlay-form ${empty showFormLogin ? "none-block" : "" }"> --%>
-		<div class="overlay-form">
-			<div class="overlay-form-header">
+		<div class="overlay-confirm">
+			<div class="overlay-confirm-header">
 				<p class="">Bạn có chắc chắn muốn xóa bài đăng này?</p>
 				<i class="fas fa-times"></i>
 			</div>
-			<div class="overlay-form-content">
+			<div class="overlay-confirm-content">
 
-				<div class="overlay-form-button">
+				<div class="overlay-confirm-button">
 					<button>
 						<a id="yesOption">Xác nhận</a>
 					</button>
 				</div>
-				<div class="overlay-form-button">
+				<div class="overlay-confirm-button">
 					<button>Hủy</button>
 				</div>
 			</div>
 		</div>
+		<form:form action="${pageContext.request.contextPath}/dang-nhap"
+			modelAttribute="account">
+			<div class="overlay-form ${empty showFormLogin ? "none-block" : "" }">
+				<div class="overlay-form-header">
+					<p class="">Đăng nhập</p>
+					<i class="fas fa-times"></i>
+				</div>
+				<div class="overlay-form-content">
+					<c:if test="${not empty failtureLoginMessage}">
+						<div class="isa_error">${ failtureLoginMessage}</div>
+					</c:if>
+					<div class="overlay-form-data">
+						<div class="overlay-form-data-item">
+							<i class="far fa-user"></i>
+							<!-- <input type="text" placeholder="Username"> -->
+							<form:input type="text" placeholder="Nhập email" path="mail" />
+						</div>
+						<div class="overlay-form-data-item">
+							<i class="fas fa-unlock-alt"></i>
+							<!-- <input type="text" placeholder="Password"> -->
+							<form:input type="password" placeholder="Nhập mật khẩu"
+								path="password" />
+						</div>
+					</div>
+					<div class="overlay-form-button">
+						<button type="submit">Đăng nhập</button>
+					</div>
+				</div>
+			</div>
+		</form:form>
+		<form:form action="${pageContext.request.contextPath}/dang-ki"
+			modelAttribute="useracc" enctype="multipart/form-data">
+			<div class="sign-up-form ${empty showFormRegis ? "none-block" : "" }">
+				<div class="sign-up-form-content">
+					<div class="sign-up-form-header">
+						<p>Đăng ký</p>
+						<i class="fas fa-times"></i>
+					</div>
+					<div class="sign-up-form-block">
+						<c:if test="${validatedRegis == true }">
+							<form:errors path="mail" element="div" class="isa_error" />
+						</c:if>
+						<div class="form-content-item">
+							<p>Họ và tên</p>
+							<form:input type="text" path="name" />
+							<form:errors path="name" element="div" class="isa_error" />
+
+						</div>
+						<div class="form-content-item">
+							<p>Địa chỉ</p>
+							<!-- <input type="text"> -->
+							<form:input type="text" path="address" />
+						</div>
+						<div class="form-content-item">
+							<p>Ngày sinh</p>
+							<form:input type="date" path="dateOfBirth" />
+							<form:errors path="dateOfBirth" element="div" class="isa_error" />
+						</div>
+						<div class="form-content-item">
+							<p>Giới tính</p>
+							<!-- <input type="text"> -->
+							<form:input type="text" path="sex" />
+						</div>
+						<div class="form-content-item">
+							<p>Căn cước công dân</p>
+							<form:input type="text" path="CCCD" />
+						</div>
+						<div class="form-content-item">
+							<p>Số điện thoại</p>
+							<form:input type="text" path="phoneNumber" />
+							<form:errors path="phoneNumber" element="div" class="isa_error" />
+						</div>
+						<div class="form-content-item">
+							<p class="">Mail</p>
+							<form:input type="text" path="mail" />
+							<form:errors path="mail" element="div" class="isa_error" />
+						</div>
+						<div class="form-content-item">
+							<p>Password</p>
+
+							<form:input type="password" path="password" />
+							<form:errors path="password" element="div" class="isa_error" />
+
+						</div>
+						<div class="form-content-avatar">
+							<p>Ảnh đại diện</p>
+							<img src="#" id="imgshow" class="none-block">
+							<!-- <input type="file" name="image" /> -->
+							<div class="form-content-avatar-block ">
+								<input type="file" id="imgload" name="image"> <label
+									for="imgload"> <i class="fas fa-plus-circle"></i>
+								</label>
+							</div>
+						</div>
+
+						<div class="sign-up-form-btn">
+							<button type="submit" class="sign-up-continue">Đăng ký</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</form:form>
 	</div>
 	<div class="header">
 		<div class="logo-frame">
@@ -94,8 +196,17 @@
 				<div class="header-down">
 					<div class="header-down-account">
 						<ul class="header-down-account-list">
-							<li class="account-sign-up"><a href="dang-xuat"">Đăng
-									xuất</a></li>
+							<c:if test="${empty sessionScope.LoginInfor }">
+								<li class="account-sign-up">Đăng kí</li>
+							</c:if>
+							<c:if test="${empty sessionScope.LoginInfor }">
+								<li class="account-sign-in"">Đăng nhập</li>
+							</c:if>
+							<c:if test="${not empty sessionScope.LoginInfor }">
+								<li class="account-log-out""><a
+									href="${pageContext.request.contextPath}/dang-xuat">Đăng
+										xuất</a></li>
+							</c:if>
 						</ul>
 					</div>
 					<div class="header-down-activate">
@@ -297,42 +408,64 @@
 	<!-- 	<script type="text/javascript" -->
 	<%-- 		src="${pageContext.request.contextPath}/js/main.js"></script> --%>
 	<script>
-		const yesOption = document.querySelector("#yesOption");
-		const overlay = document.querySelector(".overlay");
-		const overlaySignIn = document.querySelector(".overlay-form");
-		overlay.onclick = function(e) {
+	const overlay = document.querySelector(".overlay");
+	const overlayConfirm = document.querySelector(".overlay-confirm");
+	const overlaySignIn = document.querySelector(".overlay-form");
+	const overlaySignUp = document.querySelector(".sign-up-form");
+
+	overlay.onclick = function(e) {
 			if ((!e.target.closest(".overlay-form"))
-					&& !(e.target.closest(".sign-up-form"))) {
+					&& !(e.target.closest(".sign-up-form"))
+					&& !(e.target.closest(".overlay-confirm"))) {
 				overlay.classList.add("none-block");
 				console.log("ok");
 			}
 		}
-
-		const postDeleteBtn = document.querySelector(".content-delete-btn");
-
+		const yesOption = document.querySelector("#yesOption");
 		const showConfirmDialog = function(postId) {
 			yesOption.href = "${pageContext.request.contextPath}/danh-sach-tin/xoa-tin/"+postId;
 			overlay.classList.remove("none-block");
 			overlaySignUp.classList.add("none-block");
-			overlaySignIn.classList.remove("none-block");
+			overlaySignIn.classList.add("none-block");
+			overlayConfirm.classList.remove("none-block");
+
+		}
+
+		const signUp = document.querySelector(".account-sign-up");
+		const signIn = document.querySelector(".account-sign-in");
+		signUp.onclick = function () {
+		  overlay.classList.remove("none-block");
+		  overlaySignIn.classList.add("none-block");
+		  overlayConfirm.classList.add("none-block");
+		  overlaySignUp.classList.remove("none-block");
+		}
+		
+		signIn.onclick = function () {
+		  overlay.classList.remove("none-block");
+		  overlaySignUp.classList.add("none-block");
+		  overlayConfirm.classList.add("none-block");
+		  overlaySignIn.classList.remove("none-block");
 
 		}
 
 		const signInBtn = document.querySelector(".overlay-form-button button");
-		signInBtn.onclick = function() {
-			overlay.classList.add("none-block");
+		signInBtn.onclick = function () {
+		  overlay.classList.add("none-block");
 		}
 
-		const formSignIn_Close = document
-				.querySelector(".overlay-form-header i");
-		formSignIn_Close.onclick = function() {
-			overlay.classList.add("none-block");
+		const signUpBtn = document.querySelector(".sign-up-form-btn button");
+		signUpBtn.onclick = function () {
+		  overlay.classList.add("none-block");
 		}
 
-		const formSignUp_Close = document
-				.querySelector(".sign-up-form-content i");
-		formSignUp_Close.onclick = function() {
-			overlay.classList.add("none-block");
+		const formSignIn_Close = document.querySelector(".overlay-form-header i");
+		formSignIn_Close.onclick = function () {
+		  overlay.classList.add("none-block");
+		}
+
+		const formSignUp_Close = document.querySelector(".sign-up-form-content i");
+		formSignUp_Close.onclick = function () {
+		  overlay.classList.add("none-block");
 		}
 	</script>
 </body>
