@@ -17,6 +17,7 @@
 		style="max-width: 350px; margin: 0 auto;">
 		<div class="border border-sencondary rounded p-3">
 			<div>
+			
 				<p>Chúng tôi sẽ gửi đường dẫn đặt lại mật khẩu đến mail của bạn.</p>
 			</div>
 
