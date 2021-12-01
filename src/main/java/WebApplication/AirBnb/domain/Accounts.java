@@ -42,7 +42,7 @@ public class Accounts implements Serializable {
 	@OneToOne(mappedBy = "account")
 	private Users user;
 	
-	@OneToMany(mappedBy = "account")
-	private List<Posts> lstPosts;
+//	@OneToMany(mappedBy = "account")
+//	private List<Posts> lstPosts;
 	
 }

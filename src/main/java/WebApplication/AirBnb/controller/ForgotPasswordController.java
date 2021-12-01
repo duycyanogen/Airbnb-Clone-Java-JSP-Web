@@ -3,7 +3,9 @@ package WebApplication.AirBnb.controller;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Properties;
 
+import javax.mail.PasswordAuthentication;
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 
@@ -11,8 +13,11 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -33,6 +38,9 @@ import net.bytebuddy.utility.RandomString;
 public class ForgotPasswordController {
 
 	@Autowired
+	BCryptPasswordEncoder bCryptPasswordEncoder;
+	
+	@Autowired
 	AccountServiceImpl accountService;
 
 	@Autowired
@@ -49,6 +57,19 @@ public class ForgotPasswordController {
 	@RequestMapping(value = "forgot-pass", method = RequestMethod.POST)
 	public String processForgotPassword(ModelMap model, HttpServletRequest re) {
 		
+		JavaMailSenderImpl mailer = new JavaMailSenderImpl();
+		
+		mailer.setHost("smtp.gmail.com");
+		mailer.setPort(587);
+		mailer.setUsername("drakeshop465@gmail.com");
+		mailer.setPassword("c#0987654321");
+		 
+		Properties properties = new Properties();
+		properties.setProperty("mail.smtp.auth", "true");
+		properties.setProperty("mail.smtp.starttls.enable", "true");
+		 
+		mailer.setJavaMailProperties(properties);
+		
 		Session s = factory.openSession();
 		Transaction t = s.beginTransaction();
 		boolean check = true;
@@ -59,42 +80,35 @@ public class ForgotPasswordController {
 		ac = accountService.getAccountByMail(email);
 		
 		/// random sinh số có 6 chữ số
-		int random = (int) Math.floor(((Math.random() * 899999) + 100000));
+		int random = (int) Math.floor(((Math.random() * 8999999) + 1000000));
 		String newPassword = String.valueOf(random);
 		String mailgui;
 		mailgui = ac.getMail();
 		ac.setPassword(newPassword);
-		s.update(ac);
+		
 		check = false;
-		
-		/// update vào sql
-		t.commit();
-		
 		// Tạo date để gưi
 		Date date = new Date();
-		String from = "drakeshop465@gmail.com";
+		String from = "AirBnbFake";
 		String to = mailgui;
+		SimpleMailMessage message = new SimpleMailMessage();
 		String subject = "Quên mật khẩu";
 		String body = "Bạn đã báo quên mật khẩu vào " + date + "  mật khẩu mới của bạn là " + newPassword
 				+ "\n Nếu bạn không thực hiện yêu cầu trên , vui lòng liên hệ quản trị viên ngay";
 		try {
-			System.out.println("tạo mail mailer");
-			// tạo mail
-
-			MimeMessage mail = mailer.createMimeMessage();
-
-			// gọi lớp trợ giúp
-			System.out.println("trợ giúp");
-			MimeMessageHelper helper = new MimeMessageHelper(mail);
-			System.out.println("new");
-			helper.setFrom(from, from);
-			helper.setTo(to);
-			helper.setReplyTo(from, from);
-			helper.setSubject(subject);
-			helper.setText(body, true);
-			mailer.send(mail);
+			message.setFrom(from);
+			message.setTo(to);
+			message.setReplyTo(from);
+			message.setSubject(subject);
+			message.setText(body);
+			
+			mailer.send(message);
 			System.out.println("gửi");
 			model.addAttribute("tinnhan", "Mật khẩu mới đã gửi đến email của bạn");
+			
+			ac.setPassword(bCryptPasswordEncoder.encode(newPassword));
+			s.update(ac);
+			t.commit();
 		} catch (Exception ex) {
 			model.addAttribute("tinnhan", "gửi mail thất bại");
 			t.rollback();
