@@ -69,8 +69,12 @@ public class PostServiceImpl implements IPostService {
 	private RatingRepository ratingRepository;
 	@Autowired
 	private UserRepository userRepository;
-	@Autowired
-	private AccountRepository accountRepository;
+	
+	@Override
+	public int postDelete(long postId) {
+		return postRepository.deletePost(postId);
+	}
+	
 	@Override
 	@Transactional(rollbackFor = { Exception.class, Throwable.class })
 	public boolean postAdd(PostDto postDto) {

@@ -24,6 +24,27 @@
 </head>
 
 <body>
+	<%-- 	<div class="overlay ${empty showOverlay ? "none-block" : "" }"> --%>
+	<div class="overlay none-block">
+		<%-- 			<div class="overlay-form ${empty showFormLogin ? "none-block" : "" }"> --%>
+		<div class="overlay-form">
+			<div class="overlay-form-header">
+				<p class="">Bạn có chắc chắn muốn xóa bài đăng này?</p>
+				<i class="fas fa-times"></i>
+			</div>
+			<div class="overlay-form-content">
+
+				<div class="overlay-form-button">
+					<button>
+						<a id="yesOption">Xác nhận</a>
+					</button>
+				</div>
+				<div class="overlay-form-button">
+					<button>Hủy</button>
+				</div>
+			</div>
+		</div>
+	</div>
 	<div class="header">
 		<div class="logo-frame">
 			<div class="_1grlqto">
@@ -80,9 +101,11 @@
 					<div class="header-down-activate">
 						<ul class="header-down-activate-list">
 							<c:if test="${ not empty sessionScope.LoginInfor }">
-								<li><a href="${pageContext.request.contextPath}/danh-sach-tin/dang-tin">Cho thuê nhà</a></li>
+								<li><a
+									href="${pageContext.request.contextPath}/danh-sach-tin/dang-tin">Cho
+										thuê nhà</a></li>
 							</c:if>
-							
+
 							<li>Trợ giúp</li>
 						</ul>
 					</div>
@@ -190,11 +213,13 @@
 											<p class="info-price-time">/ đêm</p>
 										</div>
 									</div>
-									<c:if test="${sessionScope.LoginInfor.accountId == hostInfo.getAccountId() }">
-									<div class="content-info-detail-end-btn">
-										<button>Chỉnh sửa</button>
-										<button>Xóa</button>
-									</div>
+									<c:if
+										test="${sessionScope.LoginInfor.accountId == hostInfo.getAccountId() }">
+										<div class="content-info-detail-end-btn">
+											<button>Chỉnh sửa</button>
+											<button class="content-delete-btn"
+												onclick=showConfirmDialog(${item.getPostId()})>Xóa</button>
+										</div>
 									</c:if>
 								</div>
 							</div>
@@ -269,8 +294,47 @@
 
 
 	</div>
-	<script type="text/javascript"
-		src="${pageContext.request.contextPath}/js/main.js"></script>
+	<!-- 	<script type="text/javascript" -->
+	<%-- 		src="${pageContext.request.contextPath}/js/main.js"></script> --%>
+	<script>
+		const yesOption = document.querySelector("#yesOption");
+		const overlay = document.querySelector(".overlay");
+		const overlaySignIn = document.querySelector(".overlay-form");
+		overlay.onclick = function(e) {
+			if ((!e.target.closest(".overlay-form"))
+					&& !(e.target.closest(".sign-up-form"))) {
+				overlay.classList.add("none-block");
+				console.log("ok");
+			}
+		}
+
+		const postDeleteBtn = document.querySelector(".content-delete-btn");
+
+		const showConfirmDialog = function(postId) {
+			yesOption.href = "${pageContext.request.contextPath}/danh-sach-tin/xoa-tin/"+postId;
+			overlay.classList.remove("none-block");
+			overlaySignUp.classList.add("none-block");
+			overlaySignIn.classList.remove("none-block");
+
+		}
+
+		const signInBtn = document.querySelector(".overlay-form-button button");
+		signInBtn.onclick = function() {
+			overlay.classList.add("none-block");
+		}
+
+		const formSignIn_Close = document
+				.querySelector(".overlay-form-header i");
+		formSignIn_Close.onclick = function() {
+			overlay.classList.add("none-block");
+		}
+
+		const formSignUp_Close = document
+				.querySelector(".sign-up-form-content i");
+		formSignUp_Close.onclick = function() {
+			overlay.classList.add("none-block");
+		}
+	</script>
 </body>
 
 </html>

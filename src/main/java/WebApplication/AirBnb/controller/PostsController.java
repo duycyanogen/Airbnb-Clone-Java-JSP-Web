@@ -73,6 +73,19 @@ public class PostsController {
 		model.addAttribute("account", new AccountDto());
 		return "posts/postdetail";
 	}
+	
+	@GetMapping("xoa-tin/{postId}")
+	private String deletePost(HttpSession session, ModelMap model, @PathVariable("postId") Long postId) {
+		PostDto post = postService.getPostById(postId);
+		UserAccDto objUserAccDto = (UserAccDto) session.getAttribute("LoginInfor");
+		if (objUserAccDto == null)
+			return "redirect:/";
+		if(post.getAccountId() != objUserAccDto.getAccountId())
+			return "redirect:/";
+		int counter = postService.postDelete(postId);
+		System.out.println(counter+" rows was update!");
+		return ("redirect:/thong-tin-chu-nha/" + objUserAccDto.getAccountId() + "");
+	}
 
 	@GetMapping("/dang-tin")
 	private String add(Model model, HttpSession session) {

@@ -81,6 +81,8 @@ public interface IPostService {
 
 	List<PostDto> listPostByHostId(long hostId);
 
+	int postDelete(long postId);
+
 	
 
 	

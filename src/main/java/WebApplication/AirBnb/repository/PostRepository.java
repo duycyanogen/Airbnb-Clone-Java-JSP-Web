@@ -2,9 +2,11 @@ package WebApplication.AirBnb.repository;
 
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
-import org.springframework.stereotype.Repository; 
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import WebApplication.AirBnb.domain.Posts;
 import WebApplication.AirBnb.domain.Ratings;
@@ -84,6 +86,10 @@ public interface PostRepository extends JpaRepository<Posts, Long>{
 			+ "join roomTypeInfos.roomType roomType "
 			+ "join bedTypeDetails.bedType bedType join hotel.location location where post.status =1 and post.postId = ?1")
 	PostDto getPostById(long postId);
-	
+
+	@Transactional
+	@Modifying
+	@Query("update Posts p set p.status = 0 where p.postId = ?1")
+	int deletePost(long postId); 
 	
 }
