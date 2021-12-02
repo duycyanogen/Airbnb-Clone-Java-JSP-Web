@@ -2,6 +2,10 @@ package WebApplication.AirBnb.service;
 
 import java.util.List;
 import java.util.Optional;
+
+import javax.security.auth.login.AccountNotFoundException;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -10,11 +14,13 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 
 import WebApplication.AirBnb.domain.Accounts;
 import WebApplication.AirBnb.model.AccountDto;
+import WebApplication.AirBnb.model.PostDto;
 import WebApplication.AirBnb.model.UserAccDto;
+import WebApplication.AirBnb.repository.AccountRepository;
 
 
 public interface IAccountService extends UserDetailsService {
-
+	
 	<S extends Accounts> List<S> findAll(Example<S> example, Sort sort);
 
 	<S extends Accounts> List<S> findAll(Example<S> example);
@@ -83,5 +89,6 @@ public interface IAccountService extends UserDetailsService {
 
 	UserAccDto getUserAccountByAccountId(long accountId);
 
+	Accounts getAccountByMail(String email);
 
 }

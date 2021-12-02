@@ -20,3 +20,4 @@ public interface AccountRepository extends JpaRepository<Accounts, Long>{
 	UserAccDto getUserAccountByAccountId(@Param("accountId") long accountId);
 	
 }
+

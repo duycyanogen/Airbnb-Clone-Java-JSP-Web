@@ -19,3 +19,4 @@ public class AirBnbApplication {
 	 * LocalSessionFactoryBean(); return sessionFactory; }
 	 */
 }
+//new line
