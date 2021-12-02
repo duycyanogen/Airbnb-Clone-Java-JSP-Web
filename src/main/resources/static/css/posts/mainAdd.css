@@ -87,7 +87,7 @@ option {
 
 
 .container-content-item input {
-    width: 100%;
+    width: 92%;
     border-bottom: 1px solid #aaa;
     outline: none;
     height: 50px;
@@ -99,7 +99,7 @@ option {
 
 .container-content-item-comboBox{
     cursor: pointer;
-    width: 100%;
+    width: 92%;
     border-bottom: 1px solid #aaa;
     outline: none;
     height: 50px;
