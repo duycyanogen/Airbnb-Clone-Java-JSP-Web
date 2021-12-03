@@ -22,8 +22,9 @@
 		style="max-width: 350px;margin:0 auto;">
 		<h2 class="text-center">Quên mật khẩu</h2>
 		<div class="border border-secondary rounded p-3">
-			<p>Mật khẩu mới sẽ được gửi về mail của bạn.</p>
+			<p>${tinnhan}</p>
 			<div>
+			<lable></lable>
 				<label for="uname"></label> <input type="text" class="form-control"
 					placeholder="Enter E-mail" name="email" required autofocus>
 			</div>

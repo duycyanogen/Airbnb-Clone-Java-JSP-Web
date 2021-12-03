@@ -75,7 +75,7 @@ public class ForgotPasswordController {
 		boolean check = true;
 		
 		String email = re.getParameter("email");
-		
+		try {
 		Accounts ac = new Accounts();
 		ac = accountService.getAccountByMail(email);
 		
@@ -95,7 +95,7 @@ public class ForgotPasswordController {
 		String subject = "Quên mật khẩu";
 		String body = "Bạn đã báo quên mật khẩu vào " + date + "  mật khẩu mới của bạn là " + newPassword
 				+ "\n Nếu bạn không thực hiện yêu cầu trên , vui lòng liên hệ quản trị viên ngay";
-		try {
+		
 			message.setFrom(from);
 			message.setTo(to);
 			message.setReplyTo(from);
@@ -110,15 +110,15 @@ public class ForgotPasswordController {
 			s.update(ac);
 			t.commit();
 		} catch (Exception ex) {
-			model.addAttribute("tinnhan", "gửi mail thất bại");
+			model.addAttribute("tinnhan", "Tài khoản không tồn tại");
 			t.rollback();
 		} finally {
 			s.close();
 		}
 
-		if (check == true) {
-			model.addAttribute("tinnhan", "Tài khoản không tồn tại");
-		}
+//		if (check == true) {
+//			model.addAttribute("tinnhan", "Tài khoản không tồn tại");
+//		}
 
 		return "account/forgot-pass";
 	}
