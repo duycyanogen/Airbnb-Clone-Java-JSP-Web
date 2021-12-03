@@ -59,15 +59,17 @@ public class ForgotPasswordController {
 		
 		JavaMailSenderImpl mailer = new JavaMailSenderImpl();
 		
+		//Set cấu hình gửi mail
 		mailer.setHost("smtp.gmail.com");
 		mailer.setPort(587);
-		mailer.setUsername("drakeshop465@gmail.com");
-		mailer.setPassword("c#0987654321");
+		mailer.setUsername("airb8080@gmail.com");
+		mailer.setPassword("@mdd456789");
 		 
 		Properties properties = new Properties();
 		properties.setProperty("mail.smtp.auth", "true");
 		properties.setProperty("mail.smtp.starttls.enable", "true");
-		 
+		
+		//Cấu hình gửi mail
 		mailer.setJavaMailProperties(properties);
 		
 		Session s = factory.openSession();
@@ -76,10 +78,12 @@ public class ForgotPasswordController {
 		
 		String email = re.getParameter("email");
 		
+		try {
+		//Tìm Account theo Email
 		Accounts ac = new Accounts();
 		ac = accountService.getAccountByMail(email);
 		
-		/// random sinh số có 6 chữ số
+		// Random password
 		int random = (int) Math.floor(((Math.random() * 8999999) + 1000000));
 		String newPassword = String.valueOf(random);
 		String mailgui;
@@ -87,7 +91,7 @@ public class ForgotPasswordController {
 		ac.setPassword(newPassword);
 		
 		check = false;
-		// Tạo date để gưi
+		// Tạo Date với thời gian hiện tại
 		Date date = new Date();
 		String from = "AirBnbFake";
 		String to = mailgui;
@@ -95,30 +99,29 @@ public class ForgotPasswordController {
 		String subject = "Quên mật khẩu";
 		String body = "Bạn đã báo quên mật khẩu vào " + date + "  mật khẩu mới của bạn là " + newPassword
 				+ "\n Nếu bạn không thực hiện yêu cầu trên , vui lòng liên hệ quản trị viên ngay";
-		try {
+		
 			message.setFrom(from);
 			message.setTo(to);
 			message.setReplyTo(from);
 			message.setSubject(subject);
 			message.setText(body);
-			
 			mailer.send(message);
-			System.out.println("gửi");
+			
 			model.addAttribute("tinnhan", "Mật khẩu mới đã gửi đến email của bạn");
 			
 			ac.setPassword(bCryptPasswordEncoder.encode(newPassword));
 			s.update(ac);
 			t.commit();
 		} catch (Exception ex) {
-			model.addAttribute("tinnhan", "gửi mail thất bại");
+			model.addAttribute("tinnhan", "Tài khoản không tồn tại");
 			t.rollback();
 		} finally {
 			s.close();
 		}
 
-		if (check == true) {
-			model.addAttribute("tinnhan", "Tài khoản không tồn tại");
-		}
+//		if (check == true) {
+//			model.addAttribute("tinnhan", "Tài khoản không tồn tại");
+//		}
 
 		return "account/forgot-pass";
 	}
