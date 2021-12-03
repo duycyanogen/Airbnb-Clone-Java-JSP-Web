@@ -39,7 +39,7 @@ public class ForgotPasswordController {
 
 	@Autowired
 	BCryptPasswordEncoder bCryptPasswordEncoder;
-	
+
 	@Autowired
 	AccountServiceImpl accountService;
 
@@ -56,66 +56,73 @@ public class ForgotPasswordController {
 
 	@RequestMapping(value = "forgot-pass", method = RequestMethod.POST)
 	public String processForgotPassword(ModelMap model, HttpServletRequest re) {
-		
+
 		JavaMailSenderImpl mailer = new JavaMailSenderImpl();
-		
-		//Set cấu hình gửi mail
+
+		// Set cấu hình gửi mail
 		mailer.setHost("smtp.gmail.com");
 		mailer.setPort(587);
 		mailer.setUsername("airb8080@gmail.com");
 		mailer.setPassword("@mdd456789");
-		 
+
 		Properties properties = new Properties();
 		properties.setProperty("mail.smtp.auth", "true");
 		properties.setProperty("mail.smtp.starttls.enable", "true");
-		
-		//Cấu hình gửi mail
+
+		// Cấu hình gửi mail
 		mailer.setJavaMailProperties(properties);
-		
+
 		Session s = factory.openSession();
 		Transaction t = s.beginTransaction();
 		boolean check = true;
-		
+
 		String email = re.getParameter("email");
-		
+
 		try {
-		//Tìm Account theo Email
-		Accounts ac = new Accounts();
-		ac = accountService.getAccountByMail(email);
-		
-		// Random password
-		int random = (int) Math.floor(((Math.random() * 8999999) + 1000000));
-		String newPassword = String.valueOf(random);
-		String mailgui;
-		mailgui = ac.getMail();
-		ac.setPassword(newPassword);
-		
-		check = false;
-		// Tạo Date với thời gian hiện tại
-		Date date = new Date();
-		String from = "AirBnbFake";
-		String to = mailgui;
-		SimpleMailMessage message = new SimpleMailMessage();
-		String subject = "Quên mật khẩu";
-		String body = "Bạn đã báo quên mật khẩu vào " + date + "  mật khẩu mới của bạn là " + newPassword
-				+ "\n Nếu bạn không thực hiện yêu cầu trên , vui lòng liên hệ quản trị viên ngay";
-		
+			// Tìm Account theo Email
+			Accounts ac = new Accounts();
+			ac = accountService.getAccountByMail(email);
+
+			// Random password
+			int randomPassword = (int) Math.floor(((Math.random() * 8999999) + 1000000));
+			String newPassword = String.valueOf(randomPassword);
+			String userMail;
+			userMail = ac.getMail();
+			ac.setPassword(newPassword);
+
+			check = false;
+			// Tạo Date với thời gian hiện tại
+			Date date = new Date();
+			String from = "AirBnbFake";
+			String to = userMail;
+			SimpleMailMessage message = new SimpleMailMessage();
+			String subject = "Quên mật khẩu";
+			String body = "Chào bạn,\n" 
+			+ "Tài khoản vừa thực hiện thao tác đặt lại mật khẩu \n"
+			+ "Mật khẩu mới của bạn là: " + newPassword +"\n"
+			+ "Ngày gửi: " + date + "\n" 
+			+ "Đây là thư tự động.\n";
+
 			message.setFrom(from);
 			message.setTo(to);
 			message.setReplyTo(from);
 			message.setSubject(subject);
 			message.setText(body);
 			mailer.send(message);
-			
-			model.addAttribute("tinnhan", "Mật khẩu mới đã gửi đến email của bạn");
-			
+
+			model.addAttribute("message", "Mật khẩu mới đã gửi đến email của bạn");
+
 			ac.setPassword(bCryptPasswordEncoder.encode(newPassword));
 			s.update(ac);
 			t.commit();
-		} catch (Exception ex) {
+		} 
+		catch (Exception ex) 
+		{
 			model.addAttribute("tinnhan", "Tài khoản không tồn tại");
 			t.rollback();
-		} finally {
+		} 
+		finally 
+		{
 			s.close();
 		}
 

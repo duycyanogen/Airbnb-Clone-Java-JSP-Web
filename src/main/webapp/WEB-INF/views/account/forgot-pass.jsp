@@ -22,11 +22,11 @@
 		style="max-width: 350px;margin:0 auto;">
 		<h2 class="text-center">Quên mật khẩu</h2>
 		<div class="border border-secondary rounded p-3">
-			<p>${tinnhan}</p>
+			<p>${message}</p>
 			<div>
 			<lable></lable>
 				<label for="uname"></label> <input type="text" class="form-control"
-					placeholder="Enter E-mail" name="email" required autofocus>
+					placeholder="Nhập tài khoản email của bạn." name="email" required autofocus>
 			</div>
 			<p>
 			
