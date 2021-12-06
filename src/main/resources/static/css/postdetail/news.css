@@ -558,4 +558,25 @@ a {
 .active-star i{
  color: #ff385c;
 }
+
+@media screen and (max-width:1400px){
+  .header {
+    
+    padding-left: 10%;
+    padding-right: 10%;
+  }
+  
+  .container{
+   padding-left: 10%;
+   padding-right: 10%;
+  }
+  
+  .footer {
+ 	padding-left: 10%;
+ 	padding-right: 10%;
+}
+ 
+}
+
+
 /*# sourceMappingURL=style.css.map */

@@ -10,7 +10,6 @@ import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.security.core.userdetails.UserDetailsService;
 
 import WebApplication.AirBnb.domain.Accounts;
 import WebApplication.AirBnb.model.AccountDto;
@@ -19,7 +18,7 @@ import WebApplication.AirBnb.model.UserAccDto;
 import WebApplication.AirBnb.repository.AccountRepository;
 
 
-public interface IAccountService extends UserDetailsService {
+public interface IAccountService  {
 	
 	<S extends Accounts> List<S> findAll(Example<S> example, Sort sort);
 
@@ -90,5 +89,8 @@ public interface IAccountService extends UserDetailsService {
 	UserAccDto getUserAccountByAccountId(long accountId);
 
 	Accounts getAccountByMail(String email);
+
+	Boolean changePassword(String oldPassword, String newPassword, long accountId);
+
 
 }

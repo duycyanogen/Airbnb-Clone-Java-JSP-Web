@@ -266,3 +266,25 @@ p {
     right: 0px;
     min-height: calc(100vh - 80px);
 }
+
+@media screen and (max-width:1400px){
+  .header {
+    
+    padding-left: 10%;
+    padding-right: 10%;
+  }
+  
+  .container{
+   padding-left: 25px;
+   padding-right: 25px;
+   padding-bottom: 0px;
+  }
+ 
+  .contairer-background {
+    width: 35%;
+  }
+  
+  .container-content {
+  	width: 65%;
+  }
+}
