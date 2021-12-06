@@ -99,8 +99,11 @@ public class HomeController {
 		useracc = accountService.login(account);
 		if (useracc != null) {
 			session.setAttribute("LoginInfor", useracc);
-			System.out.println("After login: " + session);
-			return new ModelAndView("redirect:" + request.getHeader("Referer"), model);
+			System.out.println("After login: " + request.getHeader("Referer"));
+			String url = request.getHeader("Referer");
+			if (url.equals("http://localhost:8080/dang-nhap"))
+				url = "http://localhost:8080/trang-chu";
+			return new ModelAndView("redirect:" + url, model);
 		} else {
 			model.remove("showFormRegis");
 			model.addAttribute("showOverlay", "true");
@@ -166,7 +169,11 @@ public class HomeController {
 	@RequestMapping(value = "dang-xuat", method = RequestMethod.GET)
 	public String Logout(HttpSession session, HttpServletRequest request) {
 		session.removeAttribute("LoginInfor");
-		return "redirect:" + request.getHeader("Referer");
+		String url = request.getHeader("Referer");
+		if (url.equals("http://localhost:8080/dang-nhap"))
+			url = "http://localhost:8080/trang-chu";
+		return "redirect:" + url;
+//		return "redirect:" + request.getHeader("Referer");
 	}
 	
 	@PostMapping(value = "updateInfo")
