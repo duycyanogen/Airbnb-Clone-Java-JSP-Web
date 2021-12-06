@@ -16,7 +16,10 @@
 <link rel="stylesheet" type="text/css"
 	href="<c:url value='${pageContext.request.contextPath}/css/account/grid.css'/>" />
 <link rel="stylesheet" type="text/css"
+	href="<c:url value='${pageContext.request.contextPath}/css/common/total.css'/>" />
+<link rel="stylesheet" type="text/css"
 	href="<c:url value='${pageContext.request.contextPath}/css/account/account.css'/>" />
+
 <link rel="stylesheet" type="text/css"
 	href="<c:url value='${pageContext.request.contextPath}/Fonts/fontawesome-free-5.15.3-web/css/all.min.css'/>" />
 <base href="${pageContext.servletContext.contextPath}">
@@ -24,7 +27,52 @@
 </head>
 
 <body>
+<div class="overlay ${isErrors==false ? "none-block" : ""}">
+        <div class="overlay-form">
+           <div class="overlay-form-header">
+             <p class="">Đổi mật khẩu</p>
+             <i class="fas fa-times"></i>
+           </div>
+			<form:form action="/doi-mat-khau" method="post" modelAttribute="passwordDto">
+				<div class="overlay-form-content">
+					<div class="overlay-form-data">
+						<div class="overlay-form-data-item">
+							<div class="overlay-form-data-input">
+								<i class="fas fa-key"></i>
+								<form:input type="password" placeholder="Nhập mật khẩu cũ"
+									path="currentPassword" />
+							</div>
+							<form:errors path="currentPassword" element="div"
+								class="isa_error" />
+						</div>
+						<div class="overlay-form-data-item">
+							<div class="overlay-form-data-input">
+								<i class="fas fa-key"></i>
+								<form:input type="password" placeholder="Nhập mật khẩu mới"
+									path="newPassword" />
+							</div>
 
+							<form:errors path="newPassword" element="div" class="isa_error" />
+						</div>
+						<div class="overlay-form-data-item">
+							<div class="overlay-form-data-input">
+								<i class="fas fa-key"></i>
+								<form:input type="password" placeholder="Xác nhận mật khẩu mới"
+									path="confirmPassword" />
+							</div>
+
+							<form:errors path="confirmPassword" element="div"
+								class="isa_error" />
+						</div>
+					</div>
+					<div class="overlay-form-button">
+						<button type="submit">Lưu thay đổi</button>
+					</div>
+				</div>
+			</form:form>
+		</div>
+        
+</div>
 	<div class="header">
 		<a href="${pageContext.request.contextPath}/trang-chu" class="header-logo">
 			<div class="logo-frame">
@@ -145,6 +193,9 @@
 								</div>
 								<p class="handle-edit">Chỉnh sửa</p>
 							</li>
+							<li class="handle-info-list-item password-change"><span>Đổi
+									mật khẩu</span>
+							</li>
 
 						</ul>
 						<div class="handle-info-save">
@@ -257,8 +308,45 @@
 
 
 	</div>
-	<script type="text/javascript"
-		src="${pageContext.request.contextPath}/js/main.js"></script>
+	<%-- <script type="text/javascript"
+		src="${pageContext.request.contextPath}/js/main.js"></script> --%>
+	<script>
+    const handleList_btn = document.querySelectorAll(".handle-edit");
+    var handleInfoListItem;
+    for(let i = 0; i < handleList_btn.length; i++) {
+      handleList_btn[i].onclick = function() {
+      handleInfoListItem = handleList_btn[i].parentElement;
+      handleInfoListItem.querySelector("div .handle-value").focus();
+   }
+
+   const overlay = document.querySelector(".overlay");
+   const overlaySignIn = document.querySelector(".overlay-form");
+   const passChange = document.querySelector(".password-change span");
+   const formSignIn_Close = document.querySelector(".overlay-form-header i");
+   const savePass_Btn = document.querySelector(".overlay-form-button button");
+   
+   formSignIn_Close.onclick = function() {
+     overlay.classList.add("none-block");
+   }
+   passChange.onclick = function() {
+     overlay.classList.remove("none-block");
+   }
+
+   passChange.onclick = function() {
+     overlay.classList.remove("none-block");
+   }
+   overlay.onclick = function(e) {
+   if((!e.target.closest(".overlay-form"))) {
+    overlay.classList.add("none-block");
+    console.log("ok");
+   }
+  }
+   savePass_Btn.onclick = function() {
+     overlay.classList.remove("none-block");
+   }
+
+}
+</script>
 </body>
 
 </html>

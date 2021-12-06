@@ -13,10 +13,6 @@ import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -24,12 +20,13 @@ import WebApplication.AirBnb.domain.Users;
 import WebApplication.AirBnb.domain.Roles;
 import WebApplication.AirBnb.domain.Accounts;
 import WebApplication.AirBnb.model.AccountDto;
+import WebApplication.AirBnb.model.PasswordDto;
 import WebApplication.AirBnb.model.UserAccDto;
 import WebApplication.AirBnb.repository.UserRepository;
 import WebApplication.AirBnb.repository.AccountRepository;
 import WebApplication.AirBnb.service.IAccountService;
 
-@Service("userDetailService")
+@Service
 public class AccountServiceImpl implements IAccountService {
 	@Autowired
 	private AccountRepository accountRepository;
@@ -93,7 +90,31 @@ public class AccountServiceImpl implements IAccountService {
 			return null;
 		}
 	}
-
+    
+	
+	
+	@Override
+	public Boolean changePassword (String oldPassword, String newPassword, long accountId) {
+		try {	
+			String currentPassword = accountRepository.getPasswordByAccountId(accountId);
+			if( !bCryptPasswordEncoder.matches( oldPassword, currentPassword)) {
+				return false;
+			}
+			newPassword=bCryptPasswordEncoder.encode(newPassword);
+			int result = accountRepository.updatePassword(newPassword, accountId );
+			if (result == 1) {
+			   return true;
+			} else
+				return false;
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			return false;
+		}
+	}
+    
+	
+	
 	@Override
 	public UserAccDto getUserAccountByMail(String email) {
 		return accountRepository.getUserAccountByMail(email);
@@ -254,17 +275,17 @@ public class AccountServiceImpl implements IAccountService {
 		return false;
 	}
 
-	@Override
-	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		// TODO Auto-generated method stub
-		Accounts account = this.getAccountByMail(username);
-		if (account == null)
-			throw new UsernameNotFoundException("User này không tồn tại!");
-
-		HashSet<GrantedAuthority> auth = new HashSet<>();
-		auth.add(new SimpleGrantedAuthority(account.getRole().toString()));
-		return new org.springframework.security.core.
-				userdetails.User(account.getMail(), account.getPassword(), auth);
-	}
+//	@Override
+//	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+//		// TODO Auto-generated method stub
+//		Accounts account = this.getAccountByMail(username);
+//		if (account == null)
+//			throw new UsernameNotFoundException("User này không tồn tại!");
+//
+//		HashSet<GrantedAuthority> auth = new HashSet<>();
+//		auth.add(new SimpleGrantedAuthority(account.getRole().toString()));
+//		return new org.springframework.security.core.
+//				userdetails.User(account.getMail(), account.getPassword(), auth);
+//	}
 
 }

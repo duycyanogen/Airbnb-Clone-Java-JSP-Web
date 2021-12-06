@@ -517,3 +517,50 @@ body {
 	background-color: var(--btn-color-hover);
 	cursor: pointer;
 }
+
+@media screen and (max-width:1400px){
+  .header {
+    
+    padding-left: 10%;
+    padding-right: 10%;
+  }
+  
+  .container{
+   padding-left: 10%;
+   padding-right: 10%;
+  }
+  
+ .container-content-item {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 200px;
+    /* margin-bottom: 20px; */
+    border-bottom: 1px solid rgb(207, 207, 207);
+ }
+ 
+ .container-main {
+ 	padding-right: 0px;
+ }
+ .content-info {
+ 	margin-left: 0px;
+ 	padding-right: 0px;
+ 	padding-left: 0px;
+ }
+ 
+ .info-evalution i {
+ 	font-size: 14px;
+ 	
+ }
+ 
+  .info-evalution p {
+ 	font-size: 14px;
+ 	
+ }
+ 
+ .container-content-item {
+ 	margin: 0px;
+ }
+ 
+}

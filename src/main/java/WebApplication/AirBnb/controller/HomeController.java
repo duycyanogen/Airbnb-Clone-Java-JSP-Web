@@ -31,6 +31,7 @@ import WebApplication.AirBnb.domain.Accounts;
 import WebApplication.AirBnb.model.UserDto;
 import WebApplication.AirBnb.repository.RatingRepository;
 import WebApplication.AirBnb.model.AccountDto;
+import WebApplication.AirBnb.model.PasswordDto;
 import WebApplication.AirBnb.model.PostDto;
 import WebApplication.AirBnb.model.UserAccDto;
 import WebApplication.AirBnb.service.IAccountService;
@@ -78,8 +79,10 @@ public class HomeController {
 		UserAccDto objUserAccDto = (UserAccDto) session.getAttribute("LoginInfor");
 		if (objUserAccDto == null)
 			return "redirect:/";
+		model.addAttribute("isErrors",false);
 		model.addAttribute("post", new PostDto());
 		model.addAttribute("objUserAccDto", objUserAccDto);
+		model.addAttribute("passwordDto", new PasswordDto());
 		return "account/accountinfo";
 	}
 
@@ -100,7 +103,11 @@ public class HomeController {
 		if (useracc != null) {
 			session.setAttribute("LoginInfor", useracc);
 			System.out.println("After login: " + session);
-			return new ModelAndView("redirect:" + request.getHeader("Referer"), model);
+			String url = request.getHeader("Referer");
+			if (url.equals("http://localhost:8080/dang-nhap"))
+				url = "http://localhost:8080/trang-chu";
+			return new ModelAndView("redirect:" + url, model);
+		
 		} else {
 			model.remove("showFormRegis");
 			model.addAttribute("showOverlay", "true");
@@ -114,7 +121,48 @@ public class HomeController {
 
 	@Autowired
 	ServletContext context;
+   
+	@RequestMapping(value = "/doi-mat-khau", method = RequestMethod.POST)
+	public ModelAndView ChangePassword(HttpSession session, ModelMap model, @Validated @ModelAttribute("passwordDto") PasswordDto passwordDto,
+			BindingResult errors) 
+	{
+	   Boolean isErrors = false;
+	   UserAccDto objUserAccDto = (UserAccDto) session.getAttribute("LoginInfor");
+	   model.addAttribute("post", new PostDto());
+	   model.addAttribute("objUserAccDto", objUserAccDto);
+	   model.addAttribute("passwordDto", new PasswordDto());
+	   if(errors.hasErrors()) {
+		   isErrors = true;
+		   model.addAttribute("isErrors",isErrors);
+		   return new ModelAndView("/account/accountinfo",errors.getModel());
+		   
+		   
+	   }
+	   else {
+		   if( !passwordDto.getNewPassword().equals(passwordDto.getConfirmPassword()))
+		    {
+			   isErrors = true;
+			   model.addAttribute("isErrors",isErrors);
+			   errors.rejectValue("confirmPassword","passwordDto", "Xác nhận mật khẩu chưa chính xác");
+		    }
+		   if(!accountService.changePassword(passwordDto.getCurrentPassword(),passwordDto.getNewPassword() , objUserAccDto.getAccountId()))
+		   {
+			   isErrors = true;
+			   model.addAttribute("isErrors",isErrors);
+			   errors.rejectValue("confirmPassword","passwordDto", "Mật khẩu hiện tai không đúng");
+			   return new ModelAndView("/account/accountinfo",errors.getModel());
+		   } else {
+			  
+			   return new ModelAndView("redirect:/thong-tin-ca-nhan", model);
+		   }	  
 
+		   
+	   }
+	   
+//		  return  new ModelAndView("redirect:/",model);
+	}
+	
+	 
 	@RequestMapping(value = "/dang-ki", method = RequestMethod.POST)
 	public ModelAndView Register(ModelMap model, @Validated @ModelAttribute("useracc") UserAccDto useracc,
 			BindingResult errors, @RequestParam("image") MultipartFile image) {
@@ -166,7 +214,11 @@ public class HomeController {
 	@RequestMapping(value = "dang-xuat", method = RequestMethod.GET)
 	public String Logout(HttpSession session, HttpServletRequest request) {
 		session.removeAttribute("LoginInfor");
-		return "redirect:" + request.getHeader("Referer");
+		String url = request.getHeader("Referer");
+		if (url.equals("http://localhost:8080/dang-nhap"))
+			url = "http://localhost:8080/trang-chu";
+		return "redirect:" + url;
+		
 	}
 	
 	@PostMapping(value = "updateInfo")
@@ -184,5 +236,7 @@ public class HomeController {
 		session.setAttribute("LoginInfor",objUserAccDtoSession);
 		return "redirect:/thong-tin-ca-nhan";
 	}
+	
+	
 
 }

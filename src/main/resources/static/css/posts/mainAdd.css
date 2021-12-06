@@ -330,6 +330,19 @@ option {
   padding-right: 10%;
 
 }
+
+.contairer-background {
+	width: 31%;
+}
+ .footer {
+ 	padding-left: 10%;
+ 	padding-right: 10%;
+}
+
+.section {
+	padding-left: 0px;
+	padding-right: 0px;
+}
 }
    
 
