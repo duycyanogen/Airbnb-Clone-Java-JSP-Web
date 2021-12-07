@@ -92,5 +92,7 @@ public interface IAccountService  {
 
 	Boolean changePassword(String oldPassword, String newPassword, long accountId);
 
+	List<UserAccDto> getAllUserAccount();
+
 
 }

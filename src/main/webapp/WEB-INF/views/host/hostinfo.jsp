@@ -327,7 +327,7 @@
 									<c:if
 										test="${sessionScope.LoginInfor.accountId == hostInfo.getAccountId() }">
 										<div class="content-info-detail-end-btn">
-											<button>Chỉnh sửa</button>
+<!-- 											<button>Chỉnh sửa</button> -->
 											<button class="content-delete-btn"
 												onclick=showConfirmDialog(${item.getPostId()})>Xóa</button>
 										</div>

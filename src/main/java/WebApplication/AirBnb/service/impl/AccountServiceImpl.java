@@ -40,6 +40,11 @@ public class AccountServiceImpl implements IAccountService {
 	BCryptPasswordEncoder bCryptPasswordEncoder;
 
 	@Override
+	public List<UserAccDto> getAllUserAccount()
+	{
+		return accountRepository.getAllUserAccount();
+	}
+	@Override
 	public <S extends Accounts> S save(S entity) {
 		entity.setPassword(bCryptPasswordEncoder.encode(entity.getPassword()));
 		return accountRepository.save(entity);
@@ -82,9 +87,13 @@ public class AccountServiceImpl implements IAccountService {
 		try {
 			UserAccDto result = new UserAccDto();
 			result = accountRepository.getUserAccountByMail(account.getMail());
+			
 			if (result != null) {
 				if (bCryptPasswordEncoder.matches(account.getPassword(), result.getPassword()))
+				{
+					result.setRoleId(accountRepository.getRoleByAccountId(result.getAccountId()));
 					return result;
+				}
 				else
 					return null;
 			} else
