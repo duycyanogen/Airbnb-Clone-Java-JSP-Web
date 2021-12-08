@@ -24,7 +24,16 @@
 	href="<c:url value='${pageContext.request.contextPath}/vendor/fonts/fontawesome/css/fontawesome-all.css'/>" />
 <link rel="stylesheet" type="text/css"
 	href="<c:url value='${pageContext.request.contextPath}/vendor/fonts/material-design-iconic-font/css/materialdesignicons.min.css'/>" />
-<title>Concept - Bootstrap 4 Admin Dashboard Template</title>
+<link rel="stylesheet" type="text/css"
+	href="<c:url value='${pageContext.request.contextPath}/css/common/reset.css'/>" />
+<link rel="stylesheet" type="text/css"
+	href="<c:url value='${pageContext.request.contextPath}/css/common/base.css'/>" />
+<link rel="stylesheet" type="text/css"
+	href="<c:url value='${pageContext.request.contextPath}/css/common/total.css'/>" />
+<link rel="stylesheet" type="text/css"
+	href="<c:url value='${pageContext.request.contextPath}/css/admin/admin.css'/>" />
+
+<title>User managet</title>
 </head>
 
 <body>
