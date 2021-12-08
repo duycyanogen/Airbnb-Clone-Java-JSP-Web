@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class BedTypeDto {
+	private long bedTypeId;
 	@NotBlank
 	private String bedTypeName;
 	

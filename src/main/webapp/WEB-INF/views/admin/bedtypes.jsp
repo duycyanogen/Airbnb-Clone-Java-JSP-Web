@@ -65,141 +65,25 @@
 				</button>
 				<div class="collapse navbar-collapse " id="navbarSupportedContent">
 					<ul class="navbar-nav ml-auto navbar-right-top">
-						<li class="nav-item">
-							<div id="custom-search" class="top-search-bar">
-								<input class="form-control" type="text" placeholder="Search..">
-							</div>
-						</li>
+						
 						<li class="nav-item dropdown notification"><a
 							class="nav-link nav-icons" href="#" id="navbarDropdownMenuLink1"
 							data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i
 								class="fas fa-fw fa-bell"></i> <span class="indicator"></span></a>
-							<ul
-								class="dropdown-menu dropdown-menu-right notification-dropdown">
-								<li>
-									<div class="notification-title">Notification</div>
-									<div class="notification-list">
-										<div class="list-group">
-											<a href="#"
-												class="list-group-item list-group-item-action active">
-												<div class="notification-info">
-													<div class="notification-list-user-img">
-														<img src="../assets/images/avatar-2.jpg" alt=""
-															class="user-avatar-md rounded-circle">
-													</div>
-													<div class="notification-list-user-block">
-														<span class="notification-list-user-name">Jeremy
-															Rakestraw</span>accepted your invitation to join the team.
-														<div class="notification-date">2 min ago</div>
-													</div>
-												</div>
-											</a> <a href="#" class="list-group-item list-group-item-action">
-												<div class="notification-info">
-													<div class="notification-list-user-img">
-														<img src="../assets/images/avatar-3.jpg" alt=""
-															class="user-avatar-md rounded-circle">
-													</div>
-													<div class="notification-list-user-block">
-														<span class="notification-list-user-name"> John
-															Abraham</span>is now following you
-														<div class="notification-date">2 days ago</div>
-													</div>
-												</div>
-											</a> <a href="#" class="list-group-item list-group-item-action">
-												<div class="notification-info">
-													<div class="notification-list-user-img">
-														<img src="../assets/images/avatar-4.jpg" alt=""
-															class="user-avatar-md rounded-circle">
-													</div>
-													<div class="notification-list-user-block">
-														<span class="notification-list-user-name">Monaan
-															Pechi</span> is watching your main repository
-														<div class="notification-date">2 min ago</div>
-													</div>
-												</div>
-											</a> <a href="#" class="list-group-item list-group-item-action">
-												<div class="notification-info">
-													<div class="notification-list-user-img">
-														<img src="../assets/images/avatar-5.jpg" alt=""
-															class="user-avatar-md rounded-circle">
-													</div>
-													<div class="notification-list-user-block">
-														<span class="notification-list-user-name">Jessica
-															Caruso</span>accepted your invitation to join the team.
-														<div class="notification-date">2 min ago</div>
-													</div>
-												</div>
-											</a>
-										</div>
-									</div>
-								</li>
-								<li>
-									<div class="list-footer">
-										<a href="#">View all notifications</a>
-									</div>
-								</li>
-							</ul></li>
+							</li>
 						<li class="nav-item dropdown connection"><a class="nav-link"
 							href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
 							aria-haspopup="true" aria-expanded="false"> <i
 								class="fas fa-fw fa-th"></i>
 						</a>
-							<ul class="dropdown-menu dropdown-menu-right connection-dropdown">
-								<li class="connection-list">
-									<div class="row">
-										<div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 ">
-											<a href="#" class="connection-item"><img
-												src="../assets/images/github.png" alt=""> <span>Github</span></a>
-										</div>
-										<div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 ">
-											<a href="#" class="connection-item"><img
-												src="../assets/images/dribbble.png" alt=""> <span>Dribbble</span></a>
-										</div>
-										<div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 ">
-											<a href="#" class="connection-item"><img
-												src="../assets/images/dropbox.png" alt=""> <span>Dropbox</span></a>
-										</div>
-									</div>
-									<div class="row">
-										<div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 ">
-											<a href="#" class="connection-item"><img
-												src="../assets/images/bitbucket.png" alt=""> <span>Bitbucket</span></a>
-										</div>
-										<div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 ">
-											<a href="#" class="connection-item"><img
-												src="../assets/images/mail_chimp.png" alt=""><span>Mail
-													chimp</span></a>
-										</div>
-										<div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 ">
-											<a href="#" class="connection-item"><img
-												src="../assets/images/slack.png" alt=""> <span>Slack</span></a>
-										</div>
-									</div>
-								</li>
-								<li>
-									<div class="conntection-footer">
-										<a href="#">More</a>
-									</div>
-								</li>
-							</ul></li>
+							</li>
 						<li class="nav-item dropdown nav-user"><a
-							class="nav-link nav-user-img" href="#"
+							class="nav-link nav-user-img" href="${pageContext.request.contextPath}/thong-tin-ca-nhan"
 							id="navbarDropdownMenuLink2" data-toggle="dropdown"
 							aria-haspopup="true" aria-expanded="false"><img
-								src="../assets/images/avatar-1.jpg" alt=""
+								src="${pageContext.request.contextPath}/avatarimage/${sessionScope.LoginInfor.getAvatar() }" alt=""
 								class="user-avatar-md rounded-circle"></a>
-							<div class="dropdown-menu dropdown-menu-right nav-user-dropdown"
-								aria-labelledby="navbarDropdownMenuLink2">
-								<div class="nav-user-info">
-									<h5 class="mb-0 text-white nav-user-name">John Abraham</h5>
-									<span class="status"></span><span class="ml-2">Available</span>
-								</div>
-								<a class="dropdown-item" href="#"><i
-									class="fas fa-user mr-2"></i>Account</a> <a class="dropdown-item"
-									href="#"><i class="fas fa-cog mr-2"></i>Setting</a> <a
-									class="dropdown-item" href="#"><i
-									class="fas fa-power-off mr-2"></i>Logout</a>
-							</div></li>
+							</li>
 					</ul>
 				</div>
 			</nav>
@@ -298,10 +182,8 @@
 													<td>${item.getBedTypeName()}</td>
 													<td>
 														<button class="btn btn-success" onclick=showInsertDialog()>Thêm</button>
-														<button class="btn btn-info">Sửa</button>
-
-														<button class="content-delete-btn btn btn-danger"
-															onclick=showConfirmDialog(${item.getBedTypeId()})>Xóa</button>
+														<button class="btn btn-info"
+															onclick="showUpdateDialog(${item.getBedTypeId()},'${item.getBedTypeName()}')">Sửa</button>
 													</td>
 												</tr>
 											</c:forEach>
@@ -326,24 +208,24 @@
 				</div>
 			</div>
 			<div class="overlay none-block">
-				<%-- <div class="overlay-form ${empty showFormLogin ? " none-block" : "" }"> --%>
-				<div id="confirm-delete" class="overlay-confirm">
-					<div class="overlay-confirm-header">
-						<p class="">Bạn có chắc chắn muốn xóa loại giường này?</p>
-						<i class="fas fa-times cancelTimes1"></i>
-					</div>
-					<div class="overlay-confirm-content">
+<%-- 				<div class="overlay-form ${empty showFormLogin ? " none-block" : "" }"> --%>
+								<div id="confirm-delete" class="overlay-confirm">
+									<div class="overlay-confirm-header">
+										<p class="">Bạn có chắc chắn muốn xóa loại giường này?</p>
+										<i class="fas fa-times cancel"></i>
+									</div>
+									<div class="overlay-confirm-content">
 
-						<div class="overlay-confirm-button">
-							<button>
-								<a id="yesOption">Xác nhận</a>
-							</button>
-						</div>
-						<div class="overlay-confirm-button">
-							<button class="cancel1">Hủy</button>
-						</div>
-					</div>
-				</div>
+										<div class="overlay-confirm-button">
+											<button>
+												<a id="yesOption">Xác nhận</a>
+											</button>
+										</div>
+										<div class="overlay-confirm-button">
+											<button class="cancel">Hủy</button>
+										</div>
+									</div>
+								</div>
 				<div id="confirm-insert" class="overlay-confirm">
 					<form:form
 						action="${pageContext.request.contextPath}/admin/insertBedType"
@@ -353,38 +235,42 @@
 								<h2>Thêm mới dịch vụ</h2>
 								<form:input type="text" placeholder="Nhập tên loại giường mới"
 									path="bedTypeName" />
-
 							</div>
-							<i class="fas fa-times cancelTimes2"></i>
+							<i class="fas fa-times cancel"></i>
 						</div>
 						<div class="overlay-confirm-content">
-
-
 							<div class="overlay-confirm-button">
 								<button type="submit">Xác nhận</button>
 							</div>
 							<div class="overlay-confirm-button">
-								<button class="cancel2">Hủy</button>
+								<button type="button" class="cancel">Hủy</button>
 							</div>
 						</div>
 					</form:form>
 				</div>
 				<div id="confirm-update" class="overlay-confirm">
-					<div class="overlay-confirm-header">
-						<p class="">Bạn có chắc chắn muốn xóa bài đăng này?</p>
-						<i class="fas fa-times cancelTimes3"></i>
-					</div>
-					<div class="overlay-confirm-content">
+					<form:form
+						action="${pageContext.request.contextPath}/admin/updateBedType"
+						modelAttribute="bedTypeDto">
+						<div class="overlay-confirm-header">
+							<div class="input-form">
+								<h2>Chỉnh sửa</h2>
+								<form:input id="Id" type="hidden" path="bedTypeId" />
+								<form:input id="Name" type="text"
+									placeholder="Nhập tên dịch vụ mới" path="bedTypeName" />
+							</div>
+							<i class="fas fa-times cancel"></i>
+						</div>
+						<div class="overlay-confirm-content">
 
-						<div class="overlay-confirm-button">
-							<button>
-								<a id="yesOption">Xác nhận</a>
-							</button>
+							<div class="overlay-confirm-button">
+								<button type="submit">Cập nhật</button>
+							</div>
+							<div class="overlay-confirm-button">
+								<button type="button" class="cancel">Hủy</button>
+							</div>
 						</div>
-						<div class="overlay-confirm-button">
-							<button class="cancel3">Hủy</button>
-						</div>
-					</div>
+					</form:form>
 				</div>
 			</div>
 		</div>
@@ -393,32 +279,17 @@
 							const confirmDelete = document.querySelector("#confirm-delete");
 							const confirmUpdate = document.querySelector("#confirm-update");
 							const confirmInsert = document.querySelector("#confirm-insert");
-							const cancelTimes1 = document.querySelector(".cancelTimes1");
-							const cancelTimes2 = document.querySelector(".cancelTimes2");
-							const cancelTimes3 = document.querySelector(".cancelTimes3");
-							const cancel1 = document.querySelector(".cancel1");
-							const cancel2 = document.querySelector(".cancel2");
-							const cancel3 = document.querySelector(".cancel3");
-							cancelTimes1.onclick = function (e) {
-								overlay.classList.add("none-block");
+							const cancel = document.querySelectorAll(".cancel");
+							const idInput = document.querySelector("#Id");
+							const nameInput = document.querySelector("#Name");
+							const iconInput = document.querySelector("#Icon");
+ 														
+							for (var i = 0; i < cancel.length; i++) {
+								cancel[i].onclick = function () {
+									overlay.classList.add("none-block");
+								}
 							}
-							cancelTimes2.onclick = function (e) {
-								overlay.classList.add("none-block");
-							}
-							cancelTimes3.onclick = function (e) {
-								overlay.classList.add("none-block");
-							}
-
-							cancel1.onclick = function (e) {
-								overlay.classList.add("none-block");
-							}
-							cancel2.onclick = function (e) {
-								overlay.classList.add("none-block");
-							}
-							cancel3.onclick = function (e) {
-								overlay.classList.add("none-block");
-							}
-
+							console.log(cancel);
 							overlay.onclick = function (e) {
 								if ((!e.target.closest("#confirm-insert"))
 									&& !(e.target.closest("#confirm-update"))
@@ -426,10 +297,8 @@
 									overlay.classList.add("none-block");
 								}
 							}
-							const yesOption = document.querySelector("#yesOption");
-							const showConfirmDialog = function (serviceId) {
-								yesOption.href = "${pageContext.request.contextPath}/danh-sach-tin/xoa-tin/"
-									+ serviceId;
+
+							const showConfirmDialog = function (serviceId) {								
 								overlay.classList.remove("none-block");
 								confirmInsert.classList.add("none-block");
 								confirmUpdate.classList.add("none-block");
@@ -437,27 +306,22 @@
 
 							}
 
-							const showInsertDialog = function () {
-								yesOption.href = "${pageContext.request.contextPath}/danh-sach-tin/xoa-tin/";
-
+							const showInsertDialog = function () {								
 								overlay.classList.remove("none-block");
 								confirmInsert.classList.remove("none-block");
 								confirmUpdate.classList.add("none-block");
 								confirmDelete.classList.add("none-block");
-
 							}
 
-							const showUpdateDialog = function (serviceId) {
-								yesOption.href = "${pageContext.request.contextPath}/danh-sach-tin/xoa-tin/"
-									+ serviceId;
+							const showUpdateDialog = function (Id, name) {
+								idInput.value = Id;
+								nameInput.value = name;
 								overlay.classList.remove("none-block");
-								confirmInsert.classList.remove("none-block");
-								confirmUpdate.classList.add("none-block");
+								confirmInsert.classList.add("none-block");
+								confirmUpdate.classList.remove("none-block");
 								confirmDelete.classList.add("none-block");
 
 							}
-
-
 						</script>
 </body>
 

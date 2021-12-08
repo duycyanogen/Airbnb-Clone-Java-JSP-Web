@@ -69,13 +69,26 @@ public class AdminController {
 		return "admin/roomtypes";
 	}
 
-	@RequestMapping(value = "insertRoomType", method = RequestMethod.POST)
+	@RequestMapping(value = "admin/insertRoomType", method = RequestMethod.POST)
 	public ModelAndView insertRoomType(ModelMap model,
 			@Validated @ModelAttribute("roomTypeDto") RoomTypeDto roomTypeDto, BindingResult errors) {
 		if (!errors.hasErrors()) {
 			RoomTypes roomTypesEntity = new RoomTypes();
 			roomTypesEntity.setRoomTypeName(roomTypeDto.getRoomTypeName());
 
+			roomTypeService.save(roomTypesEntity);
+			return new ModelAndView("redirect:/admin/danh-sach-loai-phong");
+		}
+		return new ModelAndView("admin/roomtypes", errors.getModel());
+	}
+	
+	@RequestMapping(value = "admin/updateRoomType", method = RequestMethod.POST)
+	public ModelAndView updateRoomType(ModelMap model,
+			@Validated @ModelAttribute("roomTypeDto") RoomTypeDto roomTypeDto, BindingResult errors) {
+		if (!errors.hasErrors()) {
+			RoomTypes roomTypesEntity = new RoomTypes();
+			roomTypesEntity.setRoomTypeName(roomTypeDto.getRoomTypeName());
+			roomTypesEntity.setRoomTypeId(roomTypeDto.getRoomTypeId());
 			roomTypeService.save(roomTypesEntity);
 			return new ModelAndView("redirect:/admin/danh-sach-loai-phong");
 		}
@@ -95,13 +108,26 @@ public class AdminController {
 		return "admin/bedtypes";
 	}
 
-	@RequestMapping(value = "insertBedType", method = RequestMethod.POST)
+	@RequestMapping(value = "admin/insertBedType", method = RequestMethod.POST)
 	public ModelAndView insertBedType(ModelMap model, @Validated @ModelAttribute("bedTypeDto") BedTypeDto bedTypeDto,
 			BindingResult errors) {
 		if (!errors.hasErrors()) {
 			BedTypes bedTypesEntity = new BedTypes();
 			bedTypesEntity.setBedTypeName(bedTypeDto.getBedTypeName());
 
+			bedTypeService.save(bedTypesEntity);
+			return new ModelAndView("redirect:/admin/danh-sach-loai-giuong");
+		}
+		return new ModelAndView("admin/bedtypes", errors.getModel());
+	}
+	
+	@RequestMapping(value = "admin/updateBedType", method = RequestMethod.POST)
+	public ModelAndView updateBedType(ModelMap model, @Validated @ModelAttribute("bedTypeDto") BedTypeDto bedTypeDto,
+			BindingResult errors) {
+		if (!errors.hasErrors()) {
+			BedTypes bedTypesEntity = new BedTypes();
+			bedTypesEntity.setBedTypeName(bedTypeDto.getBedTypeName());
+			bedTypesEntity.setBedTypeId(bedTypeDto.getBedTypeId());
 			bedTypeService.save(bedTypesEntity);
 			return new ModelAndView("redirect:/admin/danh-sach-loai-giuong");
 		}
@@ -121,13 +147,27 @@ public class AdminController {
 		return "admin/services";
 	}
 
-	@RequestMapping(value = "insertService", method = RequestMethod.POST)
+	@RequestMapping(value = "admin/insertService", method = RequestMethod.POST)
 	public ModelAndView insertService(ModelMap model, @Validated @ModelAttribute("serviceDto") ServiceDto serviceDto,
 			BindingResult errors) {
 		if (!errors.hasErrors()) {
 			Services serviceEntity = new Services();
 			serviceEntity.setServiceName(serviceDto.getServiceName());
 			serviceEntity.setIcon("<i class=\"" + serviceDto.getIcon() + "\"></i>");
+			serviceService.save(serviceEntity);
+			return new ModelAndView("redirect:/admin/danh-sach-dich-vu");
+		}
+		return new ModelAndView("admin/services", errors.getModel());
+	}
+	
+	@RequestMapping(value = "admin/updateService", method = RequestMethod.POST)
+	public ModelAndView updateService(ModelMap model, @Validated @ModelAttribute("serviceDto") ServiceDto serviceDto,
+			BindingResult errors) {
+		if (!errors.hasErrors()) {
+			Services serviceEntity = new Services();
+			serviceEntity.setServiceName(serviceDto.getServiceName());
+			serviceEntity.setIcon("<i class=\"" + serviceDto.getIcon() + "\"></i>");
+			serviceEntity.setServiceId(serviceDto.getServiceId());
 			serviceService.save(serviceEntity);
 			return new ModelAndView("redirect:/admin/danh-sach-dich-vu");
 		}
@@ -147,12 +187,25 @@ public class AdminController {
 		return "admin/locations";
 	}
 
-	@RequestMapping(value = "insertLocation", method = RequestMethod.POST)
+	@RequestMapping(value = "admin/insertLocation", method = RequestMethod.POST)
 	public ModelAndView insertLocation(ModelMap model,
 			@Validated @ModelAttribute("locationDto") LocationDto locationDto, BindingResult errors) {
 		if (!errors.hasErrors()) {
 			Locations locationEntity = new Locations();
 			locationEntity.setLocationName(locationDto.getLocationName());
+			locationService.save(locationEntity);
+			return new ModelAndView("redirect:/admin/danh-sach-dia-diem");
+		}
+		return new ModelAndView("admin/locations", errors.getModel());
+	}
+	
+	@RequestMapping(value = "admin/updateLocation", method = RequestMethod.POST)
+	public ModelAndView updateLocation(ModelMap model,
+			@Validated @ModelAttribute("locationDto") LocationDto locationDto, BindingResult errors) {
+		if (!errors.hasErrors()) {
+			Locations locationEntity = new Locations();
+			locationEntity.setLocationName(locationDto.getLocationName());
+			locationEntity.setLocationId(locationDto.getLocationId());
 			locationService.save(locationEntity);
 			return new ModelAndView("redirect:/admin/danh-sach-dia-diem");
 		}

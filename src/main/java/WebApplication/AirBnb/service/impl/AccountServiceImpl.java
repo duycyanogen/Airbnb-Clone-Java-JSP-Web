@@ -42,7 +42,11 @@ public class AccountServiceImpl implements IAccountService {
 	@Override
 	public List<UserAccDto> getAllUserAccount()
 	{
-		return accountRepository.getAllUserAccount();
+		List<UserAccDto> lstUserAccs = accountRepository.getAllUserAccount();
+		for (UserAccDto userAccDto : lstUserAccs) {
+			userAccDto.setRoleId(accountRepository.getRoleByAccountId(userAccDto.getAccountId()));
+		}
+		return lstUserAccs;
 	}
 	@Override
 	public <S extends Accounts> S save(S entity) {
