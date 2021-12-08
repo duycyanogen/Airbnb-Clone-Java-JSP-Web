@@ -205,6 +205,10 @@
 					</div>
 					<div class="header-down-activate">
 						<ul class="header-down-activate-list">
+						<c:if test="${ sessionScope.LoginInfor.getRoleId()==1 }">
+								<li><a
+									href="${pageContext.request.contextPath}/admin">Admin</a></li>
+							</c:if>
 							<c:if test="${ not empty sessionScope.LoginInfor }">
 								<li><a
 									href="${pageContext.request.contextPath}/danh-sach-tin/dang-tin">Cho
