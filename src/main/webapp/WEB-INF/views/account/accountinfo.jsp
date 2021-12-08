@@ -164,7 +164,7 @@
 							<li class="handle-info-list-item birthday-account">
 								<div>
 									<p class="handle-key">Ngày sinh</p>
-									<form:input cssClass="handle-value"  type="text" path="dateOfBirth" />
+									<form:input cssClass="handle-value"  type="date" path="dateOfBirth" />
 
 								</div>
 								<p class="handle-edit">Chỉnh sửa</p>
