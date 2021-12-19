@@ -24,11 +24,13 @@
 <%-- <link rel="stylesheet" href="<c:url value='image'/>" /> --%>
 <base href="${pageContext.servletContext.contextPath}">
 <title>Home</title>
+<link rel="shortcut icon" sizes="76x76" type="image/x-icon" href="https://a0.muscache.com/airbnb/static/logotype_favicon-21cc8e6c6a2cca43f061d2dcabdf6e58.ico"/>
 </head>
 
 <body>
 	<div class="overlay ${empty showOverlay ? "none-block" : "" }">
-		<form:form action="${pageContext.request.contextPath}/dang-nhap" modelAttribute="account">
+		<form:form action="${pageContext.request.contextPath}/dang-nhap"
+			modelAttribute="account">
 			<div class="overlay-form ${empty showFormLogin ? "none-block" : "" }">
 				<div class="overlay-form-header">
 					<p class="">Đăng nhập</p>
@@ -51,7 +53,8 @@
 								path="password" />
 						</div>
 						<div>
-							<a href="${pageContext.request.contextPath}/forgot-pass"">Quên mật khẩu?</a></span>
+							<a href="${pageContext.request.contextPath}/forgot-pass"">Quên
+								mật khẩu?</a></span>
 						</div>
 
 					</div>
@@ -61,8 +64,8 @@
 				</div>
 			</div>
 		</form:form>
-		<form:form action="${pageContext.request.contextPath}/dang-ki" modelAttribute="useracc"
-			enctype="multipart/form-data">
+		<form:form action="${pageContext.request.contextPath}/dang-ki"
+			modelAttribute="useracc" enctype="multipart/form-data">
 			<div class="sign-up-form ${empty showFormRegis ? "none-block" : "" }">
 				<div class="sign-up-form-content">
 					<div class="sign-up-form-header">
@@ -205,9 +208,8 @@
 					</div>
 					<div class="header-down-activate">
 						<ul class="header-down-activate-list">
-						<c:if test="${ sessionScope.LoginInfor.getRoleId()==1 }">
-								<li><a
-									href="${pageContext.request.contextPath}/admin">Admin</a></li>
+							<c:if test="${ sessionScope.LoginInfor.getRoleId()==1 }">
+								<li><a href="${pageContext.request.contextPath}/admin">Admin</a></li>
 							</c:if>
 							<c:if test="${ not empty sessionScope.LoginInfor }">
 								<li><a
@@ -215,7 +217,9 @@
 										thuê nhà</a></li>
 							</c:if>
 							<c:if test="${not empty sessionScope.LoginInfor }">
-								<li class="account-log-out""><a href="${pageContext.request.contextPath}/thong-tin-chu-nha/${sessionScope.LoginInfor.accountId }">Quản lý tin đã đăng</a></li>
+								<li class="account-log-out""><a
+									href="${pageContext.request.contextPath}/thong-tin-chu-nha/${sessionScope.LoginInfor.accountId }">Quản
+										lý tin đã đăng</a></li>
 							</c:if>
 							<li>Trợ giúp</li>
 						</ul>
@@ -237,7 +241,9 @@
 			<div class="slider__content">
 				<span class="slider__text">Bạn chưa biết nên đi đâu?</span>
 				<div class="slider__search-frame">
-					<a href="${pageContext.request.contextPath}/danh-sach-tin/?pageId=1">Bắt đầu khám phá</a>
+					<a
+						href="${pageContext.request.contextPath}/danh-sach-tin/?pageId=1">Bắt
+						đầu khám phá</a>
 				</div>
 			</div>
 		</div>
@@ -277,7 +283,7 @@
 					<div class="section-item__content">
 						<h3>
 							<a
-								href="${pageContext.request.contextPath}/danh-sach-tin/tim-kiem?keyword=Nha+trang">Vũng
+								href="${pageContext.request.contextPath}/danh-sach-tin/tim-kiem?keyword=Vũng+tàu">Vũng
 								tàu</a>
 						</h3>
 						<p>2,5 giờ lái xe</p>
@@ -290,7 +296,7 @@
 					<div class="section-item__content">
 						<h3>
 							<a
-								href="${pageContext.request.contextPath}/danh-sach-tin/tim-kiem?keyword=Nha+trang">Phú
+								href="${pageContext.request.contextPath}/danh-sach-tin/tim-kiem?keyword=Phú+Quốc">Phú
 								Quốc</a>
 						</h3>
 						<p></p>
@@ -303,7 +309,7 @@
 					<div class="section-item__content">
 						<h3>
 							<a
-								href="${pageContext.request.contextPath}/danh-sach-tin/tim-kiem?keyword=Nha+trang">Cần
+								href="${pageContext.request.contextPath}/danh-sach-tin/tim-kiem?keyword=Cần+Thơ">Cần
 								thơ</a>
 						</h3>
 						<p>3 giờ lái xe</p>
@@ -316,7 +322,7 @@
 					<div class="section-item__content">
 						<h3>
 							<a
-								href="${pageContext.request.contextPath}/danh-sach-tin/tim-kiem?keyword=Nha+trang">Phú
+								href="${pageContext.request.contextPath}/danh-sach-tin/tim-kiem?keyword=Phú+Yên">Phú
 								Yên</a>
 						</h3>
 						<p>7,5 giờ lái xe</p>
@@ -329,7 +335,7 @@
 					<div class="section-item__content">
 						<h3>
 							<a
-								href="${pageContext.request.contextPath}/danh-sach-tin/tim-kiem?keyword=Nha+trang">Đồng
+								href="${pageContext.request.contextPath}/danh-sach-tin/tim-kiem?keyword=Đồng+Nai">Đồng
 								Nai</a>
 						</h3>
 						<p>45 phút lái xe</p>
@@ -342,7 +348,7 @@
 					<div class="section-item__content">
 						<h3>
 							<a
-								href="${pageContext.request.contextPath}/danh-sach-tin/tim-kiem?keyword=Nha+trang">Bình
+								href="${pageContext.request.contextPath}/danh-sach-tin/tim-kiem?keyword=Bình+Dương">Bình
 								Dương</a>
 						</h3>
 						<p>30 phút lái xe</p>

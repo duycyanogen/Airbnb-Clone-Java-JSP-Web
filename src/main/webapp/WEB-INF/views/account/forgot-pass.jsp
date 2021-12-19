@@ -13,6 +13,7 @@
 <meta charset="UTF-8">
 <base href="${pageContext.servletContext.contextPath}">
 <title>Quên mật khẩu</title>
+<link rel="shortcut icon" sizes="76x76" type="image/x-icon" href="https://a0.muscache.com/airbnb/static/logotype_favicon-21cc8e6c6a2cca43f061d2dcabdf6e58.ico"/>
 </head>
 <body>
 

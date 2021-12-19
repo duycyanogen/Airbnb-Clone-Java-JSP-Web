@@ -46,8 +46,8 @@ public class ForgotPasswordController {
 	@Autowired
 	SessionFactory factory;
 
-	@Autowired
-	JavaMailSender mailer;
+//	@Autowired
+//	JavaMailSender mailer;
 
 	@RequestMapping(value = "forgot-pass", method = RequestMethod.GET)
 	public String forgotPassword(ModelMap model) {
@@ -100,18 +100,18 @@ public class ForgotPasswordController {
 		String body = "Bạn đã báo quên mật khẩu vào " + date + "  mật khẩu mới của bạn là " + newPassword
 				+ "\n Nếu bạn không thực hiện yêu cầu trên , vui lòng liên hệ quản trị viên ngay";
 		
-			message.setFrom(from);
-			message.setTo(to);
-			message.setReplyTo(from);
-			message.setSubject(subject);
-			message.setText(body);
-			mailer.send(message);
-			
-			model.addAttribute("tinnhan", "Mật khẩu mới đã gửi đến email của bạn");
-			
-			ac.setPassword(bCryptPasswordEncoder.encode(newPassword));
-			s.update(ac);
-			t.commit();
+		message.setFrom(from);
+		message.setTo(to);
+		message.setReplyTo(from);
+		message.setSubject(subject);
+		message.setText(body);
+		mailer.send(message);
+		
+		model.addAttribute("tinnhan", "Mật khẩu mới đã gửi đến email của bạn");
+		
+		ac.setPassword(bCryptPasswordEncoder.encode(newPassword));
+		s.update(ac);
+		t.commit();
 		} catch (Exception ex) {
 			model.addAttribute("tinnhan", "Tài khoản không tồn tại");
 			t.rollback();

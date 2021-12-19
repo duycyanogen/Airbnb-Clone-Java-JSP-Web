@@ -23,6 +23,7 @@
 	href="<c:url value='${pageContext.request.contextPath}/Fonts/fontawesome-free-5.15.3-web/css/all.min.css'/>" />
 <link rel="stylesheet" href="<c:url value='image'/>" />
 <title>AirBnb</title>
+<link rel="shortcut icon" sizes="76x76" type="image/x-icon" href="https://a0.muscache.com/airbnb/static/logotype_favicon-21cc8e6c6a2cca43f061d2dcabdf6e58.ico"/>
 </head>
 
 <body>
