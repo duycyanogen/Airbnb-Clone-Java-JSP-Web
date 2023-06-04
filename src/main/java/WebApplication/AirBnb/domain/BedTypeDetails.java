@@ -38,5 +38,32 @@ public class BedTypeDetails implements Serializable {
     private BedTypes bedType;	
 	@Column(columnDefinition = "nvarchar", length = 255)
 	private String description;
+	public BedTypeDetailId getBedTypeDetailId() {
+		return bedTypeDetailId;
+	}
+	public void setBedTypeDetailId(BedTypeDetailId bedTypeDetailId) {
+		this.bedTypeDetailId = bedTypeDetailId;
+	}
+	public RoomTypeInfos getRoomTypeInfo() {
+		return roomTypeInfo;
+	}
+	public void setRoomTypeInfo(RoomTypeInfos roomTypeInfo) {
+		this.roomTypeInfo = roomTypeInfo;
+	}
+	public BedTypes getBedType() {
+		return bedType;
+	}
+	public void setBedType(BedTypes bedType) {
+		this.bedType = bedType;
+	}
+	public String getDescription() {
+		return description;
+	}
+	public void setDescription(String description) {
+		this.description = description;
+	}
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
 	
 }

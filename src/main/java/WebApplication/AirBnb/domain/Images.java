@@ -23,6 +23,27 @@ public class Images implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	public Long getImageId() {
+		return imageId;
+	}
+	public void setImageId(Long imageId) {
+		this.imageId = imageId;
+	}
+	public String getPath() {
+		return path;
+	}
+	public void setPath(String path) {
+		this.path = path;
+	}
+	public Posts getPost() {
+		return post;
+	}
+	public void setPost(Posts post) {
+		this.post = post;
+	}
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long imageId;

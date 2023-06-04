@@ -38,6 +38,82 @@ public class Posts implements Serializable {
 	@JoinColumn(name = "account_id")
 	private Accounts account;
 	
+	public Long getPostId() {
+		return postId;
+	}
+
+	public void setPostId(Long postId) {
+		this.postId = postId;
+	}
+
+	public String getPostDate() {
+		return postDate;
+	}
+
+	public void setPostDate(String postDate) {
+		this.postDate = postDate;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public String getContent() {
+		return content;
+	}
+
+	public void setContent(String content) {
+		this.content = content;
+	}
+
+	public int getStatus() {
+		return status;
+	}
+
+	public void setStatus(int status) {
+		this.status = status;
+	}
+
+	public Accounts getAccount() {
+		return account;
+	}
+
+	public void setAccount(Accounts account) {
+		this.account = account;
+	}
+
+	public List<Ratings> getLstRatings() {
+		return lstRatings;
+	}
+
+	public void setLstRatings(List<Ratings> lstRatings) {
+		this.lstRatings = lstRatings;
+	}
+
+	public List<Images> getLstImages() {
+		return lstImages;
+	}
+
+	public void setLstImages(List<Images> lstImages) {
+		this.lstImages = lstImages;
+	}
+
+	public List<RoomTypeInfos> getLstRoomTypeInfos() {
+		return lstRoomTypeInfos;
+	}
+
+	public void setLstRoomTypeInfos(List<RoomTypeInfos> lstRoomTypeInfos) {
+		this.lstRoomTypeInfos = lstRoomTypeInfos;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
 	@OneToMany(mappedBy = "post")
 	private List<Ratings> lstRatings;
 	

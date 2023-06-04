@@ -35,5 +35,41 @@ public class ServiceDetails implements Serializable {
 	
 	@ManyToOne
 	@MapsId("serviceId") 
-	private Services service;	
+	private Services service;
+
+	public ServiceDetailId getServiceDetailId() {
+		return serviceDetailId;
+	}
+
+	public void setServiceDetailId(ServiceDetailId serviceDetailId) {
+		this.serviceDetailId = serviceDetailId;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public RoomTypeInfos getRoomTypeInfo() {
+		return roomTypeInfo;
+	}
+
+	public void setRoomTypeInfo(RoomTypeInfos roomTypeInfo) {
+		this.roomTypeInfo = roomTypeInfo;
+	}
+
+	public Services getService() {
+		return service;
+	}
+
+	public void setService(Services service) {
+		this.service = service;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}	
 }

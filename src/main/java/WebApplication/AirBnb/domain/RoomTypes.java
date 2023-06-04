@@ -30,4 +30,25 @@ public class RoomTypes implements Serializable {
 	private String roomTypeName;
 	@OneToMany(mappedBy = "roomType")
     private List<RoomTypeInfos> lstRoomTypeInfos;
+	public Long getRoomTypeId() {
+		return roomTypeId;
+	}
+	public void setRoomTypeId(Long roomTypeId) {
+		this.roomTypeId = roomTypeId;
+	}
+	public String getRoomTypeName() {
+		return roomTypeName;
+	}
+	public void setRoomTypeName(String roomTypeName) {
+		this.roomTypeName = roomTypeName;
+	}
+	public List<RoomTypeInfos> getLstRoomTypeInfos() {
+		return lstRoomTypeInfos;
+	}
+	public void setLstRoomTypeInfos(List<RoomTypeInfos> lstRoomTypeInfos) {
+		this.lstRoomTypeInfos = lstRoomTypeInfos;
+	}
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
 }

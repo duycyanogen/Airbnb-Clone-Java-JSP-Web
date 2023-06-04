@@ -21,4 +21,19 @@ public class ServiceDetailId implements Serializable {
 	private Long serviceId;
 	@Column
 	private Long roomTypeInfoId;
+	public Long getServiceId() {
+		return serviceId;
+	}
+	public void setServiceId(Long serviceId) {
+		this.serviceId = serviceId;
+	}
+	public Long getRoomTypeInfoId() {
+		return roomTypeInfoId;
+	}
+	public void setRoomTypeInfoId(Long roomTypeInfoId) {
+		this.roomTypeInfoId = roomTypeInfoId;
+	}
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
 }

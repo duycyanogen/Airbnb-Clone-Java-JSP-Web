@@ -32,5 +32,33 @@ public class Roles implements Serializable {
 	
 	@OneToMany(mappedBy = "role")
 	private List<Accounts> lstAccounts;
+
+	public Long getRoleId() {
+		return roleId;
+	}
+
+	public void setRoleId(Long roleId) {
+		this.roleId = roleId;
+	}
+
+	public String getRoleName() {
+		return roleName;
+	}
+
+	public void setRoleName(String roleName) {
+		this.roleName = roleName;
+	}
+
+	public List<Accounts> getLstAccounts() {
+		return lstAccounts;
+	}
+
+	public void setLstAccounts(List<Accounts> lstAccounts) {
+		this.lstAccounts = lstAccounts;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
 	
 }

@@ -21,5 +21,20 @@ public class BedTypeDetailId implements Serializable {
 	private Long bedTypeId;
 	@Column
 	private Long roomTypeInfoId;
+	public Long getBedTypeId() {
+		return bedTypeId;
+	}
+	public void setBedTypeId(Long bedTypeId) {
+		this.bedTypeId = bedTypeId;
+	}
+	public Long getRoomTypeInfoId() {
+		return roomTypeInfoId;
+	}
+	public void setRoomTypeInfoId(Long roomTypeInfoId) {
+		this.roomTypeInfoId = roomTypeInfoId;
+	}
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
 	
 }

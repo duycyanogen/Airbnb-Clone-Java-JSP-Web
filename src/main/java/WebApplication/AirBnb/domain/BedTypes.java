@@ -32,4 +32,32 @@ public class BedTypes implements Serializable {
 	
 	@OneToMany(mappedBy = "bedType")
 	private List<BedTypeDetails> lstRoomTypeDetails;
+
+	public Long getBedTypeId() {
+		return bedTypeId;
+	}
+
+	public void setBedTypeId(Long bedTypeId) {
+		this.bedTypeId = bedTypeId;
+	}
+
+	public String getBedTypeName() {
+		return bedTypeName;
+	}
+
+	public void setBedTypeName(String bedTypeName) {
+		this.bedTypeName = bedTypeName;
+	}
+
+	public List<BedTypeDetails> getLstRoomTypeDetails() {
+		return lstRoomTypeDetails;
+	}
+
+	public void setLstRoomTypeDetails(List<BedTypeDetails> lstRoomTypeDetails) {
+		this.lstRoomTypeDetails = lstRoomTypeDetails;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
 }

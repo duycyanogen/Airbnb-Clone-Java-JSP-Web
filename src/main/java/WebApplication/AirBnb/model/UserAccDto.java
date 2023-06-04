@@ -35,10 +35,85 @@ public class UserAccDto {
 		this.password = password;
 		RegisDate = regisDate;
 	}
+	public UserAccDto() {
+		// TODO Auto-generated constructor stub
+	}
 	private long roleId = 2;// Mặc định là người dùng
 	@NotBlank(message = "Bạn chưa nhập tên người dùng")
 	private String name;
 	private String address;
+	public long getRoleId() {
+		return roleId;
+	}
+	public void setRoleId(long roleId) {
+		this.roleId = roleId;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getAddress() {
+		return address;
+	}
+	public void setAddress(String address) {
+		this.address = address;
+	}
+	public String getSex() {
+		return sex;
+	}
+	public void setSex(String sex) {
+		this.sex = sex;
+	}
+	public String getDateOfBirth() {
+		return dateOfBirth;
+	}
+	public void setDateOfBirth(String dateOfBirth) {
+		this.dateOfBirth = dateOfBirth;
+	}
+	public String getCCCD() {
+		return CCCD;
+	}
+	public void setCCCD(String cCCD) {
+		CCCD = cCCD;
+	}
+	public String getAvatar() {
+		return avatar;
+	}
+	public void setAvatar(String avatar) {
+		this.avatar = avatar;
+	}
+	public String getPhoneNumber() {
+		return phoneNumber;
+	}
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
+	}
+	public long getAccountId() {
+		return accountId;
+	}
+	public void setAccountId(long accountId) {
+		this.accountId = accountId;
+	}
+	public String getMail() {
+		return mail;
+	}
+	public void setMail(String mail) {
+		this.mail = mail;
+	}
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
+	}
+	public String getRegisDate() {
+		return RegisDate;
+	}
+	public void setRegisDate(String regisDate) {
+		RegisDate = regisDate;
+	}
 	private String sex;
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private String dateOfBirth;

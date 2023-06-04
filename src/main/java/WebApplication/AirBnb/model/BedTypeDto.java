@@ -12,6 +12,18 @@ public class BedTypeDto {
 	private long bedTypeId;
 	@NotBlank
 	private String bedTypeName;
+	public long getBedTypeId() {
+		return bedTypeId;
+	}
+	public void setBedTypeId(long bedTypeId) {
+		this.bedTypeId = bedTypeId;
+	}
+	public String getBedTypeName() {
+		return bedTypeName;
+	}
+	public void setBedTypeName(String bedTypeName) {
+		this.bedTypeName = bedTypeName;
+	}
 	
 	
 }

@@ -32,4 +32,31 @@ public class Services implements Serializable {
 	private String icon;
 	@OneToMany(mappedBy = "service")
     private List<ServiceDetails> lstServiceDetails;
+	public Long getServiceId() {
+		return serviceId;
+	}
+	public void setServiceId(Long serviceId) {
+		this.serviceId = serviceId;
+	}
+	public String getServiceName() {
+		return serviceName;
+	}
+	public void setServiceName(String serviceName) {
+		this.serviceName = serviceName;
+	}
+	public String getIcon() {
+		return icon;
+	}
+	public void setIcon(String icon) {
+		this.icon = icon;
+	}
+	public List<ServiceDetails> getLstServiceDetails() {
+		return lstServiceDetails;
+	}
+	public void setLstServiceDetails(List<ServiceDetails> lstServiceDetails) {
+		this.lstServiceDetails = lstServiceDetails;
+	}
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
 }

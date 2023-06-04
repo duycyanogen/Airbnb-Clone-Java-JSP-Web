@@ -12,5 +12,17 @@ import lombok.NoArgsConstructor;
 public class RoomTypeDto {
 	private long roomTypeId;
 	@NotBlank
-	private String roomTypeName;	
+	private String roomTypeName;
+	public long getRoomTypeId() {
+		return roomTypeId;
+	}
+	public void setRoomTypeId(long roomTypeId) {
+		this.roomTypeId = roomTypeId;
+	}
+	public String getRoomTypeName() {
+		return roomTypeName;
+	}
+	public void setRoomTypeName(String roomTypeName) {
+		this.roomTypeName = roomTypeName;
+	}	
 }

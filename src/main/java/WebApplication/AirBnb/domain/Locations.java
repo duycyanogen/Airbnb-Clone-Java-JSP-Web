@@ -31,5 +31,26 @@ public class Locations implements Serializable {
 	private String locationName;
 	@OneToMany(mappedBy = "location")
 	private List<Hotels> lstHotels;
+	public Long getLocationId() {
+		return locationId;
+	}
+	public void setLocationId(Long locationId) {
+		this.locationId = locationId;
+	}
+	public String getLocationName() {
+		return locationName;
+	}
+	public void setLocationName(String locationName) {
+		this.locationName = locationName;
+	}
+	public List<Hotels> getLstHotels() {
+		return lstHotels;
+	}
+	public void setLstHotels(List<Hotels> lstHotels) {
+		this.lstHotels = lstHotels;
+	}
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
 	
 }

@@ -16,5 +16,23 @@ public class ServiceDto{
 	@NotBlank
 	private String serviceName;
 	private String icon;
+	public long getServiceId() {
+		return serviceId;
+	}
+	public void setServiceId(long serviceId) {
+		this.serviceId = serviceId;
+	}
+	public String getServiceName() {
+		return serviceName;
+	}
+	public void setServiceName(String serviceName) {
+		this.serviceName = serviceName;
+	}
+	public String getIcon() {
+		return icon;
+	}
+	public void setIcon(String icon) {
+		this.icon = icon;
+	}
 	
 }

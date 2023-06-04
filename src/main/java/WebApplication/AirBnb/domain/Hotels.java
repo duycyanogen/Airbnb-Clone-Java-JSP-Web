@@ -40,5 +40,58 @@ public class Hotels implements Serializable {
 	
 	@OneToMany(mappedBy = "hotel")
     private List<RoomTypeInfos> lstRoomTypeInfos;
+
+	public Long getHotelId() {
+		return hotelId;
+	}
+
+	public void setHotelId(Long hotelId) {
+		this.hotelId = hotelId;
+	}
+
+	public String getHotelName() {
+		return hotelName;
+	}
+
+	public void setHotelName(String hotelName) {
+		this.hotelName = hotelName;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public Locations getLocation() {
+		return location;
+	}
+
+	public void setLocation(Locations location) {
+		this.location = location;
+	}
+
+	public List<RoomTypeInfos> getLstRoomTypeInfos() {
+		return lstRoomTypeInfos;
+	}
+
+	public void setLstRoomTypeInfos(List<RoomTypeInfos> lstRoomTypeInfos) {
+		this.lstRoomTypeInfos = lstRoomTypeInfos;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+	
 	
 }
